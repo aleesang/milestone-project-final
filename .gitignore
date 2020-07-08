@@ -10,8 +10,6 @@ db.sqlite3-journal
 .cache/
 .env
 .errors.log
-.gitpod.dockerfile
-.gitpod.yml
 .gitattributes
 .vscode/
 .vscode/*
