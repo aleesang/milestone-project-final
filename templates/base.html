@@ -35,14 +35,17 @@
     <title>Tech & Co {% block extra_title %}{% endblock %}</title>
   </head>
 <body>
+<!-- Top Navigation -->
     <header class="container-fluid fixed-top">
+    <!-- Logo -->
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
                     <img src="media/TECH&COLOGO.png" height="100" alt="">
                 </a>
             </div>
-<div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <!-- Search -->
+          <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form method="GET" action="">
                     <div class="input-group w-100">
                         <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
@@ -56,8 +59,31 @@
                     </div>
                 </form>
             </div>
+            <!-- Right Navigation Links -->
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+                <!--Shop-->
+                   <li class="list-inline-item dropdown">
+                        <a class="text-black nav-link" href="#" id="shop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="text-center">
+                                <div><i class="fas fa-store"></i></div>
+                                <p class="my-0">Shop</p>
+                            </div>
+                        </a>
+                    </li>
+                <!--Products/Services Links-->
+                   <li class="list-inline-item dropdown">
+                        <a class="text-black nav-link" href="#" id="services" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="text-center">
+                                <div><i class="fas fa-users"></i></div>
+                                <p class="my-0">Our Services</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu border-0" aria-labelledby="services">
+                                <a href="" class="dropdown-item">Tech & Co Membership</a>
+                        </div>
+                    </li>
+                <!-- My Account Links-->
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
@@ -68,7 +94,7 @@
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Product Management</a>
+                                    <a href="" class="dropdown-item">My Dashboard</a>
                                 {% endif %}
                                 <a href="" class="dropdown-item">My Profile</a>
                                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -78,6 +104,7 @@
                             {% endif %}
                         </div>
                     </li>
+                    <!-- Shopping bag -->
                     <li class="list-inline-item">
                         <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
                             <div class="text-center">
@@ -101,7 +128,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 {% include 'includes/mobile-top-header.html' %}
-                {% include 'includes/main-nav.html' %}
             </nav>
         </div>
         <div id="delivery-banner" class="row text-center">
@@ -124,4 +150,6 @@
     {% block postloadjs %}
     {% endblock %}
 
+    
+  </body>
 </html>
