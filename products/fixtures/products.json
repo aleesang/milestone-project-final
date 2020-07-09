@@ -1,0 +1,58 @@
+[
+    {
+      "pk": 1,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249596",
+        "name": "Tech & Co Backpack",
+        "description": "The Tech & Co Backpack is a force to be reckoned with. It has an external padded, zipped laptop pocket that fits most 15 inch laptops. The front pocket is complete with a phone slot, pen slots and a clip to hang your keys on. All the zip pullers are designed so as you can get creative and easily attach your favourite bag charm. We've got your back.",
+        "price": 50.00,
+        "category": 1,
+        "rating": 4.6,
+        "image_url": "/media/techncobag.png",
+        "image": "techncobag.png"
+      }
+    },
+    {
+      "pk": 2,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249597",
+        "name": "Tech & Co Mouse Pad",
+        "description": "Make your mouse super happy with our Typo mouse pads! They have amazing designs with a smooth surface that will ensure easy glide for your mouse. Our mouse pads are made from neoprene with a non-slip base. ",
+        "price": 20.00,
+        "category": 2,
+        "rating": 4.6,
+        "image_url": "/media/techncomousepad.png",
+        "image": "techncomousepad.png"
+      }
+    },
+    {
+      "pk": 3,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249598",
+        "name": "Tech & Co Notebook",
+        "description": "The notebook for the quintessential organiser. Separate your subjects and keep all of your notes, doodles, clippings and worksheets in the one fresh A4 sized notebook. In a range of seasonal prints and designs, these are a Typo signature stationery essential. You're welcome. ",
+        "price": 25.00,
+        "category": 3,
+        "rating": 4.7,
+        "image_url": "/media/technconotebook.png",
+        "image": "technconotebook.png"
+      }
+    },
+    {
+      "pk": 4,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249599",
+        "name": "Tech & Co Coffee Mug",
+        "description": "Our Anytime Mug is perfect for... you guessed it.. Anytime! A staple to drink your daily coffee out of.",
+        "price": 20.00,
+        "category": 4,
+        "rating": 3,
+        "image_url": "/media/techncomug.png",
+        "image": "techncomug.png"
+      }
+    }
+  ]

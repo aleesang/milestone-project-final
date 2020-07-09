@@ -1,0 +1,34 @@
+[
+    {
+      "pk": 1,
+      "model": "products.category",
+      "fields": {
+        "name": "bags",
+        "friendly_name": "Bags"
+      }
+    },
+    {
+      "pk": 2,
+      "model": "products.category",
+      "fields": {
+        "name": "tech_accessories",
+        "friendly_name": "Accessories"
+      }
+    },
+    {
+      "pk": 3,
+      "model": "products.category",
+      "fields": {
+        "name": "stationery",
+        "friendly_name": "Stationery"
+      }
+    },
+    {
+      "pk": 4,
+      "model": "products.category",
+      "fields": {
+        "name": "mugs",
+        "friendly_name": "Mugs"
+      }
+    }
+  ]
