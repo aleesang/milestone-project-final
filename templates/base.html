@@ -70,7 +70,7 @@
                                 <p class="my-0">Shop</p>
                             </div>
                             <div class="dropdown-menu border-0" aria-labelledby="sort-products">
-                                <a href="" class="dropdown-item ">By Category</a>
+                                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
                                 <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
                             </div>
                         </a>
