@@ -27,6 +27,10 @@
                             <div class="text-left">
                                 <p class="my-0">Shop</p>
                             </div>
+                            <div class="dropdown-menu border-0" aria-labelledby="sort-products">
+                                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
+                                <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
+                            </div>
     </a>
 </li>
 <li class="list-inline-item dropdown">
@@ -58,7 +62,7 @@
     </div>
 </li>
 <li class="list-inline-item">
-    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="">
+    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{% url 'view_bag' %}">
         <div class="text-left">
             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             <p class="my-0">
