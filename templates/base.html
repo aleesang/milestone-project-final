@@ -138,10 +138,21 @@
     </header>
 
     {% if messages %}
-        <div class="message-container"></div>
-        {% for message in messages %}
-            {% include 'includes/popups/popup_success.html' %}
-        {% endfor %}
+        <div class="message-container">
+            {% for message in messages %}
+                {% with message.level as level %}
+                    {% if level == 40 %}
+                        {% include 'includes/popups/popup_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/popups/popup_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/popups/popup_success.html' %}
+                    {% else %}
+                        {% include 'includes/popups/popup_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </div>
     {% endif %}
 
     {% block page_header %}
