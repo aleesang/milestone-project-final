@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.shortcuts import HttpResponse, get_object_or_404, redirect, render, reverse
 from django.contrib import messages
 
 from products.models import Product

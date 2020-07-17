@@ -32,13 +32,13 @@ def bag_contents(request):
                     'size': size,
                 })
 
-    grand_total = total
+    final_total = total
     
     calculate = {
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
-        'grand_total': grand_total,
+        'final_total': final_total,
     }
 
     return calculate
