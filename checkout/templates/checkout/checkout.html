@@ -11,6 +11,11 @@
     </div>
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+{% endblock %}
+
+
 {% block content %}
 <div class="overlay"></div>
   <div class="container">
@@ -30,12 +35,16 @@
                         {{ form.full_name|as_crispy_field }}
                         <!-- Email -->
                         {{ form.email|as_crispy_field }}
+                        <!-- Phone -->
+                        {{ form.phone_number|as_crispy_field }}
                         <!-- Address -->
                         {{ form.street_address|as_crispy_field }}
                         <!-- Address 2-->              
                         {{ form.address_2|as_crispy_field }}
                         <!-- Country -->                
-                        {{ form.country }}
+                        {{ form.country|as_crispy_field }} <i class="{{ country.flag_css }}"></i>
+                        <!-- Town or City -->                
+                        {{ form.town_or_city|as_crispy_field }}
                         <!-- Post Code -->                
                         {{ form.postcode|as_crispy_field }}
             </fieldset>

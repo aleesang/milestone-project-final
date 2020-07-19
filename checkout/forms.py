@@ -45,6 +45,10 @@ class CheckoutForm(forms.Form):
     country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget(attrs={
         'class': 'custom-select d-block w-100'
     }))
+
+    town_or_city = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'custom-select d-block w-100'
+    }))
     
     postcode = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'
