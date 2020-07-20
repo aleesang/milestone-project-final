@@ -6,11 +6,12 @@ from .models import Order
 PAYMENT = (
     ('S', 'Stripe')
 )
-model = Order
-fields = ('full_name', 'email', 'phone_number',
-                  'street_address', 'address2',
-                  'town_or_city', 'country', 'postcode',)
-        
+class Meta:
+    model = Order
+    fields = ('full_name', 'email', 'phone_number',
+                    'street_address', 'address2',
+                    'town_or_city', 'country', 'postcode',)
+            
 class CheckoutForm(forms.Form):
     full_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
