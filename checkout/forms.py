@@ -6,54 +6,39 @@ from .models import Order
 PAYMENT = (
     ('S', 'Stripe')
 )
-class Meta:
-    model = Order
-    fields = ('full_name', 'email', 'phone_number',
-                    'street_address', 'address2',
-                    'town_or_city', 'country', 'postcode',)
+class CheckoutForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('full_name', 'email', 'phone_number',
+                        'street_address', 'address2',
+                        'town_or_city', 'country', 'postcode',)
             
-class CheckoutForm(forms.Form):
-    full_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your First and Last Name'
-    }))
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'full_name': 'Full Name',
+            'email': 'Email Address',
+            'phone_number': 'Phone Number',
+            'street_address': 'Street Address',
+            'address2': 'Address 2',
+            'town_or_city': 'Town or City',
+            'country': 'Country',
+            'postcode': 'Postal Code',
+        }
 
-    email = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your email adddress'
-    }))
-
-    phone_number = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Contact Number'
-    }))
-    
-    street_address = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Your Address'
-    }))
-
-    address_2 = forms.CharField(required=False, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Alternate Address (Optional)'
-    }))
-
-    town_or_city = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Town or City'
-    }))
-
-    country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget(attrs={
-        'class': 'custom-select d-block w-100'
-    }))
-
-    town_or_city = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'custom-select d-block w-100'
-    }))
-    
-    postcode = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control'
-    }))
+        self.fields['full_name'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            self.fields[field].label = False
 
     same_billing_address = forms.BooleanField(required=False)
     save_info = forms.BooleanField(required=False)

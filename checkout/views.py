@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm
+from products.models import Product
 from bag.calculate import inside_bag
 import stripe
 
@@ -19,7 +20,7 @@ def checkout(request):
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
             'street_address': request.POST['street_address'],
-            'address_2': request.POST['address_2'],
+            'address2': request.POST['address2'],
             'country': request.POST['country'],
             'town_or_city': request.POST['town_or_city'],
             'postcode': request.POST['postcode'],
