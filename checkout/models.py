@@ -86,9 +86,6 @@ class Order(models.Model):
     town_or_city = models.CharField(max_length=100, default=True)
     postcode = models.CharField(max_length=100, default=True)
     items = models.ManyToManyField(OrderItem)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
     checkout_address = models.ForeignKey(
         'CheckoutAddress', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -108,7 +105,6 @@ class Order(models.Model):
         return uuid.uuid4().hex.upper()
     
 class CheckoutAddress(models.Model):
-    order_number = models.CharField(max_length=32, null=False, editable=False, default=True)
     full_name = models.CharField(max_length=50, null=False, blank=False, default=True)
     email = models.EmailField(max_length=254, null=False, blank=False, default=True)
     phone_number = models.CharField(max_length=20, null=False, blank=False, default=True)

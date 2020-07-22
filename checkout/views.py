@@ -3,7 +3,9 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm
+from .models import Order
 from products.models import Product
+from django.utils import timezone
 from bag.calculate import inside_bag
 import stripe
 
@@ -21,11 +23,10 @@ def checkout(request):
             'phone_number': request.POST['phone_number'],
             'street_address': request.POST['street_address'],
             'address2': request.POST['address2'],
-            'country': request.POST['country'],
             'town_or_city': request.POST['town_or_city'],
+            'country': request.POST['country'],
             'postcode': request.POST['postcode'],
-        }
-    
+        }      
         form = CheckoutForm(form_data)
         if form.is_valid():
             order = form.save()
@@ -33,21 +34,20 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
+                        order_item = OrderItem(
                             order=order,
                             product=product,
                             quantity=item_data,
                         )
-                        order_line_item.save()
+                        order_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
-                            order_line_item = OrderLineItem(
+                        for quantity in item_data['items_by_product'].items():
+                            order_item = OrderItem(
                                 order=order,
                                 product=product,
                                 quantity=quantity,
-                                product_size=size,
                             )
-                            order_line_item.save()
+                            order_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your bag wasn't found in our database. "
@@ -65,24 +65,20 @@ def checkout(request):
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
-            return redirect(reverse('products'))    
-    
-    bag = request.session.get('bag', {})
-    if not bag:
-        messages.error(request, "There's nothing in your bag at the moment")
-        return redirect(reverse('products'))
+            return redirect(reverse('products'))
 
-    current_bag = inside_bag(request)
-    total = current_bag['final_total']
-    stripe_total = round(total * 100)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
+            # Attempt to charge the user
+            current_bag = inside_bag(request)
+            total = current_bag['final_total']
+            stripe_total = round(total * 100)
+            stripe.api_key = stripe_secret_key
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+                )  
 
-    form = CheckoutForm()
-    
+        form = CheckoutForm()
+
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
@@ -91,10 +87,11 @@ def checkout(request):
     context = {
         'form': form,
         'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
+        'stripe_secret_key': stripe_secret_key,
     }
 
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     """
