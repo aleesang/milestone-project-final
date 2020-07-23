@@ -1,7 +1,7 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from .models import Order
+from .models import Order, OrderItem
 
 PAYMENT = (
     ('S', 'Stripe')
