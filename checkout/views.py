@@ -1,101 +1,77 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
 from django.contrib import messages
 from django.conf import settings
 from django.views.generic import ListView, DetailView, View
+from django.contrib.auth.decorators import login_required
 from .forms import CheckoutForm
-from .models import Order, OrderItem
-from products.models import Product
+from .models import Product, OrderItem, Order
 from django.utils import timezone
 from bag.calculate import inside_bag
 import stripe
 
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+@login_required()
 def checkout(request):
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    bag_page = "active"
+    if request.method == "POST":
+        form = CheckoutForm(request.POST)
 
-    if request.method == 'POST':
-        bag = request.session.get('bag', {})
-
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
-            'street_address': request.POST['street_address'],
-            'address2': request.POST['address2'],
-            'town_or_city': request.POST['town_or_city'],
-            'country': request.POST['country'],
-            'postcode': request.POST['postcode'],
-        }      
-        form = CheckoutForm(form_data)
         if form.is_valid():
-            order = form.save()
-            for item_id, item_data in bag.items():
-                product = Product.objects.get(id=item_id) 
-                order_item = OrderItem(
+            order = form.save(commit=False)
+            order.date = timezone.now()
+            order.save()
+
+            bag = request.session.get('bag', {})
+            total = 0
+            # Calculate the total charge
+            for id, quantity in bag.items():
+                product = get_object_or_404(Products, pk=id)
+                order_item, created = OrderItem.objects.get_or_create(
                     order = order,
-                    feature = feature,
+                    product = product,
                     quantity = quantity
                 )
                 order_item.save()
-                
-            try:
-
             # Attempt to charge the user
-                
-                current_bag = inside_bag(request)
-                total = current_bag['final_total']
-                stripe_total = round(total * 100)
-                stripe.api_key = stripe_secret_key
-                intent = stripe.PaymentIntent.create(
-                    amount=stripe_total,
-                    currency=settings.STRIPE_CURRENCY,
-                    )  
-
+            try:
+                customer = stripe.Charge.create(
+                    amount = int(total * 100),
+                    currency = "aud",
+                    description = request.user.email,
+                    card = form.cleaned_data['stripe_id'],                    
+                )
             except stripe.error.CardError:
                 messages.error(request, "Your credit card was declined")
-                
-                request.session['save_info'] = 'save-info' in request.POST
-                return redirect(reverse('checkout_success', args=[order.order_number]))
-
-            # If payment succeeds, add the purchased votes to the feature's total votes
+            
+            # If payment succeeds, add the purchased votes to the product's total votes
             else:
-                if intent.paid:
+                if customer.paid:
                     messages.success(request, "You have successfully paid. Thank you for purchasing upvotes!")
     
+                    #Add the Votes
+                    for id, quantity in bag.items():
+                        product = get_object_or_404(pk=id)
+                        product.save()
+    
+                    #Continue to clear bag and move on                 
+                    request.session['bag'] = {}
+                    return redirect('checkout_success')
                 else:
                     messages.error(request, "Error with transaction")
 
         else:
-            messages.error(request, "Error in taking payment from specified card")
+            messages.error(request, "Error in taking payment form specified card")
 
-
-
-    return render(request, template, context)
-    template = 'checkout/checkout.html'
-    context = {
-                'form': form,
-                'stripe_public_key': stripe_public_key,
-                'stripe_secret_key': stripe_secret_key,
-            }
-
-
-    def checkout_success(request, order_number):
-        """
-        Handle successful checkouts
-        """
-        save_info = request.session.get('save_info')
-        order = get_object_or_404(Order, order_number=order_number)
-        messages.success(request, f'Order successfully processed! \
-            Your order number is {order_number}. A confirmation \
-            email will be sent to {order.email}.')
-
-        if 'bag' in request.session:
-            del request.session['bag']
-
-        template = 'checkout/checkout_success.html'
+    else:
+        form = CheckoutForm()
         context = {
-            'order': order,
+            'form': form
         }
+        return render(request, 'checkout/checkout.html', context)
 
-        return render(request, template, context)
+# Once payment is complete, direct user to a page to acknowledge it
+def  checkout_success(request):
+    return render(request, "checkout/checkout_success.html")
