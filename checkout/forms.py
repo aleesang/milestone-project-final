@@ -13,22 +13,22 @@ class CheckoutForm(forms.ModelForm):
                             'street_address', 'address2',
                             'town_or_city', 'country', 'postcode',)  
                 
-        full_name = forms.CharField(widget=forms.TextInput(attrs={
+        full_name = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Your Full Name'
             }))
 
-        email = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        email = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Your Email'
             }))
 
-        phone_number = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        phone_number = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Phone Number'
             }))
 
-        street_address = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        street_address = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Your Address'
             }))
@@ -38,16 +38,16 @@ class CheckoutForm(forms.ModelForm):
                 'placeholder': 'Alternative Address'
             }))
 
-        town_or_city = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        town_or_city = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Town/City'
             }))
                                 
-        country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget(attrs={
+        country = CountryField(blank_label='(select country)').formfield(required=True, widget=CountrySelectWidget(attrs={
                 'class': 'custom-select d-block w-100'
             }))
             
-        postcode = forms.CharField(widget=forms.TextInput(attrs={
+        postcode = forms.CharField(required=True, widget=forms.TextInput(attrs={
                 'class': 'form-control'
             }))
 
