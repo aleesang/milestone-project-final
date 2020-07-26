@@ -4,19 +4,20 @@ from .models import Order, OrderItem
 
 class OrderItemAdminInline(admin.TabularInline):
     model = OrderItem
-    readonly_fields = ('item_total',)
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderItemAdminInline,)
-
-    fields = ('full_name', 
+    readonly_fields = ('order_number',)
+    fields = ('order_number',
+              'full_name', 
               'email', 
               'phone_number',
               'street_address', 
               'address2',
-              'town_or_city', 
               'country', 
+              'town_or_city', 
               'postcode',) 
 
+list_display = ('order_number',)
 
 admin.site.register(Order, OrderAdmin)
