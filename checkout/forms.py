@@ -3,56 +3,46 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from .models import Order
 
-PAYMENT = (
-    ('S', 'Stripe')
-)
+from django import forms
+from .models import Order
+
+
 class CheckoutForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('full_name', 'email', 'phone_number',
-                            'street_address', 'address2',
-                            'town_or_city', 'country', 'postcode',)  
-                
-        full_name = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your Full Name'
-            }))
+        fields = ('full_name', 
+                  'email', 
+                  'phone_number', 
+                  'street_address', 
+                  'address2',
+                  'town_or_city',
+                  'country', 
+                  'postcode',) 
 
-        email = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your Email'
-            }))
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'full_name': 'Full Name',
+            'email': 'Email Address',
+            'phone_number': 'Phone Number',
+            'street_address': 'Street Address',
+            'address2': 'Alternate Street Address',
+            'town_or_city': 'Town or City',
+            'country': 'Country',
+            'postcode': 'Postal Code',
+        }
 
-        phone_number = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Phone Number'
-            }))
-
-        street_address = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your Address'
-            }))
-
-        address2 = forms.CharField(required=False, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Alternative Address'
-            }))
-
-        town_or_city = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Town/City'
-            }))
-                                
-        country = CountryField(blank_label='(select country)').formfield(required=True, widget=CountrySelectWidget(attrs={
-                'class': 'custom-select d-block w-100'
-            }))
-            
-        postcode = forms.CharField(required=True, widget=forms.TextInput(attrs={
-                'class': 'form-control'
-            }))
-
-same_billing_address = forms.BooleanField(required=False)
-save_info = forms.BooleanField(required=False)
-payment_option = forms.ChoiceField(
-    widget=forms.RadioSelect, choices=PAYMENT)
+        self.fields['full_name'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            self.fields[field].label = False
 

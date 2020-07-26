@@ -248,7 +248,6 @@ input[name='q']::placeholder {
 }
 
 /* Stripe CSS */
-
 .StripeElement,
 .stripe-style-input {
   box-sizing: border-box;
@@ -286,7 +285,6 @@ input[name='q']::placeholder {
     color: #000;
     border: 1px solid #000;
 }
-
 
 /* -------------------------------- Media Queries */
 
