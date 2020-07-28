@@ -9,11 +9,11 @@ from django.utils import timezone
 from bag.calculate import inside_bag
 import stripe
 
-stripe.api_key = "sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo"
+# api for stripe, gets secret_key from settings
+stripe.api_key = 'sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo'
 
 def checkout(request):
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
@@ -75,15 +75,14 @@ def checkout(request):
         
         form = CheckoutForm()
 
-    if not stripe_public_key:
+    if not stripe_publishable_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
     context = {
         'form': form,
-        'stripe_public_key': stripe_public_key,
-        'stripe_secret_key': stripe_secret_key,
+        'stripe_publishable_key': stripe_publishable_key,
     }
 
     return render(request, template, context)

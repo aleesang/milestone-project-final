@@ -46,18 +46,17 @@ class Order(models.Model):
         return total
     
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, blank=True, null=True, default=None, on_delete=models.CASCADE, related_name='order_items')
-    product = models.ForeignKey(Product, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, blank=True, null=True, on_delete=models.CASCADE, related_name='order_item')
+    product = models.ForeignKey(Product, blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.IntegerField(blank=True)
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the lineitem total
+        and update the order total.
+        """
+        self.lineitem_total = self.product.price * self.quantity
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.user.username
-    
-    def get_total_price(self):
-        total = 0
-        for order_item in self.items.all():
-            total += order_item.get_final_price()
-        return total
-
-
-    
+        return f'SKU {self.product.sku} on order {self.order.order_number}'
