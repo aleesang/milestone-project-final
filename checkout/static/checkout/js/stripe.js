@@ -3,7 +3,6 @@ var stripe = Stripe('pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYA
 
 // Create an instance of Elements.
 var elements = stripe.elements();
-var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
 // Custom styling can be passed to options when creating an Element.
 // (Note that this demo uses a wider set of styles than the guide below.)
@@ -40,7 +39,7 @@ card.on('change', function(event) {
 });
 
 var form = document.getElementById("payment-form");
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit-button", function(event) {
   event.preventDefault();
   // Complete payment when the submit button is clicked
   payWithCard(stripe, card, data.clientSecret);
@@ -89,17 +88,4 @@ var showError = function(errorMsgText) {
   setTimeout(function() {
     errorMsg.textContent = "";
   }, 4000);
-};
-// Show a spinner on payment submission
-var loading = function(isLoading) {
-  if (isLoading) {
-    // Disable the button and show a spinner
-    document.querySelector("button").disabled = true;
-    document.querySelector("#spinner").classList.remove("hidden");
-    document.querySelector("#button-text").classList.add("hidden");
-  } else {
-    document.querySelector("button").disabled = false;
-    document.querySelector("#spinner").classList.add("hidden");
-    document.querySelector("#button-text").classList.remove("hidden");
-  }
 };

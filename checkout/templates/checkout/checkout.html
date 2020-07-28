@@ -43,7 +43,7 @@
                         <!-- Address 2-->              
                         {{ form.address2|as_crispy_field }}
                         <!-- Country -->                
-                        {{ form.country|as_crispy_field }} <i class="{{ country.flag_css }}"></i>
+                        {{ form.country|as_crispy_field }}
                         <!-- Town or City -->                
                         {{ form.town_or_city|as_crispy_field }}
                         <!-- Post Code -->                
@@ -64,9 +64,7 @@
 							{% endif %}
 						  </div>
             </fieldset>
-              </form>
             <!-- Stripe Payment -->
-            <form id="payment-form">
                     <fieldset class="px-3">
                         <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                         <!-- A Stripe card element will go here -->
