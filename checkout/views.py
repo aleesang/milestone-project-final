@@ -31,13 +31,12 @@ def checkout(request):
                                     'country': request.POST['country'],
                                     'town_or_city': request.POST['town_or_city'],
                                     'postcode': request.POST['postcode'],}
-    else:
+
         form = CheckoutForm
     if request.method == "POST":
-        form = ProfileForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if form.is_valid() and payment_form.is_valid():
+        if payment_form.is_valid():
             order = form.save(commit=False)
             order.date = timezone.now()
             order.user = request.user
@@ -83,7 +82,7 @@ def checkout(request):
     # auto-fills name and address information
     # if those details have been completed on Checkout page
     return render(request, "checkout/checkout.html",
-                  {"form": form, "payment_form": payment_form,
+                  {"payment_form": payment_form,
                    "publishable": settings.STRIPE_PUBLISHABLE_KEY})
     
 def checkout_success(request, order_number):
