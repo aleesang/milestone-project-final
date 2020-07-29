@@ -5,11 +5,16 @@ from django.shortcuts import reverse
 from django_countries.fields import CountryField
 import uuid
 from products.models import Product
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 class Order(models.Model):
+    """
+    The Order model stores information about the user's name,
+    phone number and address  to assist in the delivery of products
+    """
     order_number = models.CharField(max_length=32, null=True, blank=True, default=None, editable=False)
     full_name = models.CharField(max_length=50, null=True, blank=True, default=None)
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
