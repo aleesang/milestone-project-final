@@ -24,6 +24,10 @@ class Order(models.Model):
     country = CountryField(multiple=False, null=True, blank=True, default=None)
     town_or_city = models.CharField(max_length=100, null=True, default=None)
     postcode = models.CharField(max_length=100, null=True, default=None)
+    date = models.DateTimeField(null=True, default=None)
+    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    final_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def _generate_order_number(self):
         """
@@ -54,6 +58,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, on_delete=models.CASCADE, related_name='order_item')
     product = models.ForeignKey(Product, blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.IntegerField(blank=True)
+    item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False, default=None)
 
     def save(self, *args, **kwargs):
         """

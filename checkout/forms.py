@@ -31,8 +31,8 @@ class CheckoutForm(forms.ModelForm):
                   'phone_number', 
                   'street_address', 
                   'address2',
-                  'town_or_city',
                   'country', 
+                  'town_or_city',
                   'postcode',) 
 
     def __init__(self, *args, **kwargs):
@@ -47,8 +47,8 @@ class CheckoutForm(forms.ModelForm):
             'phone_number': 'Phone Number',
             'street_address': 'Street Address',
             'address2': 'Alternate Street Address',
-            'town_or_city': 'Town or City',
             'country': 'Country',
+            'town_or_city': 'Town or City',
             'postcode': 'Postal Code',
         }
 

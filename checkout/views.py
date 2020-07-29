@@ -68,7 +68,7 @@ def checkout(request):
             if customer.paid:
                 messages.error(request, "Your Order was Successful")
                 request.session['bag'] = {}
-                return redirect(reverse('checkout_success'))
+                return redirect(reverse('checkout'))
             else:
                 messages.error(request, "Unable to take payment")
         else:
@@ -81,9 +81,8 @@ def checkout(request):
 
     # auto-fills name and address information
     # if those details have been completed on Checkout page
-    return render(request, "checkout/checkout.html",
-                  {"payment_form": payment_form,
-                   "publishable": settings.STRIPE_PUBLISHABLE_KEY})
+    return render(request, "checkout.html", 
+                  {"payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
     
 def checkout_success(request, order_number):
     """

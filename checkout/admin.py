@@ -7,8 +7,16 @@ class OrderItemAdminInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderItemAdminInline,)
-    readonly_fields = ('order_number',)
+    
+    readonly_fields = ('order_number', 
+                'date',
+                'full_name',
+                'order_total', 
+                'delivery_cost',
+                'final_total',)
+    
     fields = ('order_number',
+              'date',
               'full_name', 
               'email', 
               'phone_number',
@@ -16,8 +24,16 @@ class OrderAdmin(admin.ModelAdmin):
               'address2',
               'country', 
               'town_or_city', 
-              'postcode',) 
+              'postcode', 
+              'delivery_cost',
+              'order_total', 
+              'final_total',) 
 
-list_display = ('order_number',)
+list_display = ('order_number',
+                'date', 
+                'full_name',
+                'order_total', 
+                'delivery_cost',
+                'final_total',)
 
 admin.site.register(Order, OrderAdmin)
