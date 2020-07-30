@@ -6,6 +6,7 @@ from django_countries.fields import CountryField
 import uuid
 from products.models import Product
 from django.contrib.auth.models import User
+from profiles.models import Profile
 
 # Create your models here.
 
@@ -22,7 +23,7 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=20, null=True, blank=False, default=None)
     street_address = models.CharField(max_length=100, null=True, blank=False, default=None)
     address2 = models.CharField(max_length=80, null=True, blank=True, default=None)
-    country = CountryField(multiple=False, null=True, blank=False, default=None)
+    country = CountryField(blank_label='Country *', multiple=False, null=False, blank=False, default=None)
     town_or_city = models.CharField(max_length=100, null=True, default=None)
     postcode = models.CharField(max_length=100, null=True, default=None)
     date = models.DateTimeField(null=True, default=None)
