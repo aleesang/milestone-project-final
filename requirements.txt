@@ -18,7 +18,7 @@ Django==3.0.7
 django-admin==2.0.1
 django-allauth==0.42.0
 django-countries==6.1.2
-django-crispy-forms==1.9.1
+django-crispy-forms==1.9.2
 django-environ==0.4.5
 django-excel-base==1.0.4
 django-excel-response2==3.0.2

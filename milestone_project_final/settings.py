@@ -41,12 +41,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
+    'django_countries',
     'home',
     'products',
     'bag',
     'checkout',
-    'crispy_forms',
-    'django_countries',
+    'profiles',
 ]
 
 MIDDLEWARE = [

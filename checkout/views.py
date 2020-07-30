@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
 from django.contrib import messages
 from django.conf import settings
-from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.decorators import login_required
 from .forms import CheckoutForm, MakePaymentForm
 from .models import OrderItem, Order, Product
+from profiles.models import Profile
+from profiles.forms import ProfileForm
 from django.utils import timezone
 from bag.calculate import inside_bag
 import stripe
@@ -13,30 +14,36 @@ import stripe
 # api for stripe, gets secret_key from settings
 stripe.api_key = 'sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo'
 
+@login_required()
 def checkout(request):
     """
     The checkout view pulls information from the Order and MakePayment forms
     to process a transaction.
     It is also used to render the checkout.html page,
-    displaying bag info and checkout details if they exist.
+    displaying cart info and profile details if they exist.
     """
-    if request.method == 'POST':
-        bag = request.session.get('bag', {})
-
-        form_data = {'full_name': request.POST['full_name'],
-                                    'email': request.POST['email'],
-                                    'phone_number': request.POST['phone_number'],
-                                    'street_address': request.POST['street_address'],
-                                    'address2': request.POST['address2'],
-                                    'country': request.POST['country'],
-                                    'town_or_city': request.POST['town_or_city'],
-                                    'postcode': request.POST['postcode'],}
-
+    # requests current user
+    user_id = request.user.pk
+    # restrieves the Profile info of the current user
+    if Profile.objects.filter(user=user_id).exists():
+        # condenses Profile info to a single variable
+        currentprofile = Profile.objects.get(user=user_id)
+        form = ProfileForm(initial={'full_name': currentprofile.full_name,
+                                    'email': currentprofile.email,
+                                    'phone_number': currentprofile.phone_number,
+                                    'street_address': currentprofile.street_address,
+                                    'address2': currentprofile.address2,
+                                    'country': currentprofile.country,
+                                    'town_or_city': currentprofile.town_or_city,
+                                    'postcode': currentprofile.postcode,
+                                    'user': currentprofile.user})
+    else:
         form = CheckoutForm
     if request.method == "POST":
+        checkout_form = CheckoutForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if payment_form.is_valid():
+        if checkout_form.is_valid() and payment_form.is_valid():
             order = form.save(commit=False)
             order.date = timezone.now()
             order.user = request.user
@@ -77,12 +84,12 @@ def checkout(request):
                            "We were unable to take a payment with that card!")
     else:
         payment_form = MakePaymentForm()
-        form = CheckoutForm()
+        checkout_form = CheckoutForm()
 
     # auto-fills name and address information
     # if those details have been completed on Checkout page
-    return render(request, "checkout.html", 
-                  {"payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
+    return render(request, "checkout/checkout.html", 
+                  {"checkout_form": form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
     
 def checkout_success(request, order_number):
     """
