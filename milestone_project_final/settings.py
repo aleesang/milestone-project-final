@@ -24,12 +24,13 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q*mw6e*v0-8li#((e#jwh2_6tsg=)e=cz%$audj@2=fi2_2g1+'
+# Secret key moved to env.py
+SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tech-and-co.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['tech-and-co.herokuapp.com', '127.0.0.1', 'localhost', '*']
 
 
 # Application definition
@@ -120,8 +121,18 @@ WSGI_APPLICATION = 'milestone_project_final.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+if "DATABASE_URL" in os.environ:
+    DATABASES = {'default':
+                 dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+else:
+    print("Database URL not found. Using SQLite instead")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -159,6 +170,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+if 'USE_AWS' in os.environ:
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'tech-and-co'
+    AWS_S3_REGION_NAME = 'us-east-1'
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.StaticStorage'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR),"static","static-only")
@@ -170,6 +192,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 FREE_DELIVERY = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'aud'
-STRIPE_PUBLISHABLE_KEY = os.getenv('pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYAcSJs9OSFleBhaO0oqOnDi4nWyFwHO8hb5gvIgd001MYSbJK6')
-STRIPE_SECRET_KEY = os.getenv('sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
