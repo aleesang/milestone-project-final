@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
 from django.contrib import messages
 from django.conf import settings
@@ -12,7 +13,8 @@ import stripe
 
 
 # api for stripe, gets secret_key from settings
-stripe.api_key = 'sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo'
+stripe.api_key = os.environ.get('AWS_ACCESS_KEY_ID')
+
 
 @login_required()
 def checkout(request):
@@ -20,7 +22,7 @@ def checkout(request):
     The checkout view pulls information from the Order and MakePayment forms
     to process a transaction.
     It is also used to render the checkout.html page,
-    displaying cart info and profile details if they exist.
+    displaying bag info and profile details if they exist.
     """
     # requests current user
     user_id = request.user.pk

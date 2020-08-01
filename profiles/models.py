@@ -33,4 +33,4 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_profile(sender, **kwargs):
     if kwargs['created']:
-        user_profile = Profile.objects.create(user=kwargs['instance'])
+        user = Profile.objects.create(user=kwargs['instance'])
