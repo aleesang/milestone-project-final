@@ -64,6 +64,7 @@ def checkout(request):
                 order_item.save()
 
             try:
+                
                 customer = stripe.Charge.create(
                     amount=stripe_total,
                     currency=settings.STRIPE_CURRENCY,
@@ -92,6 +93,8 @@ def checkout(request):
     # if those details have been completed on Checkout page
     return render(request, "checkout/checkout.html", 
                   {"checkout_form": form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
+    
+
     
 def checkout_success(request, order_number):
     """
