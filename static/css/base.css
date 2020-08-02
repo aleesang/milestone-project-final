@@ -296,6 +296,23 @@ select option[value=""] {
     color: #aab7c4 !important;
 }
 
+/* Footer */
+.page-footer {
+    background-color: rgb(212, 170, 170);
+  }
+  
+  .footer_link {
+    color: #000000de;
+  }
+  
+  .footer_link:hover {
+    color: #5a5a5a;
+  }
+  
+  .footer_link:active:focus {
+    color: #7f7e80;
+  }
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */

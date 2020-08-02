@@ -1,5 +1,5 @@
 // A reference to Stripe.js initialized with your real test publishable API key.
-var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var stripePublishableKey = $('#id_stripe_publishable_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);x
 
@@ -34,16 +34,26 @@ fetch("/create-payment-intent", {
     };
 
     var card = elements.create('card', {style: style});
-    // Stripe injects an iframe into the DOM
-    card.mount("#card-element");
-    card.on("change", function (event) {
-      // Disable the Pay button if there are no card details in the Element
-      document.querySelector("submit-button").disabled = event.empty;
-      document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
+    card.mount('#card-element');
+    
+    // Handle realtime validation errors on the card element
+    card.addEventListener('change', function (event) {
+        var errorDiv = document.getElementById('card-errors');
+        if (event.error) {
+            var html = `
+                <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span>${event.error.message}</span>
+            `;
+            $(errorDiv).html(html);
+        } else {
+            errorDiv.textContent = '';
+        }
     });
 
     var form = document.getElementById("payment-form");
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit-button", function(event) {
       event.preventDefault();
       // Complete payment when the submit button is clicked
       payWithCard(stripe, card, data.clientSecret);
@@ -70,6 +80,15 @@ var payWithCard = function(stripe, card, clientSecret) {
         orderComplete(result.paymentIntent.id);
       }
     });
+};
+
+var saveInfo = Boolean($('#id-save-info').attr('checked'));
+// From using {% csrf_token %} in the form
+var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+var postData = {
+    'csrfmiddlewaretoken': csrfToken,
+    'client_secret': clientSecret,
+    'save_info': saveInfo,
 };
 
 /* ------- UI helpers ------- */

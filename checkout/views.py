@@ -26,18 +26,20 @@ def checkout(request):
     # restrieves the Profile info of the current user
     if Profile.objects.filter(user=user_id).exists():
         # condenses Profile info to a single variable
-        currentprofile = Profile.objects.get(user=user_id)
-        form = ProfileForm(initial={'full_name': currentprofile.full_name,
-                                    'email': currentprofile.email,
-                                    'phone_number': currentprofile.phone_number,
-                                    'street_address': currentprofile.street_address,
-                                    'address2': currentprofile.address2,
-                                    'country': currentprofile.country,
-                                    'town_or_city': currentprofile.town_or_city,
-                                    'postcode': currentprofile.postcode,
-                                    'user': currentprofile.user})
+            currentprofile = Profile.objects.get(user=user_id)
+            form = ProfileForm(initial={'full_name': currentprofile.full_name,
+                                        'email': currentprofile.email,
+                                        'phone_number': currentprofile.phone_number,
+                                        'street_address': currentprofile.street_address,
+                                        'address2': currentprofile.address2,
+                                        'country': currentprofile.country,
+                                        'town_or_city': currentprofile.town_or_city,
+                                        'postcode': currentprofile.postcode,
+                                        'user': currentprofile.user})
+
     else:
         form = CheckoutForm
+        
     if request.method == "POST":
         checkout_form = CheckoutForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
@@ -96,13 +98,35 @@ def checkout(request):
                    "payment_form": payment_form, 
                    "publishable": settings.STRIPE_PUBLISHABLE_KEY},
                   )
-    
+
 def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'default_phone_number': order.phone_number,
+                'default_email': order.email,
+                'default_street_address': order.street_address,
+                'default_address2': order.address2,
+                'default_country': order.country,
+                'default_town_or_city': order.town_or_city,
+                'default_postcode': order.postcode,
+            }
+            user_profile_form = ProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
+
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
@@ -113,9 +137,6 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'stripe_publishable_key': stripe_publishable_key,
-        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
-    

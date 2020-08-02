@@ -140,6 +140,7 @@
         </div>
     </header>
 
+
     {% if messages %}
         <div class="message-container">
             {% for message in messages %}
@@ -161,7 +162,7 @@
     {% block page_header %}
     {% endblock %}
 
-    {% block content %}
+    {% block content %} 
     {% endblock %}
 
     {% block postloadjs %}
@@ -172,8 +173,9 @@
         });
     </script>
     {% endblock %}
-<footer>
 
+<footer>
+{% include 'includes/footer.html' %}  
 </footer>
     
   </body>
