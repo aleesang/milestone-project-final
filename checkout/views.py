@@ -10,10 +10,7 @@ from profiles.forms import ProfileForm
 from django.utils import timezone
 from bag.calculate import inside_bag
 import stripe
-
-
-# api for stripe, gets secret_key from settings
-stripe.api_key = os.environ.get('AWS_ACCESS_KEY_ID')
+import json
 
 
 @login_required()
@@ -65,11 +62,13 @@ def checkout(request):
 
             try:
                 
-                customer = stripe.Charge.create(
+                current_bag = bag_contents(request)
+                total = current_bag['grand_total']
+                stripe_total = round(total * 100)
+                stripe.api_key = stripe_secret_key
+                intent = stripe.PaymentIntent.create(
                     amount=stripe_total,
                     currency=settings.STRIPE_CURRENCY,
-                    description=request.user.email,
-                    card=payment_form.cleaned_data['stripe_id']
                 )
             # Provides various messages to user dependent on success of order
             except stripe.error.CardError:
@@ -88,13 +87,15 @@ def checkout(request):
     else:
         payment_form = MakePaymentForm()
         checkout_form = CheckoutForm()
-
+        
     # auto-fills name and address information
     # if those details have been completed on Checkout page
-    return render(request, "checkout/checkout.html", 
-                  {"checkout_form": form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
-    
-
+    return render(request, 
+                  "checkout/checkout.html", 
+                  {"checkout_form": form, 
+                   "payment_form": payment_form, 
+                   "publishable": settings.STRIPE_PUBLISHABLE_KEY},
+                  )
     
 def checkout_success(request, order_number):
     """
@@ -112,6 +113,8 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'stripe_publishable_key': stripe_publishable_key,
+        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)

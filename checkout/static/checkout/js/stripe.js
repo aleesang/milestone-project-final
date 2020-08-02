@@ -1,9 +1,7 @@
 // A reference to Stripe.js initialized with your real test publishable API key.
-var stripe = Stripe("pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYAcSJs9OSFleBhaO0oqOnDi4nWyFwHO8hb5gvIgd001MYSbJK6");
-// The items the customer wants to buy
-var purchase = {
-  items: [{ id: "xl-tshirt" }]
-};
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublicKey);x
 
 // Disable the button until we have Stripe set up on the page
 document.querySelector("submit-button").disabled = true;
