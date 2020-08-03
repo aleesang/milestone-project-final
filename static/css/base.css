@@ -269,6 +269,7 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+
 /* Stripe CSS */
 .StripeElement,
 .stripe-style-input {
@@ -377,7 +378,7 @@ select option[value=""] {
         height: calc(100vh - 116px);
     }
 
-    .display-4.logo-font.text-black {
+    .display-4.text-black {
         font-size: 2rem;
     }
 
