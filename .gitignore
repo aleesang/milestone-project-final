@@ -18,4 +18,4 @@ db.sqlite3-journal
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-get-pip.py
+.get-pip.py
