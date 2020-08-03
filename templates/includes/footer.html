@@ -1,14 +1,90 @@
-  <footer class="page-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5>About</h5>
-          <p>Tech&Co is the place for all your tech accessories. </p>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright center">
-    <div class="container"> © 2020 Tech&Co <a class="footer_link" href="http://github.com/aleesang" target="_blank">Created by Alee Sang</a>
-    </div>
-  </div>
-  </footer>
+        <!-- Footer Start-->
+        <footer>
+            <div class="footer-container">
+                <div class="container-fluid">
+                    <div class="row">
+                    <!-- Start of Footer Widget -->
+                      <!-- Column 1 -->
+                        <div class="col-lg-3 col-sm-6 offset-md-1 offset-lg-0 mb-md--45">
+                            <div class="footer-widget">
+                                <div class="textwidget">
+                                    <figure class="mb--30">
+                                        <img src="/media/TECH&COLOGO.png" height="100" alt="">
+                                    </figure>
+                                    <p>Bringing you fun, but practical tech accessories to empower you in this tech world! </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 2 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20">Company</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <a href="#" class="dropdown-item">About Us</a>
+                                        <a href="#" class="dropdown-item">Shop</a>
+                                        <a href="#" class="dropdown-item">Contact</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 3 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20">Dashboard</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                            {% else %}
+                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                            {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 4 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20">Social Network</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <a href="#" class="dropdown-item">Facebook</a>
+                                        <a href="#" class="dropdown-item">Instagram</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 5 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20">Get the App</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <a href="#">
+                                          <img src="/media/app-store.svg" alt="">
+                                        </a>
+                                        <a href="#">
+                                          <img src="/media/google-play.svg" alt="">
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                <!-- End of Footer Widget -->        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p class="copyright-text">Tech&Co &copy; 2020 all rights reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer End-->

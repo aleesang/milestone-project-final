@@ -1,3 +1,25 @@
+/* CSS Document */
+
+/******************************
+
+[Table of Contents]
+
+1. Fonts
+2. Body and some general stuff
+3. Header
+4. Menu
+5. Home
+6. Ads
+7. Products
+8. Ad Extra Large
+9. Icon Boxes
+10. Newsletter
+11. Footer
+
+
+******************************/
+
+/* Fonts */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Poppins:100,200,300,400,500,600,700");
 
 html {
@@ -296,22 +318,30 @@ select option[value=""] {
     color: #aab7c4 !important;
 }
 
+
 /* Footer */
-.page-footer {
-    background-color: rgb(212, 170, 170);
-  }
+.footer-container {
+    background-color: #ffdb1181;
+    padding: 2em 1em 2em 1em;
+    margin-top: 5em;
+}
+
+
+@media (max-width: 74.9375em) {
+    .footer-widget .widget-title {
+      font-size: 15px; } }
   
-  .footer_link {
-    color: #000000de;
-  }
-  
-  .footer_link:hover {
-    color: #5a5a5a;
-  }
-  
-  .footer_link:active:focus {
-    color: #7f7e80;
-  }
+.footer-widget .footer-menu {
+    margin-bottom: 2em; 
+    padding-left: 0.5em; 
+    padding-right: 1em;
+}
+
+.footer-bottom {
+    background-color: #ffdb1181;
+    padding: 1em 1em 1em 1em;   
+}
+
 
 /* -------------------------------- Media Queries */
 
