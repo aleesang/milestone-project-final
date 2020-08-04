@@ -1,23 +1,13 @@
 /* CSS Document */
 
-/******************************
+/*-----------------------------
 
 [Table of Contents]
 
 1. Fonts
-2. Body and some general stuff
-3. Header
-4. Menu
-5. Home
-6. Ads
-7. Products
-8. Ad Extra Large
-9. Icon Boxes
-10. Newsletter
-11. Footer
+2. Body 
 
-
-******************************/
+-----------------------------/
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Poppins:100,200,300,400,500,600,700");
@@ -148,38 +138,6 @@ input[name='q']::placeholder {
     right: 36px;
 }
 
-/* Convenience classes - colors copied from Bootstrap */
-.arrow-primary {
-    border-bottom-color: #007bff !important;
-}
-
-.arrow-secondary {
-    border-bottom-color: #6c757d !important;
-}
-
-.arrow-success {
-    border-bottom-color: #28a745 !important;
-}
-
-.arrow-danger {
-    border-bottom-color: #dc3545 !important;
-}
-
-.arrow-warning {
-    border-bottom-color: #ffc107 !important;
-}
-
-.arrow-info {
-    border-bottom-color: #17a2b8 !important;
-}
-
-.arrow-light {
-    border-bottom-color: #f8f9fa !important;
-}
-
-.arrow-dark {
-    border-bottom-color: #343a40 !important;
-}
 
 .bag-notification-wrapper {
     height: 100px;
@@ -187,7 +145,7 @@ input[name='q']::placeholder {
     overflow-y: auto;
 }
 
-/* Allauth form formatting */
+/* ------------------------------- Allauth form formatting */
 
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /* mt-4 */
@@ -226,7 +184,7 @@ input[name='q']::placeholder {
     line-height: 1.5;
     border-radius: 0;
 
-    /* standard bootstrap btn transitions */
+/* ------------------------------- standard bootstrap btn transitions */
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -241,7 +199,7 @@ input[name='q']::placeholder {
 	color: #17a2b8; /* text-info */
 }
 
-/* Product Form */
+/* ------------------------------- Product Form */
 
 .btn-file {
     position: relative;
@@ -269,18 +227,12 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
-/* Card Styling Index Page */
+/* ------------------------------- Card Styling Index Page */
 
-.card.large {
-    height: 475px;
-  }
-  
-  .card-title {
-    background-color: black;
-    color: white;
-    font-weight: bolder;
-    text-transform: uppercase;
-  }
+
+.index-products-title {
+    margin-top: 10em;
+} 
 
 img.card-image-home {
     float: left;
@@ -289,12 +241,6 @@ img.card-image-home {
     object-fit: cover;
 }
 
-.truncate {
-    line-height: 20px;
-    max-height: 20px;
-    overflow: hidden;
-    display:inline-block;
-  }
 
 .index-page-shop-btn {
     border-radius: 0;
@@ -303,7 +249,7 @@ img.card-image-home {
 
 }
 
-/* Stripe CSS */
+/* ------------------------------- Stripe CSS */
 .StripeElement,
 .stripe-style-input {
   box-sizing: border-box;
