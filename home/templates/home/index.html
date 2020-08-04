@@ -1,209 +1,74 @@
-    {% extends "base.html" %}
-    {% load static %}
+{% extends "base.html" %}
+{% load static %}
 
-    {% block page_header %}
-        <div class="container header-container">
-            <div class="row">
-                <div class="col"></div>
-            </div>
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
         </div>
-    {% endblock %}
+    </div>
+{% endblock %}
 
-    {% block content %}
-    <!-- featured area -->
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-7 col-md-6 my-auto">
-                    <h1 class="display-4 text-black">
-                        OUR FEATURED PRODUCTS
-                    </h1>
-                    <div class="my-5">
-                        <h4>
-                            <a href="{% url 'products' %}" class="hero-button btn btn-lg rounded-0 text-uppercase py-3">FEATURED</a>
-                        </h4>
-                    </div>
+{% block content %}
+<!-- Banner Content Area -->
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-7 col-md-6 my-auto">
+                <h1 class="display-4 text-black">
+                    Look Stylish With Our New Range of Backoacks!
+                </h1>
+                <div class="my-5">
+                    <h4>
+                        <a href="{% url 'products' %}" class="hero-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
+                    </h4>
                 </div>
             </div>
         </div>
+    </div>
 
-
-    <!-- Product Tab Area Start -->
-        <div class="container h-100">
-            <div class="row h-50">
-                <div class="col-7 col-md-6 my-auto">
-                    <h2>Featured Products</h2>
+<!-- Featured Products -->
+<div class="container h-100">
+    <!-- Products Row -->
+        <div class="row h-100">
+            <!--Card 1 -->
+            <div class="col-3 my-auto">
+                <img class="card-image-home" src="/media/techncobag.png" alt="tech & co bag">
+                <div class="card-body">
+                    <h5 class="card-title">Tech & Co</h5>
+                    <p class="truncate">The Tech & Co Backpack is a force to be reckoned with. It has an external padded, zipped laptop pocket that fits most 15 inch laptops. The front pocket is complete with a phone slot, pen slots and a clip to hang your keys on. All the zip pullers are designed so as you can get creative and easily attach your favourite bag charm. We've got your back.</p>
+                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
-
-            <div class="row h-100">
-                <div class="col-12">
-                        <!-- Products Row -->
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6 mb--45">
-                                    <div class="ft-product HTfadeInUp">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-                                                <figure class="product-image--holder">
-                                                    <img src="assets/img/products/prod-04-270x300.jpg" alt="Product">
-                                                </figure>
-                                                <a href="product-details.html" class="product-overlay"></a>
-                                                <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#productModal" class="action-btn">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-heart-o"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-repeat"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="product-category">
-                                                    <a href="product-details.html">Chair</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="product-details.html">Golden Easy Spot Chair.</a></h3>
-                                                <div class="product-info-bottom">
-                                                    <div class="product-price-wrapper">
-                                                        <span class="money">$150</span>
-                                                    </div>
-                                                    <a href="cart.html" class="add-to-cart pr--15">
-                                                        <i class="la la-plus"></i>
-                                                        <span>Add To Cart</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb--45">
-                                    <div class="ft-product HTfadeInUp">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-                                                <figure class="product-image--holder">
-                                                    <img src="assets/img/products/prod-05-270x300.jpg" alt="Product">
-                                                </figure>
-                                                <a href="product-details.html" class="product-overlay"></a>
-                                                <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#productModal" class="action-btn">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-heart-o"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-repeat"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="product-category">
-                                                    <a href="product-details.html">Chair</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="product-details.html">Golden Easy Spot Chair.</a></h3>
-                                                <div class="product-info-bottom">
-                                                    <div class="product-price-wrapper">
-                                                        <span class="new-price">
-                                                            <span class="money">$150</span>
-                                                        </span>
-                                                        <span class="old-price">
-                                                            <span class="money">$200</span>
-                                                        </span>
-                                                    </div>
-                                                    <a href="cart.html" class="add-to-cart pr--15">
-                                                        <i class="la la-plus"></i>
-                                                        <span>Add To Cart</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb--45">
-                                    <div class="ft-product HTfadeInUp">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-                                                <figure class="product-image--holder">
-                                                    <img src="assets/img/products/prod-06-270x300.jpg" alt="Product">
-                                                </figure>
-                                                <a href="product-details.html" class="product-overlay"></a>
-                                                <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#productModal" class="action-btn">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-heart-o"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-repeat"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="product-category">
-                                                    <a href="product-details.html">Chair</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="product-details.html">Golden Easy Spot Chair.</a></h3>
-                                                <div class="product-info-bottom">
-                                                    <div class="product-price-wrapper">
-                                                        <span class="money">$150</span>
-                                                    </div>
-                                                    <a href="cart.html" class="add-to-cart pr--15">
-                                                        <i class="la la-plus"></i>
-                                                        <span>Add To Cart</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb--45">
-                                    <div class="ft-product HTfadeInUp">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-                                                <figure class="product-image--holder">
-                                                    <img src="assets/img/products/prod-09-270x300.png" alt="Product">
-                                                </figure>
-                                                <a href="product-details.html" class="product-overlay"></a>
-                                                <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#productModal" class="action-btn">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-heart-o"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="action-btn">
-                                                        <i class="la la-repeat"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="product-category">
-                                                    <a href="product-details.html">Chair</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="product-details.html">Golden Easy Spot Chair.</a></h3>
-                                                <div class="product-info-bottom">
-                                                    <div class="product-price-wrapper">
-                                                        <span class="money">$150</span>
-                                                    </div>
-                                                    <a href="cart.html" class="add-to-cart pr--15">
-                                                        <i class="la la-plus"></i>
-                                                        <span>Add To Cart</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End of Products Row -->
-                    </div>
+            <!--Card 2 -->
+            <div class="col-3 my-auto">
+                <img class="card-image-home" src="/media/techncomousepad.png" alt="tech & co mousepad">
+                <div class="card-body">
+                    <h5 class="card-title">Tech & Co Mousepad</h5>
+                    <p class="truncate">Make your mouse super happy with our Typo mouse pads! They have amazing designs with a smooth surface that will ensure easy glide for your mouse. Our mouse pads are made from neoprene with a non-slip base.</p>
+                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
+            <!--Card 3 -->
+            <div class="col-3 my-auto">
+                <img class="card-image-home" src="/media/techncomug.png" alt="tech & co Mug">
+                <div class="card-body">
+                    <h5 class="card-title">Tech & Co Notebook</h5>
+                    <p class="truncate">The notebook for the quintessential organiser. Separate your subjects and keep all of your notes, doodles, clippings and worksheets in the one fresh A5 sized notebook. In a range of seasonal prints and designs, these are a Typo signature stationery essential. You're welcome.</p>
+                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+                </div>
+            </div>
+            <!--Card 4 -->
+            <div class="col-3 my-auto">
+                <img class="card-image-home" src="/media/technconotebook.png" alt="tech & co notebook">
+                <div class="card-body">
+                    <h5 class="card-title">Tech & Co Notebook</h5>
+                    <p class="truncate">The notebook for the quintessential organiser. Separate your subjects and keep all of your notes, doodles, clippings and worksheets in the one fresh A5 sized notebook. In a range of seasonal prints and designs, these are a Typo signature stationery essential. You're welcome.</p>
+                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+                </div>
+            </div>    
         </div>
-                <!-- Product Tab Area End -->
-
+    <!-- End of Row -->
+</div>
     {% endblock %}
 
     {% block postloadjs %}
