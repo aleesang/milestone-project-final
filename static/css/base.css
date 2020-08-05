@@ -24,13 +24,14 @@ body {
     font-family: 'Roboto';
 }
 
-/* from Bulma */
-.icon {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    height: 1.5rem;
-    width: 1.5rem;
+
+.promo-banner {
+    padding: 0.5em 0 0.5em 0;
+    font-size: large;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background: #b40054;
 }
 
 .main-logo-link {
@@ -38,7 +39,7 @@ body {
 }
 
 .hero-button {
-    background: rgb(136, 119, 119);
+    background: rgb(178, 226, 207);
     color: white;
     min-width: 260px;
 }
@@ -244,7 +245,7 @@ img.card-image-home {
 
 .index-page-shop-btn {
     border-radius: 0;
-    background: rgb(146, 117, 131);
+    background: rgb(178, 226, 207);
     color: white;
 
 }
@@ -374,9 +375,6 @@ select option[value=""] {
         font-size: 1rem;
     }
 
-    #delivery-banner h4 {
-        font-size: .9rem;
-    }
 
     .btn.btn-outline-black.rounded-0,
     .btn.btn-black.rounded-0 {

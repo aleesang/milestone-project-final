@@ -31,7 +31,7 @@ def inside_bag(request):
                     'product': product,
                     'size': size,
                 })
-
+    
     final_total = total
     
     calculate = {
