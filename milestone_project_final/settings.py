@@ -209,4 +209,4 @@ else:
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USER = os.environ.get('EMAIL_USER')
     EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
