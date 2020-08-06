@@ -71,7 +71,7 @@
                    <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="shop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
-                                <div><i class="fas fa-store"></i></div>
+                                <div><i class="fas fa-store-alt fa-lg"></i></div>
                                 <p class="my-0">Shop</p>
                             </div>
                             <div class="dropdown-menu border-0" aria-labelledby="sort-products">
@@ -102,7 +102,7 @@
                     <li class="list-inline-item">
                         <a class="{% if final_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
                             <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                <div><i class="fab fa-shopify fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if final_total %}
                                         ${{ final_total|floatformat:2 }}
@@ -124,7 +124,7 @@
                 {% include 'includes/mobile-top-header.html' %}
             </nav>
         </div>
-        <div class="row promo-banner">
+        <div class="row mb-5 promo-banner">
             <div class="col">
                 <span>Check out our new range of notebooks!</span>                
             </div>            
