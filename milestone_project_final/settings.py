@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'gmailapi_backend',
     'crispy_forms',
     'django_countries',
     'home',
@@ -198,12 +199,16 @@ STRIPE_CURRENCY = 'aud'
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_PORT = 465
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USER = os.environ.get('EMAIL_USER')
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
+#Email
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'technco@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+    EMAIL_PORT = 465
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_USER = os.environ.get('EMAIL_USER')
+    EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
