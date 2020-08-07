@@ -208,5 +208,5 @@ else:
     EMAIL_PORT = 587
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USER = os.environ.get('EMAIL_USER')
-    EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+    EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
