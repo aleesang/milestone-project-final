@@ -204,7 +204,7 @@ if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'technco@example.com'
 else:
-    EMAIL_BACKEND = 'gmailapi_backend.mail.GmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
     EMAIL_PORT = 465
@@ -212,6 +212,3 @@ else:
     EMAIL_USER = os.environ.get('EMAIL_USER')
     EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_USER')
-    GMAIL_API_CLIENT_ID = 'client_id'
-    GMAIL_API_CLIENT_SECRET = 'client_secret'
-    GMAIL_API_REFRESH_TOKEN = 'refresh_token'
