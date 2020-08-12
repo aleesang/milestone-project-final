@@ -48,8 +48,9 @@
                         {{ checkout_form.town_or_city|as_crispy_field }}
                         <!-- Post Code -->                
                         {{ checkout_form.postcode|as_crispy_field }}
-
             </fieldset>
+          
+          <!-- Start of Form -->
             <fieldset class="rounded px-3 mb-5">
               <div class="form-check form-check-inline float-right mr-0">
 							{% if user.is_authenticated %}
@@ -65,17 +66,17 @@
 							{% endif %}
 						  </div>
             </fieldset>
-            <!-- Stripe Payment -->
-                    <fieldset class="px-3" id="payment-form">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                        <!--Stripe.js injects the Card Element-->
-                        <div class="mb-3" id="card-element"></div>
-                        <!-- Used to display form errors -->
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <!-- Pass the client secret to the view so we can get the payment intent id -->
-                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </fieldset>
-                    <!-- Review Bag Button -->
+
+            <!--Stripe Payment -->
+            <fieldset class="px-3">
+                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                <!-- A Stripe card element will go here -->
+                <div class="mb-3" id="card-element"></div>
+                <!-- Used to display form errors -->
+                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+            </fieldset>
+            
+            <!-- Review Bag Button -->
             <div class="submit-button text-right mt-5 mb-2">                    
 						  <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
 							<span class="icon">
@@ -83,6 +84,7 @@
 							</span>
 							<span class="font-weight-bold">Review Bag</span>
 						</a>
+
             <!-- Submit Button -->
 						<button id="submit-button" class="btn btn-black rounded-0">
 							<span class="font-weight-bold">Complete Checkout</span>
@@ -160,7 +162,5 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    {{ stripe_publishable_key|json_script:"id_stripe_publishable_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe.js' %}"></script>
 {% endblock %}

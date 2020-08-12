@@ -1,70 +1,69 @@
-// A reference to Stripe.js initialized with your real test publishable API key.
-var stripePublishableKey = $('#id_stripe_publishable_key').text().slice(1, -1);
-var clientSecret = $('#id_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripePublicKey);x
+// Set your publishable key: remember to change this to your live publishable key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+var stripe = Stripe('pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYAcSJs9OSFleBhaO0oqOnDi4nWyFwHO8hb5gvIgd001MYSbJK6');
+var elements = stripe.elements();
 
-// Disable the button until we have Stripe set up on the page
-document.querySelector("submit-button").disabled = true;
+
+// Custom styling can be passed to options when creating an Element.
+var style = {
+  base: {
+    // Add your base input styles here. For example:
+    color: '#000',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+        color: '#aab7c4'
+    }
+},
+invalid: {
+    color: '#dc3545',
+    iconColor: '#dc3545'
+}
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+
 fetch("/create-payment-intent", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify(purchase)
+  body: JSON.stringify(orderData)
 })
   .then(function(result) {
     return result.json();
   })
   .then(function(data) {
-    var elements = stripe.elements();
-    var style = {
-      base: {
-          color: '#000',
-          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-          fontSmoothing: 'antialiased',
-          fontSize: '16px',
-          '::placeholder': {
-              color: '#aab7c4'
-          }
-      },
-      invalid: {
-          color: '#dc3545',
-          iconColor: '#dc3545'
-      }
-    };
+    return setupElements(data);
+  })
+  .then(function({ stripe, card, clientSecret }) {
+    document.querySelector("button").disabled = false;
 
-    var card = elements.create('card', {style: style});
-    card.mount('#card-element');
-    
-    // Handle realtime validation errors on the card element
-    card.addEventListener('change', function (event) {
-        var errorDiv = document.getElementById('card-errors');
-        if (event.error) {
-            var html = `
-                <span class="icon" role="alert">
-                    <i class="fas fa-times"></i>
-                </span>
-                <span>${event.error.message}</span>
-            `;
-            $(errorDiv).html(html);
-        } else {
-            errorDiv.textContent = '';
-        }
-    });
-
+    // Handle form submission.
     var form = document.getElementById("payment-form");
-    form.addEventListener("submit-button", function(event) {
+    form.addEventListener("submit", function(event) {
       event.preventDefault();
-      // Complete payment when the submit button is clicked
-      payWithCard(stripe, card, data.clientSecret);
+      // Initiate payment when the submit button is clicked
+      pay(stripe, card, clientSecret);
     });
   });
 
-// Calls stripe.confirmCardPayment
-// If the card requires authentication Stripe shows a pop-up modal to
-// prompt the user to enter authentication details without leaving your page.
-var payWithCard = function(stripe, card, clientSecret) {
-  loading(true);
+
+/*
+ * Calls stripe.confirmCardPayment which creates a pop-up modal to
+ * prompt the user to enter extra authentication details without leaving your page
+ */
+var pay = function(stripe, card, clientSecret) {
+  changeLoadingState(true);
+
+  // Initiate the payment.
+  // If authentication is required, confirmCardPayment will automatically display a modal
   stripe
     .confirmCardPayment(clientSecret, {
       payment_method: {
@@ -76,39 +75,36 @@ var payWithCard = function(stripe, card, clientSecret) {
         // Show error to your customer
         showError(result.error.message);
       } else {
-        // The payment succeeded!
-        orderComplete(result.paymentIntent.id);
+        // The payment has been processed!
+        orderComplete(clientSecret);
       }
     });
 };
 
-var saveInfo = Boolean($('#id-save-info').attr('checked'));
-// From using {% csrf_token %} in the form
-var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-var postData = {
-    'csrfmiddlewaretoken': csrfToken,
-    'client_secret': clientSecret,
-    'save_info': saveInfo,
+/* ------- Post-payment helpers ------- */
+
+/* Shows a success / error message when the payment is complete */
+var orderComplete = function(clientSecret) {
+  // Just for the purpose of the sample, show the PaymentIntent response object
+  stripe.retrievePaymentIntent(clientSecret).then(function(result) {
+    var paymentIntent = result.paymentIntent;
+    var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+
+    document.querySelector(".sr-payment-form").classList.add("hidden");
+    document.querySelector("pre").textContent = paymentIntentJson;
+
+    document.querySelector(".sr-result").classList.remove("hidden");
+    setTimeout(function() {
+      document.querySelector(".sr-result").classList.add("expand");
+    }, 200);
+
+    changeLoadingState(false);
+  });
 };
 
-/* ------- UI helpers ------- */
-// Shows a success message when the payment is complete
-var orderComplete = function(paymentIntentId) {
-  loading(false);
-  document
-    .querySelector(".result-message a")
-    .setAttribute(
-      "href",
-      "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-    );
-  document.querySelector(".result-message").classList.remove("hidden");
-  document.querySelector("submit-button").disabled = true;
-};
-
-// Show the customer the error from Stripe if their card fails to charge
 var showError = function(errorMsgText) {
-  loading(false);
-  var errorMsg = document.querySelector("#card-error");
+  changeLoadingState(false);
+  var errorMsg = document.querySelector(".sr-field-error");
   errorMsg.textContent = errorMsgText;
   setTimeout(function() {
     errorMsg.textContent = "";
@@ -116,14 +112,13 @@ var showError = function(errorMsgText) {
 };
 
 // Show a spinner on payment submission
-var loading = function(isLoading) {
+var changeLoadingState = function(isLoading) {
   if (isLoading) {
-    // Disable the button and show a spinner
-    document.querySelector("submit-button").disabled = true;
+    document.querySelector("button").disabled = true;
     document.querySelector("#spinner").classList.remove("hidden");
     document.querySelector("#button-text").classList.add("hidden");
   } else {
-    document.querySelector("submit-button").disabled = false;
+    document.querySelector("button").disabled = false;
     document.querySelector("#spinner").classList.add("hidden");
     document.querySelector("#button-text").classList.remove("hidden");
   }
