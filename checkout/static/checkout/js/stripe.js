@@ -56,27 +56,40 @@ fetch("/create-payment-intent", {
 
 
 /*
- * Calls stripe.confirmCardPayment which creates a pop-up modal to
- * prompt the user to enter extra authentication details without leaving your page
+ * Collect card details and pay for the order
  */
-var pay = function(stripe, card, clientSecret) {
+var pay = function(stripe, card) {
   changeLoadingState(true);
 
-  // Initiate the payment.
-  // If authentication is required, confirmCardPayment will automatically display a modal
+  // Collects card details and creates a PaymentMethod
   stripe
-    .confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card
+    .createPaymentMethod("card", card)
+    .then(function(result) {
+      if (result.error) {
+        showError(result.error.message);
+      } else {
+        orderData.paymentMethodId = result.paymentMethod.id;
+
+        return fetch("/pay", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(orderData)
+        });
       }
     })
     .then(function(result) {
-      if (result.error) {
-        // Show error to your customer
-        showError(result.error.message);
+      return result.json();
+    })
+    .then(function(response) {
+      if (response.error) {
+        showError(response.error);
+      } else if (response.requiresAction) {
+        // Request authentication
+        handleAction(response.clientSecret);
       } else {
-        // The payment has been processed!
-        orderComplete(clientSecret);
+        orderComplete(response.clientSecret);
       }
     });
 };

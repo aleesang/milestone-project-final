@@ -26,7 +26,7 @@
         <h2 class="mt-5 mb-4">Checkout</h2>
       </div>
     </div>
-    <!-- Start of Form -->    
+    <!-- Form Column -->    
       <div class="row">
         <div class="col-md-8 mb-4">
             <form action="{% url 'checkout' %}" method="POST" class="card-body">
@@ -68,8 +68,8 @@
             </fieldset>
 
             <!--Stripe Payment -->
-            <fieldset class="px-3">
-                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+            <fieldset id="payment-form" class="px-3">
+                <legend class="fieldset-label small px-2 w-auto">Payment</legend>
                 <!-- A Stripe card element will go here -->
                 <div class="mb-3" id="card-element"></div>
                 <!-- Used to display form errors -->
@@ -78,7 +78,7 @@
             
             <!-- Review Bag Button -->
             <div class="submit-button text-right mt-5 mb-2">                    
-						  <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
+						  <a href="{% url 'view_bag' %}" class="btn button-other rounded-0">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
 							</span>
@@ -86,7 +86,7 @@
 						</a>
 
             <!-- Submit Button -->
-						<button id="submit-button" class="btn btn-black rounded-0">
+						<button id="submit-button" class="btn button-main rounded-0">
 							<span class="font-weight-bold">Complete Checkout</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>
@@ -103,7 +103,7 @@
             <!-- end of form -->
           </div>
           
-        <!-- ****** Bag Column ****** -->
+        <!-- Bag Column -->
         <div class="col-md-4 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your Bag</span>
@@ -128,7 +128,7 @@
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
               <!-- product name -->
-                <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                <p class="my-0 checkout-prod-name"><strong>{{ item.product.name }}</strong></p>
               <!-- quantity of item -->
                 <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
               </div>
@@ -142,7 +142,7 @@
           </ul>
           {% endfor %}
 
-              <div class="row text-black text-right">
+              <div class="row text-right">
                         <div class="col-7 offset-2">
                             <p class="my-0">Delivery:</p>
                             <p class="my-0">Final Total:</p>

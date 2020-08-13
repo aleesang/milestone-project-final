@@ -15,9 +15,6 @@ from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
 
 
-stripe.api_key = 'sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo'
-
-
 @login_required()
 def checkout(request):
     """
@@ -68,30 +65,28 @@ def checkout(request):
                 )
                 order_item.save()
 
-            try:
-                current_bag = inside_bag(request)
-                total = current_bag['final_total']
-                stripe_total = round(total * 100)
-                stripe.api_key = stripe_secret_key
-                intent = stripe.PaymentIntent.create(
-                    amount=stripe_total,
-                    currency=settings.STRIPE_CURRENCY,
-                )
-                
-            # Provides various messages to user dependent on success of order
-            except stripe.error.CardError:
-                messages.error(request, "Your card was declined!")
-
-            if customer.paid:
-                messages.error(request, "Your order was Successful")
-                request.session['bag'] = {}
-                return redirect(reverse('checkout'))
+                try:
+                    customer = stripe.Charge.create(
+                        amount=int(total*100),
+                        currency='AUD',
+                        description=request.user.email,
+                        card=payment_form.cleaned_data['stripe_id'],
+                    )
+                except stripe.error.CardError:
+                    messages.error(request, 'Your card was declined!')
+                if customer.paid:
+                    messages.success(request, 'You have successfully paid')
+                    request.session['bag'] = {}
+                    return redirect(reverse('products'))
+                else:
+                    messages.error
+                    (request,
+                     'We are unable to take your payment at this time.')
             else:
-                messages.error(request, "Unable to take payment")
-        else:
-            print(payment_form.errors)
-            messages.error(request,
-                           "We were unable to take a payment with that card!")
+                print(payment_form.errors)
+                messages.error(
+                    request,
+                    'We are unable to take payment from this card.')
     else:
         payment_form = MakePaymentForm()
         checkout_form = CheckoutForm()

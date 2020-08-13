@@ -6,12 +6,15 @@
 
 1. Fonts
 2. Body 
+3. Banner
+4. Site Buttons
 
 -----------------------------/
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Poppins:100,200,300,400,500,600,700");
 
+/* Body */
 html {
     height: 100%;
 }
@@ -24,7 +27,7 @@ body {
     font-family: 'Roboto';
 }
 
-
+/* Banner */
 .promo-banner {
     padding: 0.5em 0 0.5em 0;
     font-size: large;
@@ -34,51 +37,45 @@ body {
     background: #b40054;
 }
 
-.main-logo-link {
-    width: fit-content;
-}
-
 .hero-button {
-    background: rgb(178, 226, 207);
+    background: rgb(159, 194, 182);
     color: white;
     min-width: 260px;
 }
 
-.btn-black {
-    background: black;
-    color: white;
-}
-
-.btn-outline-black {
-    background: white;
-    color: black !important; /* use important to override link colors for <a> elements */
-    border: 1px solid black;
-}
-
-.btn-outline-black:hover,
-.btn-outline-black:active,
-.btn-outline-black:focus {
-    background: black;
-    color: white !important;
-}
-
 .hero-button:hover,
 .hero-button:active,
-.hero-button:focus,
-.btn-black:hover,
-.btn-black:active,
-.btn-black:focus {
-    background: rgb(104, 90, 90);
+.hero-button:focus {
+    background: rgb(93, 138, 141);
     color: rgb(236, 236, 236);
 }
 
-.text-black {
-    color: #000 !important;
+/* Site Buttons */
+.button-main {
+    background: rgb(135, 187, 189);
+    color: white;
 }
 
-.border-black {
-    border: 1px solid black !important;
+.button-main:hover,
+.button-main:active,
+.button-main:focus {
+    background: rgb(59, 59, 59);
+    color: white !important;
 }
+
+.button-other {
+    background: rgb(0, 0, 0);
+    color: rgb(250, 246, 246) !important; /* use important to override link colors for <a> elements */
+    border: 1px solid rgb(128, 91, 91);
+}
+
+.button-other:hover,
+.button-other:active,
+.button-other:focus {
+    background: rgb(59, 59, 59);
+    color: white !important;
+}
+
 
 .bg-black {
     background: #000 !important;
@@ -228,6 +225,13 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+/* ------------------------------- checkout Page - Your Bag Styling  */
+
+.checkout-prod-name {
+    color: black;
+    font-weight: bolder;
+}
+
 /* ------------------------------- Card Styling Index Page */
 
 
@@ -245,9 +249,15 @@ img.card-image-home {
 
 .index-page-shop-btn {
     border-radius: 0;
-    background: rgb(178, 226, 207);
+    background: rgb(159, 194, 182);
     color: white;
+}
 
+.index-page-shop-btn:hover,
+.index-page-shop-btn:active,
+.index-page-shop-btn:focus {
+    background: rgb(93, 138, 141);
+    color: rgb(236, 236, 236);
 }
 
 /* ------------------------------- Stripe CSS */
