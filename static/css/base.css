@@ -1,5 +1,3 @@
-/* CSS Document */
-
 /*-----------------------------
 
 [Table of Contents]
@@ -9,6 +7,14 @@
 3. Cover Overlay
 4. Banner
 5. Site Buttons
+6. Card Styling Index Page
+7. Bottom To Top Arrow On Product Page
+8. Bootstrap Toasts
+9. Allauth Form Formatting
+10. Checkout Page - Your Bag Styling
+11. Stripe
+12. Footer
+13. Media Queries
 
 -----------------------------/
 
@@ -26,6 +32,10 @@ body {
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Roboto';
+}
+
+.font-awesome-icons {
+    color: rgb(98, 109, 109);
 }
 
 /* Cover Overlay */
@@ -77,7 +87,7 @@ body {
 
 .button-other {
     background: rgb(0, 0, 0);
-    color: rgb(250, 246, 246) !important; /* use important to override link colors for <a> elements */
+    color: rgb(250, 246, 246) !important; 
     border: 1px solid rgb(128, 91, 91);
 }
 
@@ -88,7 +98,32 @@ body {
     color: white !important;
 }
 
-/* Bottom to top arrow */
+/* Card Styling Index Page */
+.index-products-title {
+    margin-top: 10em;
+} 
+
+img.card-image-home {
+    float: left;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.index-page-shop-btn {
+    border-radius: 0;
+    background: rgb(159, 194, 182);
+    color: white;
+}
+
+.index-page-shop-btn:hover,
+.index-page-shop-btn:active,
+.index-page-shop-btn:focus {
+    background: rgb(93, 138, 141);
+    color: rgb(236, 236, 236);
+}
+
+/* Bottom To Top Arrow On Product Page */
 .btt-button {
     height: 42px;
     width: 42px;
@@ -107,8 +142,7 @@ input[name='q']::placeholder {
     color: #aeb7be;
 }
 
-/* ------------------------------- bootstrap toasts */
-
+/* Bootstrap Toasts */
 .popup-message {
     position: fixed;
     top: 72px;
@@ -116,35 +150,14 @@ input[name='q']::placeholder {
     z-index: 99999999999;
 }
 
-
-/* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
-.arrow-up {
-    width: 0; 
-    height: 0; 
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent; 
-    border-bottom: 10px solid black;
-    position: absolute;
-    top: -10px;
-    right: 36px;
-}
-
-
-.bag-notification-wrapper {
-    height: 100px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-/* ------------------------------- Allauth form formatting */
-
+/* Allauth form formatting */
 .allauth-form-inner-content p {
-    margin-top: 1.5rem; /* mt-4 */
-    color: #6c757d; /* text-secondary */
+    margin-top: 1.5rem; 
+    color: #677886; 
 }
 
 .allauth-form-inner-content input {
-    border-color: #000;
+    border-color: rgb(143, 143, 143);
     border-radius: 0;
 }
 
@@ -153,14 +166,13 @@ input[name='q']::placeholder {
 }
 
 .allauth-form-inner-content input::placeholder {
-    color: #aab7c4;
+    color: #a3abb3;
 }
 
 .allauth-form-inner-content button,
 .allauth-form-inner-content input[type='submit'] {
-	/* btn */
 	display: inline-block;
-    font-weight: 400;
+    font-weight: bold;
     color: #fff;
     text-align: center;
     vertical-align: middle;
@@ -168,94 +180,33 @@ input[name='q']::placeholder {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #000;
-    border: 1px solid #000;
+    background-color: rgb(135, 187, 189);
+    border: 1px solid rgb(135, 187, 189);
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0;
-
-/* ------------------------------- standard bootstrap btn transitions */
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .allauth-form-inner-content button:hover,
 .allauth-form-inner-content input[type='submit']:hover {	
 	color: #fff;
-    background-color: #222;
-    border-color: #222;
+    background-color: rgb(195, 216, 207);
+    border-color: rgb(195, 216, 207);
 }
 
 .allauth-form-inner-content a {
-	color: #17a2b8; /* text-info */
+	color: #3a7983; 
 }
 
-/* ------------------------------- Product Form */
-
-.btn-file {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-file input[type="file"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.custom-checkbox .custom-control-label::before {
-    border-radius: 0;
-    border-color: #dc3545;
-}
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    border-radius: 0;
-}
-
-/* ------------------------------- checkout Page - Your Bag Styling  */
-
+/* Checkout Page - Your Bag Styling  */
 .checkout-prod-name {
     color: black;
     font-weight: bolder;
 }
 
-/* ------------------------------- Card Styling Index Page */
-
-
-.index-products-title {
-    margin-top: 10em;
-} 
-
-img.card-image-home {
-    float: left;
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-}
-
-
-.index-page-shop-btn {
-    border-radius: 0;
-    background: rgb(159, 194, 182);
-    color: white;
-}
-
-.index-page-shop-btn:hover,
-.index-page-shop-btn:active,
-.index-page-shop-btn:focus {
-    background: rgb(93, 138, 141);
-    color: rgb(236, 236, 236);
-}
-
-/* ------------------------------- Stripe CSS */
-.StripeElement,
-.stripe-style-input {
+/* Stripe */
+.StripeElement {
   box-sizing: border-box;
   height: 40px;
   padding: 10px 12px;
@@ -267,14 +218,8 @@ img.card-image-home {
   transition: box-shadow 150ms ease;
 }
 
-.StripeElement--focus,
-.stripe-style-input:focus,
-.stripe-style-input:active {
+.StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
 }
 
 .stripe-style-input::placeholder {
@@ -288,20 +233,19 @@ img.card-image-home {
 
 #payment-form .form-control,
 #card-element {
-    color: #000;
-    border: 1px solid #000;
+    color: rgb(75, 74, 74);
+    border: 1px solid rgb(75, 74, 74);
 }
 
 select,
 select option {
-    color: #000000;
+    color: rgb(75, 74, 74);
 }
 
 select:invalid,
 select option[value=""] {
-    color: #aab7c4 !important;
+    color: #858b91 !important;
 }
-
 
 /* Footer */
 .footer-container {
@@ -309,7 +253,6 @@ select option[value=""] {
     padding: 2em 1em 2em 1em;
     margin-top: 5em;
 }
-
 
 @media (max-width: 74.9375em) {
     .footer-widget .widget-title {
@@ -327,16 +270,16 @@ select option[value=""] {
 }
 
 
-/* -------------------------------- Media Queries */
+/* Media Queries */
 
-/* Slightly larger container on xl screens */
+    /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
     .container {
       max-width: 80%;
     }
   }  
 
-/* fixed top navbar only on medium and up */
+    /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
@@ -351,7 +294,7 @@ select option[value=""] {
     }
 }
 
-/* pad the top a bit when navbar is collapsed on mobile */
+    /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
     .header-container {
         padding-top: 116px;
@@ -361,7 +304,7 @@ select option[value=""] {
         height: calc(100vh - 116px);
     }
 
-    .display-4.text-black {
+    .display-4 {
         font-size: 2rem;
     }
 
@@ -376,18 +319,6 @@ select option[value=""] {
     .navbar-toggler {
         padding: .6rem .6rem;
         font-size: 1rem;
-    }
-
-
-    .btn.btn-outline-black.rounded-0,
-    .btn.btn-black.rounded-0 {
-        padding: .375rem .375rem;
-    }
-
-    .btn.btn-outline-black.rounded-0.btn-lg,
-    .btn.btn-black.rounded-0.btn-lg {
-        padding: .375rem .375rem;
-        font-size: .75rem;
     }
 
     .increment-qty, .decrement-qty {

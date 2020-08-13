@@ -68,7 +68,7 @@
                 <!--Shop-->
                    <li class="list-inline-item dropdown">
                         <a class="nav-link" href="#" id="shop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
+                            <div class="text-center font-awesome-icons">
                                 <div><i class="fas fa-store-alt fa-lg"></i></div>
                                 <p class="my-0">Shop</p>
                             </div>
@@ -81,7 +81,7 @@
                 <!-- My Account Links-->
                     <li class="list-inline-item dropdown">
                         <a class="nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
+                            <div class="text-center font-awesome-icons">
                                 <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">My Account</p>
                             </div>
@@ -99,7 +99,7 @@
                     <!-- Shopping bag -->
                     <li class="list-inline-item">
                         <a class="{% if final_total %}text-info font-weight-bold{% else %}{% endif %} nav-link" href="{% url 'view_bag' %}">
-                            <div class="text-center">
+                            <div class="text-center font-awesome-icons">
                                 <div><i class="fab fa-shopify fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if final_total %}
