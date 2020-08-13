@@ -24,13 +24,9 @@
     </a>
 </li>
 <li class="list-inline-item dropdown">
-    <a class="nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link d-block d-lg-none" href="{% url 'products' %}">
         <div class="text-left">
             <p class="my-0">Shop</p>
-        </div>
-        <div class="dropdown-menu border-0" aria-labelledby="sort-products">
-            <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
-            <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Product</a>
         </div>
     </a>
 </li>

@@ -249,10 +249,16 @@ select option[value=""] {
 }
 
 /* Footer */
+footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: 15em;
+}
+
 .footer-container {
     background-color: #ffdb1181;
     padding: 2em 1em 2em 1em;
-    margin-top: 5em;
 }
 
 @media (max-width: 74.9375em) {

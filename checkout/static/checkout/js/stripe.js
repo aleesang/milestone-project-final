@@ -9,8 +9,6 @@ var style = {
   base: {
     // Add your base input styles here. For example:
     color: '#000',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
     fontSize: '16px',
     '::placeholder': {
         color: '#aab7c4'
@@ -34,7 +32,6 @@ fetch("/create-payment-intent", {
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify(orderData)
 })
   .then(function(result) {
     return result.json();
