@@ -66,11 +66,13 @@ def checkout(request):
                 order_item.save()
 
                 try:
-                    customer = stripe.Charge.create(
-                        amount=int(total*100),
-                        currency='AUD',
-                        description=request.user.email,
-                        card=payment_form.cleaned_data['stripe_id'],
+                    current_bag = bag_contents(request)
+                    total = current_bag['grand_total']
+                    stripe_total = round(total * 100)
+                    stripe.api_key = stripe_secret_key
+                    intent = stripe.PaymentIntent.create(
+                        amount=stripe_total,
+                        currency=settings.STRIPE_CURRENCY,
                     )
                 except stripe.error.CardError:
                     messages.error(request, 'Your card was declined!')

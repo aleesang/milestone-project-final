@@ -4,21 +4,7 @@ var stripe = Stripe('pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYA
 var elements = stripe.elements();
 
 
-// Custom styling can be passed to options when creating an Element.
-var style = {
-  base: {
-    // Add your base input styles here. For example:
-    color: '#000',
-    fontSize: '16px',
-    '::placeholder': {
-        color: '#aab7c4'
-    }
-},
-invalid: {
-    color: '#dc3545',
-    iconColor: '#dc3545'
-}
-};
+
 
 // Create an instance of the card Element.
 var card = elements.create('card', {style: style});
@@ -27,7 +13,7 @@ var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
 
-fetch("/create-payment-intent", {
+fetch("/checkout", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
