@@ -35,7 +35,7 @@ def inside_bag(request):
     
     if total < settings.DELIVERY_DISCOUNT:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
-        free_delivery = settings.FREE_DELIVERY_THRESHOLD - total
+        free_delivery = settings.DELIVERY_DISCOUNT - total
     else:
         delivery = 0
         free_delivery = 0
@@ -48,7 +48,7 @@ def inside_bag(request):
         'product_count': product_count,
         'delivery': delivery,
         'free_delivery': free_delivery,
-        'free_delivery_threshold': settings.DELIVERY_DISCOUNT,
+        'delivery_discount': settings.DELIVERY_DISCOUNT,
         'final_total': final_total,
     }
 
