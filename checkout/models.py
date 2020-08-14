@@ -34,6 +34,19 @@ class Order(models.Model):
     def __str__(self):
         return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
     
+        def update_total(self):
+            """
+        Update grand total each time a line item is added,
+        accounting for delivery costs.
+        """
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        if self.order_total < settings.DELIVERY_DISCOUNT:
+            self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        else:
+            self.delivery_cost = 0
+        self.final_total = self.order_total + self.delivery_cost
+        self.save()
+    
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name='order_item')
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
