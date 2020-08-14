@@ -27,29 +27,6 @@ var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
 
-fetch("/checkout", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-})
-  .then(function(result) {
-    return result.json();
-  })
-  .then(function(data) {
-    return setupElements(data);
-  })
-  .then(function({ stripe, card, clientSecret }) {
-    document.querySelector("button").disabled = false;
-
-    // Handle form submission.
-    var form = document.getElementById("payment-form");
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-      // Initiate payment when the submit button is clicked
-      pay(stripe, card, clientSecret);
-    });
-  });
 
 
 /*
