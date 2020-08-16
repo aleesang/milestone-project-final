@@ -68,7 +68,7 @@
             </fieldset>
 
             <!--Stripe Payment -->
-            <fieldset id="payment-form" class="px-3">
+            <fieldset id="payment-form" class="px-3">      
                 <legend class="fieldset-label small px-2 w-auto">Payment</legend>
                 <!-- A Stripe card element will go here -->
                 <div class="mb-3" id="card-element"></div>
@@ -87,6 +87,9 @@
 
             <!-- Submit Button -->
 						<button id="submit-button" class="btn button-main rounded-0">
+            <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
 							<span class="font-weight-bold">Complete Checkout</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>

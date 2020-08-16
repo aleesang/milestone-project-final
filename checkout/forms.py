@@ -18,7 +18,7 @@ class MakePaymentForm(forms.Form):
     cvv = forms.CharField(label='Security code (CVV)', required=False)
     expiry_month = forms.ChoiceField(label='Month', choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(label='Year', choices=YEAR_CHOICES, required=False)
-    client_secret = forms.CharField(widget=forms.HiddenInput)
+    stripe_id = forms.CharField(widget=forms.HiddenInput)
     
 class CheckoutForm(forms.ModelForm):
     class Meta:
@@ -32,30 +32,5 @@ class CheckoutForm(forms.ModelForm):
                   'town_or_city',
                   'postcode',) 
 
-    def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
-        """
-        super().__init__(*args, **kwargs)
-        placeholders = {
-            'full_name': 'Full Name',
-            'email': 'Email Address',
-            'phone_number': 'Phone Number',
-            'street_address': 'Street Address',
-            'address2': 'Alternate Street Address',
-            'town_or_city': 'Town or City',
-            'postcode': 'Postal Code',
-        }
 
-        self.fields['full_name'].widget.attrs['autofocus'] = True
-        for field in self.fields:
-            if field != 'country':
-                if self.fields[field].required:
-                    placeholder = f'{placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
-            self.fields[field].label = False
 
