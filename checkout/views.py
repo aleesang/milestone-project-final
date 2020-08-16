@@ -3,8 +3,6 @@ import stripe
 import json
 import datetime
 
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -19,6 +17,7 @@ from .forms import CheckoutForm, MakePaymentForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required()
 def checkout(request):
@@ -28,85 +27,111 @@ def checkout(request):
     It is also used to render the checkout.html page,
     displaying bag info and profile details if they exist.
     """
-    # requests current user
-    user_id = request.user.pk
-    # restrieves the Profile info of the current user
-    if Profile.objects.filter(user=user_id).exists():
-        # condenses Profile info to a single variable
-            currentprofile = Profile.objects.get(user=user_id)
-            form = ProfileForm(initial={'full_name': currentprofile.full_name,
-                                        'email': currentprofile.email,
-                                        'phone_number': currentprofile.phone_number,
-                                        'street_address': currentprofile.street_address,
-                                        'address2': currentprofile.address2,
-                                        'country': currentprofile.country,
-                                        'town_or_city': currentprofile.town_or_city,
-                                        'postcode': currentprofile.postcode,
-                                        'user': currentprofile.user})
+    stripe_public_key = settings.STRIPE_PUBLC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    else:
-        form = CheckoutForm
+    if request.method == 'POST':
+        bag = request.session.get('bag', {})
+        total = 0
         
-    if request.method == "POST":
-        checkout_form = CheckoutForm(request.POST)
-        payment_form = MakePaymentForm(request.POST)
+        form_info = {
+            'full_name': currentprofile.full_name,
+            'email': currentprofile.email,
+            'phone_number': currentprofile.phone_number,
+            'street_address': currentprofile.street_address,
+            'address2': currentprofile.address2,
+            'country': currentprofile.country,
+            'town_or_city': currentprofile.town_or_city,
+            'postcode': currentprofile.postcode,
+            'user': currentprofile.user
+        }
 
+        checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid() and payment_form.is_valid():
-            order = form.save(commit=False)
+            order = checkout_form.save(commit=False)
             order.date = timezone.now()
             order.user = request.user
             order.save()
-
-            bag = request.session.get('bag', {})
-            total = 0
-            
+                
             for id, quantity in bag.items():
-                product = get_object_or_404(Product, pk=id)
-                total += quantity * product.price
-                order_item = OrderItem(
-                    order=order,
-                    product=product,
-                    quantity=quantity
-                )
-                order_item.save()
-
                 try:
-                    current_bag = bag_contents(request)
-                    total = current_bag['final_total']
-                    stripe_total = round(total * 100)
-                    stripe.api_key = stripe_secret_key
-                    intent = stripe.PaymentIntent.create(
-                        amount=stripe_total,
-                        currency=settings.STRIPE_CURRENCY,
+                    product = Product.objects.get(id=item_id)
+                    if isinstance(item_data, int):
+                        order_item = OrderItem(
+                            order=order,
+                            product=product,
+                            quantity=quantity
+                        )
+                        order_item.save()
+                    else:
+                        for size, quantity in item_data['items_by_size'].items():
+                            order_item = OrderItem(
+                                order=order,
+                                product=product,
+                                quantity=quantity,
+                                product_size=size,
+                            )
+                            order_item.save()
+                except Product.DoesNotExist:
+                    messages.error(request, (
+                        "One of the products in your bag wasn't found in our database. "
+                        "Please call us for assistance!")
                     )
-                except stripe.error.CardError:
-                    messages.error(request, 'Your card was declined!')
-                if customer.paid:
-                    messages.success(request, 'You have successfully paid')
-                    request.session['bag'] = {}
-                    return redirect(reverse('products'))
-                else:
-                    messages.error
-                    (request,
-                     'We are unable to take your payment at this time.')
-            else:
-                print(payment_form.errors)
-                messages.error(
-                    request,
-                    'We are unable to take payment from this card.')
+                    order.delete()
+                    return redirect(reverse('view_bag'))
+                    
+            # Save the info to the user's profile if all is well
+            request.session['save_info'] = 'save-info' in request.POST
+            return redirect(reverse('checkout_success', args=[order.order_number]))
+        else:
+            messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
     else:
-        payment_form = MakePaymentForm()
-        checkout_form = CheckoutForm()
+        bag = request.session.get('bag', {})
+        if not bag:
+            messages.error(request, "There's nothing in your bag at the moment")
+            return redirect(reverse('products'))
         
-    # auto-fills name and address information
-    # if those details have been completed on Checkout page
-    return render(request, 
-                  "checkout/checkout.html", 
-                  {"checkout_form": form, 
-                   "payment_form": payment_form, 
-                   "publishable": settings.STRIPE_PUBLISHABLE_KEY},
-                  )
+        current_bag = inside_bag(request)
+        total = current_bag['final_total']
+        stripe_total = round(total * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+        )
+        
+        if request.user.is_authenticated:
+            try:
+                currentprofile = Profile.objects.get(user=request.user)
+                checkout_form = CheckoutForm(initial={
+                    'full_name': currentprofile.full_name,
+                    'email': currentprofile.email,
+                    'phone_number': currentprofile.phone_number,
+                    'street_address': currentprofile.street_address,
+                    'address2': currentprofile.address2,
+                    'country': currentprofile.country,
+                    'town_or_city': currentprofile.town_or_city,
+                    'postcode': currentprofile.postcode,
+                    'user': currentprofile.user
+                    })
+            except Profile.DoesNotExist:
+                checkout_form = CheckoutForm()
+        else:
+            checkout_form = CheckoutForm()
 
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
+
+        template = 'checkout/checkout.html'
+        context = {
+            'checkout_form': checkout_form,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+        }
+
+        return render(request, template, context)
 
 def checkout_success(request, order_number):
     """
