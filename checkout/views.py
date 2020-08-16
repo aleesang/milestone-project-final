@@ -1,15 +1,20 @@
 import os
 import stripe
 import json
+import datetime
+
 from django.views.decorators.http import require_POST
-from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
-from django.contrib import messages
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils import timezone
+
 from profiles.models import Profile
 from profiles.forms import ProfileForm
+
 from .forms import CheckoutForm, MakePaymentForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
@@ -67,7 +72,7 @@ def checkout(request):
 
                 try:
                     current_bag = bag_contents(request)
-                    total = current_bag['grand_total']
+                    total = current_bag['final_total']
                     stripe_total = round(total * 100)
                     stripe.api_key = stripe_secret_key
                     intent = stripe.PaymentIntent.create(

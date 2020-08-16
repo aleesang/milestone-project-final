@@ -27,8 +27,6 @@ var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
 
-
-
 /*
  * Collect card details and pay for the order
  */

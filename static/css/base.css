@@ -2,24 +2,20 @@
 
 [Table of Contents]
 
-1. Fonts
-2. Body 
-3. Cover Overlay
-4. Banner
-5. Site Buttons
-6. Card Styling Index Page
-7. Bottom To Top Arrow On Product Page
-8. Bootstrap Toasts
-9. Allauth Form Formatting
-10. Checkout Page - Your Bag Styling
-11. Stripe
-12. Footer
-13. Media Queries
+1. Body 
+2. Cover Overlay
+3. Banner
+4. Site Buttons
+5. Card Styling Index Page
+6. Bottom To Top Arrow On Product Page
+7. Bootstrap Toasts
+8. Allauth Form Formatting
+9. Checkout Page - Your Bag Styling
+10. Stripe
+11. Footer
+12. Media Queries
 
 -----------------------------/
-
-/* Fonts */
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Poppins:100,200,300,400,500,600,700");
 
 /* Body */
 html {
