@@ -102,5 +102,57 @@
         "image_url": "/media/techncousbspeakers.jpg",
         "image": "techncousbspeakers.jpg"
       }
+    },
+    {
+      "pk": 9,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249604",
+        "name": "Tech & Co Super Cute Airpod Case",
+        "description": "At only 1.2mm slim, you can count on the CASETiFY AirPods Pro Case to keep your tech safe from drops, dirt and scratches. It's totally up to you. *AirPods and Charger are not included.",
+        "price": 35.00,
+        "category": 2,
+        "image_url": "/media/techncoairpodcase.jpg",
+        "image": "techncoairpodcase.jpg"
+      }
+    },
+    {
+      "pk": 10,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249605",
+        "name": "Tech & Co Steminist T-Shirt",
+        "description": "Proudly wear your support and solidarity for women in STEM with the Steminist T-Shirt. It's soft and comfortable with a flattering modern fit.",
+        "price": 45.00,
+        "category": 5,
+        "image_url": "/media/steministtshirt.png",
+        "image": "steministtshirt.png"
+      }
+    },
+    {
+      "pk": 11,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249606",
+        "name": "Tech & Co True Wireless Earbuds",
+        "description": "These True Wireless Earbuds allow you to enjoy music, podcasts, audiobooks and more on the go without the hindrance of cords, thanks to the Bluetooth 5.0 technology. It has 2.5 hours of play time plus a single microphone for handsfree calls. It comes with a charging case so you can keep it powered on your daily commute.",
+        "price": 19.00,
+        "category": 2,
+        "image_url": "/media/techncowirelessbuds.jpeg",
+        "image": "techncowirelessbuds.jpeg"
+      }
+    },
+    {
+      "pk": 12,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249607",
+        "name": "Tech & Co Over the Moon Ear Phones",
+        "description": "These On-ear Headphones feature a 1.2 m cable and connect to your device with a 3.5 mm jack. They have a cushioned headband for comfort and can be folded compactly when not in use. They feature an in-line microphone and volume control so you can adjust the functions without reaching for your phone.",
+        "price": 10.00,
+        "category": 2,
+        "image_url": "/media/techncooverearphones.jpeg",
+        "image": "techncooverearphones.jpeg"
+      }
     }
   ]
