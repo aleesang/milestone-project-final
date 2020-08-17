@@ -30,5 +30,13 @@
         "name": "mugs",
         "friendly_name": "Mugs"
       }
+    },
+    {
+      "pk": 5,
+      "model": "products.category",
+      "fields": {
+        "name": "apparel",
+        "friendly_name": "Apparel"
+      }
     }
   ]

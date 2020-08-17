@@ -50,5 +50,57 @@
         "image_url": "/media/techncomug.png",
         "image": "techncomug.png"
       }
+    },
+    {
+      "pk": 5,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249600",
+        "name": "Avery Laptop Sleeve",
+        "description": "The Take Charge 13'3 inch laptop case is padded with 3mm foam and plush lining to keep your laptop super cosy. So compact and convenient you can literally work anywhere! Bring it on!",
+        "price": 25.00,
+        "category": 2,
+        "image_url": "/media/techncolaptopcover.jpg",
+        "image": "techncolaptopcover.jpg"
+      }
+    },
+    {
+      "pk": 6,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249601",
+        "name": "Tech & Co Sienna Hoodie",
+        "description": "Our Basic Hoodie ticks all the right boxes. Soft brushed fleece. Drawstring at the neck. Kangaroo pocket for keeping your hands warm. What more could you want in a hoodie?!",
+        "price": 45.00,
+        "category": 5,
+        "image_url": "/media/techncohoodie.png",
+        "image": "techncohoodie.png"
+      }
+    },
+    {
+      "pk": 7,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249602",
+        "name": "Tech & Co Mirabella Power Bank",
+        "description": "Ain't nobody got time for a flat phone! Have no fear, the Charge It will keep you charged and social media ready at all times.",
+        "price": 25.00,
+        "category": 2,
+        "image_url": "/media/techncopowerbank.jpg",
+        "image": "techncopowerbank.jpg"
+      }
+    },
+    {
+      "pk": 8,
+      "model": "products.product",
+      "fields": {
+        "sku": "pp98249603",
+        "name": "Tech & Co Gypsy USB Speakers",
+        "description": "Light up your life with Typo's LED Speaker! With two different mood lights and wireless music function, you will have the right setting for every situation!",
+        "price": 30.00,
+        "category": 2,
+        "image_url": "/media/techncousbspeakers.jpg",
+        "image": "techncousbspeakers.jpg"
+      }
     }
   ]
