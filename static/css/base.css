@@ -34,6 +34,15 @@ body {
     color: rgb(98, 109, 109);
 }
 
+.fadein {
+    opacity:0;
+}
+
+.parallax-window {
+    min-height: 400px;
+    background: transparent;
+}
+
 /* Cover Overlay */
 .overlay {
 	height: 100%;
