@@ -4,11 +4,12 @@ import json
 import datetime
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.shortcuts import render, redirect, reverse, get_object_or_404, redirect, render
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 from profiles.models import Profile
 from profiles.forms import ProfileForm
@@ -17,7 +18,6 @@ from .forms import CheckoutForm, MakePaymentForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required()
 def checkout(request):
@@ -27,8 +27,9 @@ def checkout(request):
     It is also used to render the checkout.html page,
     displaying bag info and profile details if they exist.
     """
-    stripe_public_key = settings.STRIPE_PUBLC_KEY
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = stripe_secret_key
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
@@ -49,6 +50,9 @@ def checkout(request):
         checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid() and payment_form.is_valid():
             order = checkout_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_bag = json.dumps(bag)
             order.date = timezone.now()
             order.user = request.user
             order.save()
@@ -95,10 +99,9 @@ def checkout(request):
         current_bag = inside_bag(request)
         total = current_bag['final_total']
         stripe_total = round(total * 100)
-        stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
         )
         
         if request.user.is_authenticated:
@@ -148,7 +151,7 @@ def checkout_success(request, order_number):
 
         # Save the user's info
         if save_info:
-            profile_data = {
+            profile_info = {
                 'default_phone_number': order.phone_number,
                 'default_email': order.email,
                 'default_street_address': order.street_address,
@@ -157,7 +160,7 @@ def checkout_success(request, order_number):
                 'default_town_or_city': order.town_or_city,
                 'default_postcode': order.postcode,
             }
-            user_profile_form = ProfileForm(profile_data, instance=profile)
+            user_profile_form = ProfileForm(profile_info, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
 
