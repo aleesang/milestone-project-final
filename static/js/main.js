@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+$('body').removeClass('fade-out');
+
 /* parallax */
 var rellax = new Rellax('.rellax', {
     speed: -2,
@@ -9,7 +11,6 @@ var rellax = new Rellax('.rellax', {
     vertical: true,
     horizontal: false
   });
-
 
 /* toasts */
 $('.toast').toast('show');

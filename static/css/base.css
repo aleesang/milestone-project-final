@@ -28,11 +28,20 @@ body {
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Roboto';
+    opacity: 1;
+    transition: 1s opacity;
+}
+
+body.fade-out {
+    opacity: 0.5;
+    transition: 0.5s;
 }
 
 .font-awesome-icons {
     color: rgb(98, 109, 109);
 }
+
+
 
 /* Cover Overlay */
 .overlay {
