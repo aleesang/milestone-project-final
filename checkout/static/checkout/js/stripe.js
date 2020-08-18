@@ -20,7 +20,7 @@ var style = {
       }
 };
 
-v// Handle form submit
+// Handle form submit
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {

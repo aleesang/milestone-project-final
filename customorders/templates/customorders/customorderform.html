@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -25,15 +26,17 @@
 
     <!-- Form Column -->    
       <div class="row">
-        <div class="col-md-8 mb-4">
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div class="form-actions">
-      <button type="submit">Send</button>
-    </div>
-</form>
-            <!-- end of form -->
+        <div class="col-12">
+          <form method="POST" class="card-body">
+            <fieldset class="rounded px-3 mb-5">
+              {% csrf_token %}
+              {{ form|bootstrap }}
+              <div class="form-actions">
+                <button class="btn button-main rounded-0" type="submit">Send</button>
+              </div>
+            </fieldset>
+          </form>
+      <!-- end of form -->
           </div>
  
         </div>

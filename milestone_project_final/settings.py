@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'gmailapi_backend',
     'crispy_forms',
+    'bootstrapform',
     'django_countries',
     'home',
     'products',
