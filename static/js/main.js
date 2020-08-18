@@ -10,6 +10,7 @@ var rellax = new Rellax('.rellax', {
     horizontal: false
   });
 
+
 /* toasts */
 $('.toast').toast('show');
 
