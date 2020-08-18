@@ -20,4 +20,4 @@ def customOrderView(request):
     return render(request, "customorders/customorderform.html", {'form': form})
 
 def successView(request):
-    return HttpResponse('Success! Thank you for your message.')
+    return render(request, "checkout/checkout_success.html", {'form': form})

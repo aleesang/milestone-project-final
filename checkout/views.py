@@ -18,9 +18,12 @@ from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-    
+stripe_public_key = settings.STRIPE_PUBLIC_KEY   
+stripe_secret_key = stripe.api_key
+ 
 @login_required()
 def checkout(request):
+    
     """
     The checkout view pulls information from the Order and MakePayment forms
     to process a transaction.
@@ -31,6 +34,8 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
         total = 0
+        print('test', stripe_public_key)
+        print('test', stripe.api_key)
         
         form_info = {
             'full_name': currentprofile.full_name,
@@ -94,14 +99,13 @@ def checkout(request):
             return redirect(reverse('products'))
         
         # Create a PaymentIntent with the order amount and currency and the customer id
-            current_bag = bag_contents(request)
-            total = current_bag['final_total']
-            stripe_total = round(total * 100)
-            stripe.api_key = stripe_secret_key
-            intent = stripe.PaymentIntent.create(
-                amount=stripe_total,
-                currency=settings.STRIPE_CURRENCY,
+        current_bag = inside_bag(request)
+        total = current_bag['final_total']
+        intent = stripe.PaymentIntent.create(
+            amount=round(total * 100),
+            currency=settings.STRIPE_CURRENCY,
             )
+        
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
             try:
@@ -126,14 +130,14 @@ def checkout(request):
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
-        template = 'checkout/checkout.html'
-        context = {
-            'checkout_form': checkout_form,
-            'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
-        }
+    template = 'checkout/checkout.html'
+    context = {
+        'checkout_form': checkout_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+    }
 
-        return render(request, template, context)
+    return render(request, template, context)
 
 def checkout_success(request, order_number):
     """
