@@ -102,6 +102,17 @@ body.fade-out {
     color: white !important;
 }
 
+.dropdown-menu {
+    background: rgb(248, 246, 246);
+}
+
+.dropdown-item:hover,
+.dropdown-item:active,
+.dropdown-item:focus {
+    background: rgba(90, 170, 157, 0.514);
+    color: white !important;    
+}
+
 /* Card Styling Index Page */
 .index-products-title {
     margin-top: 8em;
