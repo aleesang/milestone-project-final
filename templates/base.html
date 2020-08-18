@@ -14,7 +14,7 @@
     {% endblock %}
 
     {% block corecss %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">    
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
@@ -33,6 +33,7 @@
 
     {% block extra_js %}
         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/rellax.min.js' %}"></script>
     {% endblock %}
 
     <title>Tech & Co {% block extra_title %}{% endblock %}</title>
@@ -122,7 +123,7 @@
         </div>
         <div class="row mb-5 promo-banner">
             <div class="col">
-                <span>Check out our new range of notebooks!</span>                
+                <span>Free Delivery on orders over $50!</span>                
             </div>            
         </div>
     </header>
@@ -155,9 +156,7 @@
     {% block postloadjs %}
 
     <script>
-        $(document).ready(function(){
-            $('.toast').toast('show');
-        });
+
     </script>
     {% endblock %}
 
