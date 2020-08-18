@@ -16,6 +16,7 @@ django-countries==6.1.2
 django-crispy-forms==1.9.2
 django-csp==3.7
 django-gmailapi-backend==0.1.0
+django-rated-reviews==0.6.0
 django-storages==1.9.1
 docutils==0.15.2
 Flask==1.1.2

@@ -6,14 +6,15 @@
 2. Cover Overlay
 3. Banner
 4. Site Buttons
-5. Card Styling Index Page
-6. Bottom To Top Arrow On Product Page
-7. Bootstrap Toasts
-8. Allauth Form Formatting
-9. Checkout Page - Your Bag Styling
-10. Stripe
-11. Footer
-12. Media Queries
+5. Navbar Dropdown Menu Styling
+6. Card Styling Index Page
+7. Bottom To Top Arrow On Product Page
+8. Bootstrap Toasts
+9. Allauth Form Formatting
+10. Checkout Page - Your Bag Styling
+11. Stripe
+12. Footer
+13. Media Queries
 
 -----------------------------/
 
@@ -102,6 +103,7 @@ body.fade-out {
     color: white !important;
 }
 
+/* Navbar Dropdown Menu Styling */
 .dropdown-menu {
     background: rgb(248, 246, 246);
 }
@@ -119,7 +121,7 @@ body.fade-out {
     text-align: center;
 } 
 
-.card {
+.card-index {
     align-items: center;
 }
 
