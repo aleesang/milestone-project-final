@@ -326,15 +326,17 @@ The following technologies were used in the making of this project.
 ## Testing
 #### Manual Testing
 Manual testing conducted were as follows:
-
+- Authentication of Users
+    - Verification of Email when Registering Account
+    - Reset Password
+    - Logging in
+    - Checkout
+- Responsiveness
+    - Built mostly using mobile first approach
 
 #### Technologies Used For Testing
 - [HTML Validator](https://validator.w3.org/) 
 - [CSS Validator](https://jigsaw.w3.org/css-validator) 
-    - -moz-transition
-    - webkit-transition
-    - -o-transitions
-
 
 **Browsers and Devices**
 - [Google Chrome](https://www.google.com/chrome/) was used predominately for testing and for Inspecting via Development Tools
@@ -374,13 +376,14 @@ The website has been deployed to Heroku. <br>
 2. Install Heroku in your system with this command (for mac users)
  `brew tap heroku/brew && brew install heroku`
 
-3. Install these one by one following using pip3:
+3. Install these using pip3:
 ````
 pip3 install gunicorn 
 pip3 install psycopg2
 pip3 install Pillow
 pip3 install whitenoise
 pip3 install dj_database_url
+
 ** Additional Installations **
 pip3 install boto3
 pip3 install django-crispy-forms
@@ -401,7 +404,7 @@ MIDDLEWARE = [
 
 5. Create a repository in Github
 
-6. Create a hidden file named `.gitignore` and add `.c9` in the file. Also add the following django files to be ignored taken from [here](https://gitignore.io/api/django)
+6. Create a hidden file named `.gitignore` add the following django files to be ignored taken from [here](https://gitignore.io/api/django)
 
 7. In your terminal, type these commands to add the repository origin from Github:
 ````
@@ -414,33 +417,29 @@ git commit -m "Your commit message"
 
 9. Create a new app with a unique name with this command `heroku create <app_name>` replacing the <app_name> with a name of your choice
 
-10. To check if the correct github repository and heroku app are connected to this project, use this command: 
-`git remote -v`
+10. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button and add your environment variables.
 
-11. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button and add your environment variables.
-
-12. The Procfile contains a command that Heroku will run when the app starts. In the root folder, create a file named Procfile. Open the file and put the following:
+11. The Procfile contains a command that Heroku will run when the app starts. In the root folder, create a file named Procfile. Open the file and put the following:
 
 ```
 web: gunicorn milestone_project_final.wsgi:application
 
-```
+``
 
-
-13. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https)
+12. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https)
 
 ```
 ALLOWED_HOSTS = ["tech-and-co.herokuapp.com", '127.0.0.1', 'localhost', '*']
 ```
 
-14. Use this command to create a `requirements.txt` file which lists all the required packages needed for this project:
+13. Use this command to create a `requirements.txt` file which lists all the required packages needed for this project:
 ````
 pip3 freeze  > requirements.txt
 ````
 
-15. At the project directory level, create a `Static` folder, which should  be on the same level as the `manage.py` file. Place some files inside here like images or text files
+14. At the project directory level, create a `Static` folder, which should  be on the same level as the `manage.py` file. Place some files inside here like images or text files
 
-16. Add STATIC_ROOT to your settings.py file
+15. Add STATIC_ROOT to your settings.py file
 We need this for Whitenoise to work (so that it can serve static files properly):
 
 ```
@@ -456,60 +455,70 @@ Example
 <img src="{% static "images/hi.jpg" %}" alt="Hi!" />
 ```
 
-17. Commit all files to Heroku with these commands
+16. Commit all files to Heroku with these commands
 ````
 git add . 
 git commit -m "deploy to Heroku" 
 git push heroku master
 ````
 
-18. To use the PostgresSQL database, type this to your terminal 
+17. To use the PostgresSQL database, type this to your terminal 
 ````
 heroku addons:create heroku-postgresql
 ````
 
-19. To check the URL to the database created, run this command
+18. To check the URL to the database created, run this command
 `heroku config` and copy this URL to be used later
 
+19. In the `settings.py` add `import dj_database_url` after all the other import statements
 
-20. In the `settings.py` add `import dj_database_url` after all the other import statements
-
-21. In the `settings.py` file, comment out the `DATABASES` section and add the URL copied from Heroku here
+20. In the `settings.py` file, comment out the `DATABASES` section and add the URL copied from Heroku here
 ````
 DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 ````
 
-22. Save and restart the terminal
+21. Save and restart the terminal
 
-23. Make migrations with this command
+22. Make migrations with this command
 ````
 python3 manage.py makemigrations
 python3 manage.py migrate
 ````
 
-24. Commit all files to Heroku with these commands
+23. Commit all files to Heroku with these commands
 ````
 git add . 
 git commit -m "Updated settings.py" 
 git push heroku master
 ````
 
-25. Make a superuser with this command
+24. Make a superuser with this command
 `python manage.py createsuperuser`
 
-26. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
+25. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
 
 
 ## Credits
 
-1) Images 
+[**Creative Market**](https://creativemarket.com) for the Tech & Co product mockup images.
+[**Burst**](https://burst.shopify) for main hero image
+[**Font Awesome**](https://fontawesome.com/icons?d=gallery) font awesome for site icons
+[**Stack Overflow**]https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b creating my Sticky footer
 
-2) Product images, names and descriptions taken from 
+### Description of Products and some product image credit ###
+[Bag:](https://cottonon.com/AU/formidable-backpack/145730-09.html?dwvar_145730-09_color=145730-09&cgid=womens-bags-backpacks&originalPid=145730-09#start=1)
+[Mouse Pad:](https://cottonon.com/AU/neoprene-mouse-pad/141933-35.html?dwvar_141933-35_color=141933-35&cgid=&originalPid=141933-35)
+[Notebook:](https://cottonon.com/AU/a4-campus-notebook-recycled/145663-54.html?dwvar_145663-54_color=145663-54&cgid=&originalPid=145663-54)
+[Coffee Mug:](https://cottonon.com/AU/anytime-mug/140015-461.html?dwvar_140015-461_color=140015-461]
+[Hoodie:](https://cottonon.com/AU/basic-hoodie/5181564-09.html?dwvar_5181564-09_color=5181564-09&cgid=womens-hoodies&originalPid=5181564-09#start=1)
+[Laptop Cover image and description:]{https://cottonon.com/AU/take-charge-laptop-cover-13-inch/141956-72.html?dwvar_141956-72_color=141956-72&cgid=laptop-cases-sleeves&originalPid=141956-72#start=28)
+[USB speakers image and description:]{https://cottonon.com/AU/led-wireless-usb-speaker/144650-01.html?dwvar_144650-01_color=144650-01&cgid=speakers-portable-speakers&originalPid=144650-01#start=12}
+[Wireless Buds image and description:](https://www.officeworks.com.au/shop/officeworks/p/otto-true-wireless-earbuds-white-tw100-otslthw08)
+[Over ear phones image and description:]( https://www.officeworks.com.au/shop/officeworks/p/otto-headphones-with-inline-mic-and-volume-control-pink-otoew034pk}
+[Steminist T-shirt:](https://www.etsy.com/au/listing/610309404/women-scientist-t-shirt-steminist-tshirt?ref=pla_similar_listings_top_ad-6&plkey=6e4b90c47258f6d6ac0ed2559fbec555bc94671d%3A610309404)
 
-3) [Stack Overflow](https://stackoverflow.com/)
 
-
-### Acknowledgements
+## Acknowledgements
 A big thanks to the following for their support and guidance on this project.
-- **Seun Owonikoko** - Mentor on this project who was extremely encouraging, provided many helpful tips, and guidance and suggestions for consideration.
-- **Code Institute** - Re-visited Python modules to help direct me on how to create the functionality of this project.
+- **Seun Owonikoko** - Mentor on this project who provided many helpful tips, and guidance and suggestions for consideration.
+- **Code Institute** - Django modules and mini project was a big help in shaping the functionality and logic of my project.
