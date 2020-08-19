@@ -314,6 +314,8 @@ The following technologies were used in the making of this project.
 - [Django 2.2](https://www.djangoproject.com/) is used as the Python web framework.
 - [Stripe](https://stripe.com/docs/payments) is used to make secured payments at the checkout.
 - [python-dotenv](https://pypi.org/project/python-dotenv/) was used to store configuration in the .env file and add them to the environment variables, separate from my code.
+- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/) was used to create a more elegant looking form on the checkout page.
+- [django-bootstrap-forms](https://pypi.org/project/django-bootstrap-form/) was used to create an easy custom order form.
 - [Whitenoise](http://whitenoise.evans.io/en/stable/) is simplified static file serving for Python web apps.
 - [PostgreSQL](http://whitenoise.evans.io/en/stable/) is used as relational SQL database plugin via Heroku.
 - [Visual Studio Code](https://code.visualstudio.com/) was used to predominately build the code on Mac.
@@ -346,7 +348,7 @@ Manual testing conducted were as follows:
 ## Deployment
 ### GitHub Deployment
 
-My code was written using AWS Cloud9. AWS Cloud9 serves as the local repository which was then deployed to GitHub. Whenever a new commit is done to the master branch, the deployed site will be updated accordingly. 
+My code was written using Visual Studio Code, which serves as the local repository that was used to deploy to GitHub. Whenever a new commit is done to the master branch, the deployed site will be updated accordingly. 
 
 This repository can also be deployed locally by cloning the repository. This can be done by going to the main page of the repository to clone/download directly into the editor of choice by pasting git clone into terminal.
 
@@ -415,26 +417,25 @@ git commit -m "Your commit message"
 10. To check if the correct github repository and heroku app are connected to this project, use this command: 
 `git remote -v`
 
-11. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button. Copy the exported variables from the `.bashrc` in Cloud9 over to Heroku Config Vars (omit quotes)
+11. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button and add your environment variables.
 
 12. The Procfile contains a command that Heroku will run when the app starts. In the root folder, create a file named Procfile. Open the file and put the following:
 
 ```
-web: gunicorn coffee.wsgi:application
-```
+web: gunicorn milestone_project_final.wsgi:application
 
-where 'coffee' in my project name in this project.
+```
 
 
 13. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https)
 
 ```
-ALLOWED_HOSTS = ["lzq-django-coffee.herokuapp.com/", "*"]
+ALLOWED_HOSTS = ["tech-and-co.herokuapp.com", '127.0.0.1', 'localhost', '*']
 ```
 
 14. Use this command to create a `requirements.txt` file which lists all the required packages needed for this project:
 ````
-pip3 freeze --local > requirements.txt
+pip3 freeze  > requirements.txt
 ````
 
 15. At the project directory level, create a `Static` folder, which should  be on the same level as the `manage.py` file. Place some files inside here like images or text files
@@ -470,42 +471,40 @@ heroku addons:create heroku-postgresql
 19. To check the URL to the database created, run this command
 `heroku config` and copy this URL to be used later
 
-20. In the `.bashrc` file, add the following
-`export DATABASE_URL="database_url"` and restart the bash terminal
 
-21. In the `settings.py` add `import dj_database_url` after all the other import statements
+20. In the `settings.py` add `import dj_database_url` after all the other import statements
 
-22. In the `settings.py` file, comment out the `DATABASES` section and add the URL copied from Heroku here
+21. In the `settings.py` file, comment out the `DATABASES` section and add the URL copied from Heroku here
 ````
 DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 ````
 
-23. Save and restart the terminal
+22. Save and restart the terminal
 
-24. Make migrations with this command
+23. Make migrations with this command
 ````
 python3 manage.py makemigrations
 python3 manage.py migrate
 ````
 
-25. Commit all files to Heroku with these commands
+24. Commit all files to Heroku with these commands
 ````
 git add . 
 git commit -m "Updated settings.py" 
 git push heroku master
 ````
 
-26. Make a superuser with this command
+25. Make a superuser with this command
 `python manage.py createsuperuser`
 
-27. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
+26. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
 
 
 ## Credits
 
 1) Images 
 
-2) Product images, names and descriptions taken from [illy]()
+2) Product images, names and descriptions taken from 
 
 3) [Stack Overflow](https://stackoverflow.com/)
 
