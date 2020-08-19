@@ -16,14 +16,13 @@ def customOrderView(request):
             message = form.cleaned_data['message']
             try:
                 send_mail(from_email, subject, message, ['admin@example.com'])
-            
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
-    return render(request, "customorders/customorderform.html", {'form': form})
+    return render(request, "customorderform.html", {'form': form})
 
 def successView(request):
-    return render(request, "checkout/checkout_success.html", {'form': form})
+    return render(request, "order_success.html", {'form': form})
 
 
 def simple_upload(request):
