@@ -424,7 +424,7 @@ git commit -m "Your commit message"
 ```
 web: gunicorn milestone_project_final.wsgi:application
 
-``
+```
 
 12. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https)
 
