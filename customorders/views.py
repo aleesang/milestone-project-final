@@ -24,14 +24,3 @@ def customOrderView(request):
 def successView(request):
     return render(request, "success.html")
 
-
-def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'customorders/customorderform.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, "customorders/customorderform.html")
