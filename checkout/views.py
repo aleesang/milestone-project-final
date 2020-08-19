@@ -38,15 +38,14 @@ def checkout(request):
         print('test', stripe.api_key)
         
         form_info = {
-            'full_name': currentprofile.full_name,
-            'email': currentprofile.email,
-            'phone_number': currentprofile.phone_number,
-            'street_address': currentprofile.street_address,
-            'address2': currentprofile.address2,
-            'country': currentprofile.country,
-            'town_or_city': currentprofile.town_or_city,
-            'postcode': currentprofile.postcode,
-            'user': currentprofile.user
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'street_address': request.POST['street_address'],
+            'address2': request.POST['address2'],
+            'country': request.POST['country'],
+            'town_or_city': request.POST['town_or_city'],
+            'postcode': request.POST['postcode'],
         }
 
         checkout_form = CheckoutForm(form_info)
@@ -104,23 +103,25 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=round(total * 100),
             currency=settings.STRIPE_CURRENCY,
+            metadata={'integration_check': 'accept_a_payment'},
             )
+        
         
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
             try:
                 currentprofile = Profile.objects.get(user=request.user)
                 checkout_form = CheckoutForm(initial={
-                    'full_name': currentprofile.full_name,
-                    'email': currentprofile.email,
-                    'phone_number': currentprofile.phone_number,
-                    'street_address': currentprofile.street_address,
-                    'address2': currentprofile.address2,
-                    'country': currentprofile.country,
-                    'town_or_city': currentprofile.town_or_city,
-                    'postcode': currentprofile.postcode,
-                    'user': currentprofile.user
-                    })
+                        'full_name': currentprofile.full_name,
+                        'email': currentprofile.email,
+                        'phone_number': currentprofile.phone_number,
+                        'street_address': currentprofile.street_address,
+                        'address2': currentprofile.address2,
+                        'country': currentprofile.country,
+                        'town_or_city': currentprofile.town_or_city,
+                        'postcode': currentprofile.postcode,
+                        'user': currentprofile.user
+                        })
             except Profile.DoesNotExist:
                 checkout_form = CheckoutForm()
         else:
