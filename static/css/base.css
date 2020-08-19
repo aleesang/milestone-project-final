@@ -64,6 +64,10 @@ body.fade-out {
     background: #b40054;
 }
 
+.hero-header {
+    text-transform: uppercase;
+}
+
 .hero-button {
     background: rgb(159, 194, 182);
     color: white;
