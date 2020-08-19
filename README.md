@@ -511,10 +511,10 @@ git push heroku master
 - [Notebook:](https://cottonon.com/AU/a4-campus-notebook-recycled/145663-54.html?dwvar_145663-54_color=145663-54&cgid=&originalPid=145663-54)
 - [Coffee Mug:](https://cottonon.com/AU/anytime-mug/140015-461.html?dwvar_140015-461_color=140015-461)
 - [Hoodie:](https://cottonon.com/AU/basic-hoodie/5181564-09.html?dwvar_5181564-09_color=5181564-09&cgid=womens-hoodies&originalPid=5181564-09#start=1)
-- [Laptop Cover image and description:]{https://cottonon.com/AU/take-charge-laptop-cover-13-inch/141956-72.html?dwvar_141956-72_color=141956-72&cgid=laptop-cases-sleeves&originalPid=141956-72#start=28)
+- [Laptop Cover image and description:](https://cottonon.com/AU/take-charge-laptop-cover-13-inch/141956-72.html?dwvar_141956-72_color=141956-72&cgid=laptop-cases-sleeves&originalPid=141956-72#start=28)
 [USB speakers image and description:](https://cottonon.com/AU/led-wireless-usb-speaker/144650-01.html?dwvar_144650-01_color=144650-01&cgid=speakers-portable-speakers&originalPid=144650-01#start=12)
 - [Wireless Buds image and description:](https://www.officeworks.com.au/shop/officeworks/p/otto-true-wireless-earbuds-white-tw100-otslthw08)
-[Over ear phones image and description:]( https://www.officeworks.com.au/shop/officeworks/p/otto-headphones-with-inline-mic-and-volume-control-pink-otoew034pk}
+[Over ear phones image and description:](https://www.officeworks.com.au/shop/officeworks/p/otto-headphones-with-inline-mic-and-volume-control-pink-otoew034pk)
 - [Steminist T-shirt:](https://www.etsy.com/au/listing/610309404/women-scientist-t-shirt-steminist-tshirt?ref=pla_similar_listings_top_ad-6&plkey=6e4b90c47258f6d6ac0ed2559fbec555bc94671d%3A610309404)
 
 
