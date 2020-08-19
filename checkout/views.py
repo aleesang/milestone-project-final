@@ -4,11 +4,12 @@ import json
 import datetime
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 from profiles.models import Profile
 from profiles.forms import ProfileForm
@@ -20,6 +21,8 @@ from bag.calculate import inside_bag
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLIC_KEY   
 stripe_secret_key = stripe.api_key
+ 
+ 
  
 @login_required()
 def checkout(request):
@@ -34,8 +37,6 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
         total = 0
-        print('test', stripe_public_key)
-        print('test', stripe.api_key)
         
         form_info = {
             'full_name': request.POST['full_name'],
@@ -93,16 +94,16 @@ def checkout(request):
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
         
-        # Create a PaymentIntent with the order amount and currency and the customer id
+        # Create a PaymentIntent with the order amount and currency
         current_bag = inside_bag(request)
         total = current_bag['final_total']
+        stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=round(total * 100),
             currency=settings.STRIPE_CURRENCY,
-            metadata={'integration_check': 'accept_a_payment'},
             )
-        
-        
+        payment_method="card",
+         
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
             try:
@@ -144,14 +145,14 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
+        profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
         # Save the user's info
         if save_info:
-            profile_info = {
+            profile_data = {
                 'default_phone_number': order.phone_number,
                 'default_email': order.email,
                 'default_street_address': order.street_address,
@@ -160,7 +161,7 @@ def checkout_success(request, order_number):
                 'default_town_or_city': order.town_or_city,
                 'default_postcode': order.postcode,
             }
-            user_profile_form = ProfileForm(profile_info, instance=profile)
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
 
