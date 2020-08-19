@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from profiles.models import Profile
 from profiles.forms import ProfileForm
 
-from .forms import CheckoutForm, MakePaymentForm
+from .forms import CheckoutForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
 
@@ -49,27 +49,23 @@ def checkout(request):
         }
 
         checkout_form = CheckoutForm(form_info)
-        if checkout_form.is_valid() and payment_form.is_valid():
+        if checkout_form.is_valid():
             order = checkout_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
-            order.original_bag = json.dumps(bag)
             order.date = timezone.now()
             order.user = request.user
             order.save()
-                
-            for id, quantity in bag.items():
+            for item_id, item_info in bag.items():
                 try:
                     product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
+                    if isinstance(item_info, int):
                         order_item = OrderItem(
                             order=order,
                             product=product,
-                            quantity=quantity
+                            quantity=item_info
                         )
                         order_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        for size, quantity in item_info['items_by_size'].items():
                             order_item = OrderItem(
                                 order=order,
                                 product=product,

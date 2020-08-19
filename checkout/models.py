@@ -53,6 +53,13 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(blank=True)
     item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False, default=None)
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the item total
+        and update the order total.
+        """
+        self.item_total = self.product.price * self.quantity
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return "{0} {1} @ {2}".format(
-            self.quantity, self.product.name, self.product.price)
+        return f'SKU {self.product.sku} on order {self.order.order_number}'
