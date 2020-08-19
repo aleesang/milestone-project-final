@@ -7,7 +7,6 @@ from django.core.files.storage import FileSystemStorage
 
 def customOrderView(request):
     if request.method == 'GET':
-        to = request.GET['recipient_email']
         form = CustomOrderForm()
     else:
         form = CustomOrderForm(request.POST)
@@ -16,7 +15,7 @@ def customOrderView(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['to',])
+                send_mail(subject, message, from_email, ['from_email',])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')

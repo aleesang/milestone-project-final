@@ -30,7 +30,6 @@
           <form method="POST" class="card-body">
             <fieldset class="rounded px-3 mb-5">
               {% csrf_token %}
-              <input id="recipient_email" type="email" name="recipient_email">
               {{ form|bootstrap }}
               <div class="form-actions">
                 <button class="btn button-main rounded-0" type="submit">Send</button>
