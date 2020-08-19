@@ -22,7 +22,7 @@ def customOrderView(request):
     return render(request, "customorderform.html", {'form': form})
 
 def successView(request):
-    return render(request, "order_success.html", {'form': form})
+    return render(request, "success.html", {'form': form})
 
 
 def simple_upload(request):
