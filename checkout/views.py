@@ -102,7 +102,6 @@ def checkout(request):
             amount=round(total * 100),
             currency=settings.STRIPE_CURRENCY,
             )
-        payment_method="card",
          
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
