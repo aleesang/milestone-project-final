@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 
 def customOrderView(request):
     if request.method == 'GET':
-        to = request.GET['recipient_email_address']
+        to = request.GET['recipient_email']
         form = CustomOrderForm()
     else:
         form = CustomOrderForm(request.POST)
