@@ -21,8 +21,8 @@
                                 <h3 class="widget-title mb--35 mb-sm--20">Company</h3>
                                 <div class="footer-widget">
                                     <ul class="footer-menu">
-                                        <a href="#" class="dropdown-item">Shop</a>
-                                        <a href="#" class="dropdown-item">Contact</a>
+                                        <a href="{% url 'products' %}" class="dropdown-item">Shop</a>
+                                        <a href="{% url 'customorder' %}" class="dropdown-item">Custom Order</a>
                                     </ul>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                         <!-- Column 3 -->
                         <div class="col-lg-2 col-md-3 col-sm-4">
                             <div class="footer-widget">
-                                <h3 class="widget-title mb--35 mb-sm--20">Dashboard</h3>
+                                <h3 class="widget-title mb--35 mb-sm--20">My Account</h3>
                                 <div class="footer-widget">
                                     <ul class="footer-menu">
                             {% if request.user.is_authenticated %}
@@ -50,8 +50,8 @@
                                 <h3 class="widget-title mb--35 mb-sm--20">Social Network</h3>
                                 <div class="footer-widget">
                                     <ul class="footer-menu">
-                                        <a href="#" class="dropdown-item">Facebook</a>
-                                        <a href="#" class="dropdown-item">Instagram</a>
+                                        <a href="https://facebook.com" target="_blank" class="dropdown-item">Facebook</a>
+                                        <a href="https://instagram.com" target="_blank" class="dropdown-item">Instagram</a>
                                     </ul>
                                 </div>
                             </div>
@@ -62,10 +62,10 @@
                                 <h3 class="widget-title mb--35 mb-sm--20">Get the App</h3>
                                 <div class="footer-widget">
                                     <ul class="footer-menu">
-                                        <a href="#">
+                                        <a href="https://www.apple.com/au/ios/app-store/" target="_blank">
                                           <img src="/media/app-store.svg" alt="">
                                         </a>
-                                        <a href="#">
+                                        <a href="https://play.google.com/store?" target="_blank">
                                           <img src="/media/google-play.svg" alt="">
                                         </a>
                                     </ul>
