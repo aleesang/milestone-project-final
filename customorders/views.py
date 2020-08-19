@@ -35,4 +35,4 @@ def simple_upload(request):
         return render(request, 'customorders/customorderform.html', {
             'uploaded_file_url': uploaded_file_url
         })
-    return render(request, "customorders/customorderform.html", {'form': form})
+    return render(request, "customorders/customorderform.html")
