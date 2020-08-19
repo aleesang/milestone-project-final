@@ -307,11 +307,11 @@ The following technologies were used in the making of this project.
 
 - [HTML](https://www.w3schools.com/html/) was used for constructing the base of the project.
 - [CSS](https://www.w3schools.com/css/) for simple styling.
-- [Boostrap](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website. as well as help create an easier & cleaner look, and better responsiveness.
+- [Boostrap 4.5](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website. as well as help create an easier & cleaner look, and better responsiveness.
 - [JQuery](https://jquery.com) was used to enhance website.
 - [Google Fonts](https://fonts.google.com/) used as main fonts on website.
-- [Python](https://www.python.org/) was used to compile and utilise the logic for the project.
-- [Django 2.2](https://www.djangoproject.com/) is used as the Python web framework.
+- [Python 3.8](https://www.python.org/) was used to compile and utilise the logic for the project.
+- [Django 3.0.8](https://www.djangoproject.com/) is used as the Python web framework.
 - [Stripe](https://stripe.com/docs/payments) is used to make secured payments at the checkout.
 - [python-dotenv](https://pypi.org/project/python-dotenv/) was used to store configuration in the .env file and add them to the environment variables, separate from my code.
 - [django-crispy-forms](https://pypi.org/project/django-crispy-forms/) was used to create a more elegant looking form on the checkout page.
