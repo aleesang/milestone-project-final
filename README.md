@@ -3,10 +3,34 @@
 ### Introduction
 The project is an ecommerce site for an online store called Tech & Co. The website aims to bring you fun, but practical tech accessories to empower you in this tech world, with a range of tech accessories for the modern girl.
 
+## Table of Contents
+
+1. [**UX**](#ux)
+    - [**User Stories**](#user-stories)
+
+2. [**Features**](#features)
+    - [**Existing Features**](#existing-features)
+    - [**Features Left to Implement**](#features-left-to-implement)
+
+3. [**Technologies Used**](technologies-used)
+
+4. [**Testing**](#testing)
+    - [**Manual Testing**](#manual-testing)
+    - [**Technologies Used For Testing**](#technologies-used-for-testing)
+
+5. [**Deployment**](#deployment)
+    - [**Github Deployment**](#github-deployment)
+    - [**Heroku Deployment**](#heroku-deployment)
+
+6. [**Credits**](#credits)
+
+7. [**Acknowledgements**](#acknowledgements)
+
+
 ## UX
 The website focuses on two types of users:
-1. `Guests/New Customer` will be able to view the store's home page, place a custom order enquiry, view and search for different tech products, and add products to the shopping bag. 
-2. `Existing/Returning Customer` will heed to register for an account if they plan on checking out their items in their bag, and view their profile for their order history.
+1. `Guests/New User` will be able to view the store's home page, place a custom order enquiry, view and search for different tech products, and add products to the shopping bag. 
+2. `Existing/Returning User` will heed to register for an account if they plan on checking out their items in their bag, and view their profile for their order history.
 
 The website's purpose is to provide a link to girls and women who love all things tech, and want to own some aesthetically pleasing tech accessories that also is practical for every day use.
 
@@ -17,13 +41,10 @@ The target audience for this website are girls and women who love gadgets and ar
 - Please see link here to [User Stories]("") and [Wireframes]("").
 
 ## Features
-Some base features:
 + Account CRUD functionality
 + Browsing and filtering products by category, filter by search and by details
 + Storing products in the session for return users and for new users.
 + Authentication required for purchasing products from the site.
-
-**Existing Features**
 
 #### For users who are not logged in
 ### Existing Features
@@ -274,6 +295,8 @@ Confirmation of successful order, with order summary.
 
 ### Features Left to Implement
 
+Due to lack of time remaining the following features were not implemented:
+
 1) To allow users to add ratings and reviews for the products
 2) Add subscription for a tech service
 
@@ -284,14 +307,15 @@ The following technologies were used in the making of this project.
 
 - [HTML](https://www.w3schools.com/html/) was used for constructing the base of the project.
 - [CSS](https://www.w3schools.com/css/) for simple styling.
-- [Boostrap](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website.
+- [Boostrap](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website. as well as help create an easier & cleaner look, and better responsiveness.
 - [JQuery](https://jquery.com) was used to enhance website.
 - [Google Fonts](https://fonts.google.com/) used as main fonts on website.
-- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) is the database used to store the music library.
-- [Flask](https://www.fullstackpython.com/flask.html) is the framework that was used to route python functions and link to the html pages.
-- [Python](https://www.python.org/) was used to build the functions that rendered the songs from the mongodb database.
+- [Python](https://www.python.org/) was used to compile and utilise the logic for the project.
+- [Django 2.2](https://www.djangoproject.com/) is used as the Python web framework.
+- [Stripe](https://stripe.com/docs/payments) is used to make secured payments at the checkout.
 - [python-dotenv](https://pypi.org/project/python-dotenv/) was used to store configuration in the .env file and add them to the environment variables, separate from my code.
-- [flask-share](https://flask-share.readthedocs.io/en/latest/) is used as a means to share any song on social media via the View Song Page. (this suggestion was made by my mentor Seun Owonikoko)
+- [Whitenoise](http://whitenoise.evans.io/en/stable/) is simplified static file serving for Python web apps.
+- [PostgreSQL](http://whitenoise.evans.io/en/stable/) is used as relational SQL database plugin via Heroku.
 - [Visual Studio Code](https://code.visualstudio.com/) was used to predominately build the code on Mac.
 - [GitHub](https://github.com/) was used for version control and repository housing.
 - [Heroku](https://heroku.com) was used for the deployment of website.
