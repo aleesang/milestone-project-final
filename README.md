@@ -1,5 +1,7 @@
 # Milestone Project 4 Django Project - Tech & Co
 
+![Tech & Co](media/MilestoneProjectDjangoMockup.png)
+
 ### Introduction
 The project is an ecommerce site for an online store called Tech & Co. The website aims to bring you fun, but practical tech accessories to empower you in this tech world, with a range of tech accessories for the modern girl.
 
