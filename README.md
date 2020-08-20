@@ -307,7 +307,7 @@ The following technologies were used in the making of this project.
 
 - [HTML](https://www.w3schools.com/html/) was used for constructing the base of the project.
 - [CSS](https://www.w3schools.com/css/) for simple styling.
-- [Boostrap 4.5](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website. as well as help create an easier & cleaner look, and better responsiveness.
+- [Boostrap 4.5](https://getbootstrap.com/) the main CSS framework used to build the responsive front-end design of the website, as well as help create an easier & cleaner look, and better responsiveness.
 - [JQuery](https://jquery.com) was used to enhance website.
 - [Google Fonts](https://fonts.google.com/) used as main fonts on website.
 - [Python 3.8](https://www.python.org/) was used to compile and utilise the logic for the project.
