@@ -187,7 +187,6 @@ if 'USE_AWS' in os.environ:
 
 STATICFILES_LOCATION = 'static'
 STATICFILES_STORAGE = 'techstorages.StaticStorage'
-DEFAULT_FILE_STORAGE = 'techstorages.MediaStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
@@ -200,8 +199,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DELIVERY_DISCOUNT = 80
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'aud'
-STRIPE_PUBLIC_KEY = 'pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYAcSJs9OSFleBhaO0oqOnDi4nWyFwHO8hb5gvIgd001MYSbJK6'
-STRIPE_SECRET_KEY = 'sk_test_51Gzgb6Dylq7SXtdaSvFbSZSTV6Pg65KpqoPkHQVmY5ShuTSEqXPSf4BDjccfFnMQpeSrLSU35ynzzniihvOUGn4Q00BZM5zgfo'
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 #Email
 if 'DEVELOPMENT' in os.environ:
