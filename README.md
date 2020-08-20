@@ -38,7 +38,7 @@ The target audience for this website are girls and women who love gadgets and ar
 
 ### User Stories
 
-- Please see link here to [User Stories & Wireframes]("https://drive.google.com/drive/folders/1DrsKGULgwgbpTBK4bVPSmeUjzgG4ENEE?usp=sharing").
+- Please see link here to [User Stories & Wireframes]("https://drive.google.com/drive/folders/1DrsKGULgwgbpTBK4bVPSmeUjzgG4ENEE?usp=sharing")
 
 ## Features
 + Account CRUD functionality
@@ -501,9 +501,10 @@ git push heroku master
 ## Credits
 
 - [**Creative Market**](https://creativemarket.com) for the Tech & Co product mockup images.
-- [**Burst**](https://burst.shopify) for main hero image
-- [**Font Awesome**](https://fontawesome.com/icons?d=gallery) font awesome for site icons
-- [**Stack Overflow**](https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b) creating my Sticky footer
+- [**Burst**](https://burst.shopify) for main hero image.
+- [**Font Awesome**](https://fontawesome.com/icons?d=gallery) font awesome for site icons.
+- [**Stack Overflow**](https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b) creating my Sticky footer.
+- [**Rellax.JS**](https://www.hongkiat.com/blog/rellaxjs-parallax-script/) for parallax effect on some elements on home page.
 
 ### Description of Products and some product image credit ###
 - [Bag](https://cottonon.com/AU/formidable-backpack/145730-09.html?dwvar_145730-09_color=145730-09&cgid=womens-bags-backpacks&originalPid=145730-09#start=1)
