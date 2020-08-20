@@ -17,36 +17,6 @@ var style = {
         iconColor: '#dc3545'
     }
 };
-var card = elements.create('card', {style: style});
-card.mount('#card-element');
-
-var handleAction = function(clientSecret) {
-    stripe.handleCardAction(clientSecret).then(function(data) {
-      if (data.error) {
-        showError("Your card was not authenticated, please try again");
-      } else if (data.paymentIntent.status === "requires_confirmation") {
-        fetch("/pay", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            paymentIntentId: data.paymentIntent.id
-          })
-        })
-          .then(function(result) {
-            return result.json();
-          })
-          .then(function(json) {
-            if (json.error) {
-              showError(json.error);
-            } else {
-              orderComplete(clientSecret);
-            }
-          });
-      }
-    });
-  };
 
 // Handle realtime validation errors on the card element
 card.addEventListener('change', function (event) {
