@@ -22,6 +22,21 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe_public_key = settings.STRIPE_PUBLIC_KEY   
 stripe_secret_key = stripe.api_key
  
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
  
  
 @login_required()
@@ -52,6 +67,7 @@ def checkout(request):
         checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid():
             order = checkout_form.save(commit=False)
+            order.original_bag = json.dumps(bag)
             order.date = timezone.now()
             order.user = request.user
             order.save()

@@ -1,49 +1,76 @@
-// Create a Stripe client.
-var stripe = Stripe('pk_test_51Gzgb6Dylq7SXtda0SSiCK2ZyB0YZaymhRH48n084NcO75BUYAcSJs9OSFleBhaO0oqOnDi4nWyFwHO8hb5gvIgd001MYSbJK6');
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
-// Create an instance of Elements.
+var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
-
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
 var style = {
-  base: {
-    color: '#32325d',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
+    base: {
+        color: '#000',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+            color: '#aab7c4'
+        }
+    },
+    invalid: {
+        color: '#dc3545',
+        iconColor: '#dc3545'
     }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
 };
-
-// Create an instance of the card Element.
 var card = elements.create('card', {style: style});
-
-// Add an instance of the card Element into the `card-element` <div>.
 card.mount('#card-element');
-// Handle real-time validation errors from the card Element.
-card.on('change', function(event) {
-  var displayError = document.getElementById('card-errors');
-  if (event.error) {
-    displayError.textContent = event.error.message;
-  } else {
-    displayError.textContent = '';
-  }
+
+var handleAction = function(clientSecret) {
+    stripe.handleCardAction(clientSecret).then(function(data) {
+      if (data.error) {
+        showError("Your card was not authenticated, please try again");
+      } else if (data.paymentIntent.status === "requires_confirmation") {
+        fetch("/pay", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            paymentIntentId: data.paymentIntent.id
+          })
+        })
+          .then(function(result) {
+            return result.json();
+          })
+          .then(function(json) {
+            if (json.error) {
+              showError(json.error);
+            } else {
+              orderComplete(clientSecret);
+            }
+          });
+      }
+    });
+  };
+
+// Handle realtime validation errors on the card element
+card.addEventListener('change', function (event) {
+    var errorDiv = document.getElementById('card-errors');
+    if (event.error) {
+        var html = `
+            <span class="icon" role="alert">
+                <i class="fas fa-times"></i>
+            </span>
+            <span>${event.error.message}</span>
+        `;
+        $(errorDiv).html(html);
+    } else {
+        errorDiv.textContent = '';
+    }
 });
 
-// Handle form submission.
+// Handle form submit
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
-    $('#submita').attr('disabled', true);
+    $('#submit-button').attr('disabled', true);
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
 
@@ -78,11 +105,12 @@ form.addEventListener('submit', function(ev) {
                 name: $.trim(form.full_name.value),
                 phone: $.trim(form.phone_number.value),
                 address: {
-                    line1: $.trim(form.street_address.value),
-                    line2: $.trim(form.address2.value),
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
                     city: $.trim(form.town_or_city.value),
                     country: $.trim(form.country.value),
                     postal_code: $.trim(form.postcode.value),
+                    state: $.trim(form.county.value),
                 }
             },
         }).then(function(result) {
@@ -108,5 +136,4 @@ form.addEventListener('submit', function(ev) {
         // just reload the page, the error will be in django messages
         location.reload();
     })
-
 });
