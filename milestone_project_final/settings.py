@@ -28,7 +28,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['tech-and-co.herokuapp.com', '127.0.0.1', 'localhost', '*']
 
@@ -186,7 +186,8 @@ if 'USE_AWS' in os.environ:
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'storages.StaticStorage'
+STATICFILES_STORAGE = 'techstorages.StaticStorage'
+DEFAULT_FILE_STORAGE = 'techstorages.MediaStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
