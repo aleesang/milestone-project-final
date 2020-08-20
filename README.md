@@ -38,7 +38,7 @@ The target audience for this website are girls and women who love gadgets and ar
 
 ### User Stories
 
-- Please see link here to [User Stories]("") and [Wireframes]("").
+- Please see link here to [User Stories & Wireframes]("https://drive.google.com/drive/folders/1DrsKGULgwgbpTBK4bVPSmeUjzgG4ENEE?usp=sharing").
 
 ## Features
 + Account CRUD functionality
