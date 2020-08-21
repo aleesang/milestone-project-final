@@ -18,9 +18,8 @@ from .forms import CheckoutForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
    
-stripe.api_key = settings.STRIPE_SECRET_KEY 
-stripe_public_key = settings.STRIPE_PUBLIC_KEY   
-stripe_secret_key = stripe.api_key
+
+
 
 @require_POST
 def cache_checkout_data(request):
@@ -41,7 +40,8 @@ def cache_checkout_data(request):
  
 @login_required()
 def checkout(request):
- 
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY   
+    stripe_secret_key = settings.STRIPE_SECRET_KEY 
     """
     The checkout view pulls information from the Order and MakePayment forms
     to process a transaction.
@@ -67,6 +67,8 @@ def checkout(request):
         checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid():
             order = checkout_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.date = timezone.now()
             order.user = request.user
@@ -113,11 +115,12 @@ def checkout(request):
         # Create a PaymentIntent with the order amount and currency
         current_bag = inside_bag(request)
         total = current_bag['final_total']
+        stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
-            amount=round(total * 100),
-            currency=settings.STRIPE_CURRENCY,
-            )
+                    amount=stripe_total,
+                    currency='aud',
+        )
          
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
@@ -150,6 +153,7 @@ def checkout(request):
     }
 
     return render(request, template, context)
+    
 
 def checkout_success(request, order_number):
     """
