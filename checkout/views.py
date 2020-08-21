@@ -17,11 +17,11 @@ from profiles.forms import ProfileForm
 from .forms import CheckoutForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
+   
+stripe.api_key = settings.STRIPE_SECRET_KEY 
 stripe_public_key = settings.STRIPE_PUBLIC_KEY   
 stripe_secret_key = stripe.api_key
- 
+
 @require_POST
 def cache_checkout_data(request):
     try:
@@ -41,7 +41,7 @@ def cache_checkout_data(request):
  
 @login_required()
 def checkout(request):
-    
+ 
     """
     The checkout view pulls information from the Order and MakePayment forms
     to process a transaction.
