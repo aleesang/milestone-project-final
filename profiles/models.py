@@ -14,7 +14,6 @@ class Profile(models.Model):
     authentication (username, password and email).
     The user does not *need* to fill in these details,
     but they can be used to auto-populate the form found on checkout.html
-    We also use a OneToOneField to link it to a specific user!
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True, default=None)
@@ -25,7 +24,7 @@ class Profile(models.Model):
     default_postcode = models.CharField(max_length=100, null=True, default=None)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
     
 @receiver(post_save, sender=User)
