@@ -12,8 +12,6 @@
 {% endblock %}
 
 {% block extra_css %}
-<!-- django countries flag css -->
-<link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
 {% endblock %}
 
 
@@ -80,7 +78,7 @@
             </fieldset>
             
             <!-- Review Bag Button -->
-            <div class="submit-button text-right mt-5 mb-2">                    
+            <div class="button text-right mt-5 mb-2">                    
 						  <a href="{% url 'view_bag' %}" class="btn button-other rounded-0">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
@@ -93,7 +91,7 @@
             <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
               <span class="sr-only">Loading...</span>
             </div>
-							<span class="font-weight-bold">Complete Payment</span>
+							<span class="font-weight-bold" id="button-text">Complete Payment</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>
 							</span>

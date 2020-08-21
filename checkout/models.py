@@ -16,8 +16,8 @@ class Order(models.Model):
     The Order model stores information about the user's name,
     phone number and address  to assist in the delivery of products
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order', null=True, default=None, editable=False)
-    order_number = models.CharField(max_length=32, null=True, default=None, editable=False)
+    order_number = models.CharField(max_length=32, null=True, editable=False)
+    user_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     full_name = models.CharField(max_length=50, null=True, blank=False, default=None)
     email = models.EmailField(max_length=254, null=True, blank=False, default=None)
     phone_number = models.CharField(max_length=20, null=True, blank=False, default=None)
@@ -30,6 +30,8 @@ class Order(models.Model):
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     final_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    original_bag = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
     def __str__(self):
         return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
