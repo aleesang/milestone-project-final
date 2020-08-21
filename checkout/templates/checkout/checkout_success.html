@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -188,16 +187,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-lg-7 text-right">
-                <a href="{% url 'products' %}?category=bags,tech_accessories,stationery,mugs" class="btn btn-black rounded-0 my-2">
-                    <span class="icon mr-2">
-                        <i class="fas fa-gifts"></i>
-                    </span>
-                    <span class="text-uppercase">Now check out our other services!</span>
-                </a>
             </div>
         </div>
     </div>

@@ -11,40 +11,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
+    <div class="overlay"></div>
     <div class="container">
-    <!-- Row 1 -->
         <div class="row">
             <div class="col">
                 <hr>
-                <h2 class="mt-5 mb-4">My Profile</h2>
+                <h2 class="logo-font mt-5 mb-4">My Profile</h2>
                 <hr>
             </div>
         </div>
-    <!-- Row 2 -->
         <div class="row">
-            <!-- Column 1 -->
             <div class="col-12 col-lg-6">
-                <p class="text-muted">My Information</p>
+                <p class="text-muted">Default Delivery Information</p>
                 <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <p><span class="boldtext text-info">User:</span> {{ user.username }}</p>
-                    <p><span class="boldtext text-info">Email:</span> {{ user.email }}</p>
+                    <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
                 </form>
-                <p class="text-muted">Order History<op>
-                    <div class="order-history table-responsive">
-                        <table class="table table-sm table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Order Number</th>
-                                    <th>Date</th>
-                                    <th>Items</th>
-                                    <th>Order Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for order in order %}
+            </div>
+            <div class="col-12 col-lg-6">
+                <p class="text-muted">Order History</p>
+                <div class="order-history table-responsive">
+                    <table class="table table-sm table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Order Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
                                 <tr>
                                     <td>
                                         <a href="{% url 'order_history' order.order_number %}"
@@ -55,7 +53,7 @@
                                     <td>{{ order.date }}</td>
                                     <td>
                                         <ul class="list-unstyled">
-                                            {% for item in order.items.all %}
+                                            {% for item in order.order_item.all %}
                                                 <li class="small">
                                                     {% if item.product.has_sizes %}
                                                         Size {{ item.product.size|upper }}
@@ -67,16 +65,15 @@
                                     <td>${{ order.final_total }}</td>
                                 </tr>
                             {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <!-- End of Row -->
-    </div>
-<!-- End of Container -->
+            </div>
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
+    <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
 {% endblock %}
