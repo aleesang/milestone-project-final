@@ -124,14 +124,14 @@ def checkout(request):
             try:
                 currentprofile = Profile.objects.get(user=request.user)
                 checkout_form = CheckoutForm(initial={
-                        'full_name': currentprofile.full_name,
-                        'email': currentprofile.email,
-                        'phone_number': currentprofile.phone_number,
-                        'street_address': currentprofile.street_address,
-                        'address2': currentprofile.address2,
-                        'country': currentprofile.country,
-                        'town_or_city': currentprofile.town_or_city,
-                        'postcode': currentprofile.postcode,
+                        'full_name': currentprofile.user.get_full_name,
+                        'email': currentprofile.user.email,
+                        'phone_number': currentprofile.default_phone_number,
+                        'street_address': currentprofile.default_street_address,
+                        'address2': currentprofile.default_address2,
+                        'country': currentprofile.default_country,
+                        'town_or_city': currentprofile.default_town_or_city,
+                        'postcode': currentprofile.default_postcode,
                         })
             except Profile.DoesNotExist:
                 checkout_form = CheckoutForm()
@@ -161,14 +161,12 @@ def checkout_success(request, order_number):
     if request.user.is_authenticated:
         currentprofile = Profile.objects.get(user=request.user)
         # Attach the user's profile to the order
-        order.user_profile = profile
+        order.user_profile = currentprofile
         order.save()
 
         # Save the user's info
         if save_info:
             profile_data = {
-                'default_full_name': order.full_name,
-                'default_email': order.email,
                 'default_phone_number': order.phone_number,
                 'default_street_address': order.street_address,
                 'default_address2': order.address2,

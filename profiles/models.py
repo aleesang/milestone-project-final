@@ -17,20 +17,23 @@ class Profile(models.Model):
     We also use a OneToOneField to link it to a specific user!
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=254, null=True, blank=True, default=None)   
-    email = models.EmailField(max_length=254, null=True, blank=True, default=None)
-    phone_number = models.CharField(max_length=20, null=True, blank=True, default=None)
-    street_address = models.CharField(max_length=100, null=True, blank=True, default=None)
-    address2 = models.CharField(max_length=80, null=True, blank=True, default=None)
-    country = CountryField(multiple=False, null=True, blank=True, default=None)
-    town_or_city = models.CharField(max_length=100, null=True, default=None)
-    postcode = models.CharField(max_length=100, null=True, default=None)
+    default_phone_number = models.CharField(max_length=20, null=True, blank=True, default=None)
+    default_street_address = models.CharField(max_length=100, null=True, blank=True, default=None)
+    default_address2 = models.CharField(max_length=80, null=True, blank=True, default=None)
+    default_country = CountryField(multiple=False, null=True, blank=True, default=None)
+    default_town_or_city = models.CharField(max_length=100, null=True, default=None)
+    default_postcode = models.CharField(max_length=100, null=True, default=None)
 
 
     def __unicode__(self):
         return self.user.username
     
 @receiver(post_save, sender=User)
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user = Profile.objects.create(user=kwargs['instance'])
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Create or update the user profile
+    """
+    if created:
+        Profile.objects.create(user=instance)
+    # Existing users: just save the profile
+    instance.userprofile.save()
