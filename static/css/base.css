@@ -172,7 +172,7 @@ input[name='q']::placeholder {
 /* Bootstrap Toasts */
 .popup-message {
     position: fixed;
-    top: 72px;
+    top: 92px;
     right: 15px;
     z-index: 99999999999;
 }
@@ -229,7 +229,7 @@ input[name='q']::placeholder {
 /* Profile */
 
 .order-history {
-    max-height: 416px; /* height of profile form + submit button */
+    max-height: 416px; 
     overflow-y: auto;
 }
 
@@ -241,14 +241,6 @@ input[name='q']::placeholder {
     color: #aab7c4;
 }
 
-#id_default_country,
-#id_default_country option:not(:first-child) {
-    color: #000;
-}
-
-#id_default_country option:first-child {
-    color: #aab7c4;
-}
 
 /* Checkout Page - Your Bag Styling  */
 .checkout-prod-name {
@@ -257,10 +249,6 @@ input[name='q']::placeholder {
 }
 
 /* Stripe */
-/**
- * The CSS shown here will not be introduced in the Quickstart guide, but shows
- * how you can use CSS to style your Element's container.
- */
 .StripeElement {
 box-sizing: border-box;
 
@@ -288,8 +276,6 @@ border-color: #fa755a;
 .StripeElement--webkit-autofill {
 background-color: #fefde5 !important;}
 
-
-
 .fieldset-label {
     position: relative;
     right: .5rem;
@@ -297,8 +283,7 @@ background-color: #fefde5 !important;}
 
 #payment-form .form-control,
 #card-element {
-    color: #000;
-    border: 1px solid #000;
+    color: rgb(179, 179, 179);
 }
 
 select,

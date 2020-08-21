@@ -9,7 +9,19 @@ from checkout.models import Order
 @login_required
 def profile(request):
     """A view that displays the profile page of a logged in user"""
-
+    try:
+        # retrieves the current user
+        user = request.user.pk
+        # retrieves the Profile object associated with current user
+        currentprofile = Profile.objects.get(user=user)
+        # renders profile.html with the Profile info of the current user
+        return render(request, 'profiles/profile.html', {'profile': currentprofile})
+    except Profile.DoesNotExist:
+        # renders profile.html without Profile information,
+        # typically because user has not yet filled in
+        # their profile information
+        return render(request, 'profiles/profile.html')
+    
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
