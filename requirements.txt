@@ -10,7 +10,7 @@ click==7.1.2
 decorator==4.4.2
 defusedxml==0.6.0
 dj-database-url==0.5.0
-Django==3.0.8
+Django==3.1
 django-allauth==0.42.0
 django-bootstrap-form==3.4
 django-countries==6.1.2
@@ -64,7 +64,7 @@ s3transfer==0.3.3
 six==1.15.0
 smart-getenv==1.1.0
 sqlparse==0.3.1
-stripe==2.50.0
+stripe>=2.48.0,<3.0
 tornado==6.0.4
 traitlets==4.3.3
 uritemplate==3.0.1

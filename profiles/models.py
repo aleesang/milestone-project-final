@@ -17,6 +17,7 @@ class Profile(models.Model):
     We also use a OneToOneField to link it to a specific user!
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=254, null=True, blank=True, default=None)   
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
     phone_number = models.CharField(max_length=20, null=True, blank=True, default=None)
     street_address = models.CharField(max_length=100, null=True, blank=True, default=None)

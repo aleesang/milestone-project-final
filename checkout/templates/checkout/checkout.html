@@ -68,12 +68,15 @@
             </fieldset>
             {% csrf_token %}
             <!--Stripe Payment -->
-            <fieldset id="payment-form" class="px-3">      
-                <legend class="fieldset-label small px-2 w-auto">Payment</legend>
+            <fieldset class="px-3">
+                <legend class="fieldset-label small text-black px-2 w-auto">Credit or Debit Card</legend>
+                <div class="mb-3" id="card-element">
                 <!-- A Stripe card element will go here -->
-                <div class="mb-3" id="card-element"></div>
+                </div>
                 <!-- Used to display form errors -->
                 <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                <!-- Pass the client secret to the view so we can get the payment intent id -->
+                <input type="hidden" value="{{ client_secret }}" name="client_secret">
             </fieldset>
             
             <!-- Review Bag Button -->
@@ -90,17 +93,11 @@
             <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
               <span class="sr-only">Loading...</span>
             </div>
-							<span class="font-weight-bold">Complete Checkout</span>
+							<span class="font-weight-bold">Complete Payment</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>
 							</span>
 						</button>
-						<p class="small text-danger my-0">
-							<span class="icon">
-								<i class="fas fa-exclamation-circle"></i>
-							</span>
-							<span>Your card will be charged <strong>${{ final_total|floatformat:2 }}</strong></span>
-						</p>
 					</div>
             </form>
             <!-- end of form -->
@@ -165,5 +162,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe.js' %}"></script>
 {% endblock %}
