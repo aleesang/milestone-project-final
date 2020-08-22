@@ -28,7 +28,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['tech-and-co.herokuapp.com', '127.0.0.1', 'localhost', '*']
 
@@ -170,25 +170,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Logging
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
-
-
 # Static files (CSS, JavaScript, Images)
 
 if 'USE_AWS' in os.environ:
@@ -205,16 +186,17 @@ if 'USE_AWS' in os.environ:
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_DEFAULT_ACL = None
     
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'techstorages.StaticStorage'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIAFILES_LOCATION = 'media'
     DEFAULT_FILE_STORAGE = 'techstorages.MediaStorage'
 
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
-
+    
 # Payments
 DELIVERY_DISCOUNT = 80
 STANDARD_DELIVERY_PERCENTAGE = 10

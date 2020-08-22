@@ -55,16 +55,6 @@ body.fade-out {
 	z-index: -1;
 }
 
-/* Banner */
-.promo-banner {
-    padding: 0.5em 0 0.5em 0;
-    font-size: large;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
-    background: #9e6e84;
-    height: 3em;
-}
 
 .hero-header {
     text-transform: uppercase;
