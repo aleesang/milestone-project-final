@@ -19,9 +19,9 @@
 <div class="overlay"></div>
   <div class="container">
   <!-- Header -->
-    <div class="row">
+    <div class="row mt-5">
       <div class="col">
-        <h2 class="mt-5 mb-4">Checkout</h2>
+        <h2 class="mt-5 mb-5">Checkout</h2>
       </div>
     </div>
     <!-- Form Column -->    
@@ -51,19 +51,20 @@
           <!-- Start of Form -->
             <fieldset class="mb-5">
               <div class="form-check form-check-inline float-right mr-0">
-							{% if user.is_authenticated %}
-              <!-- User is logged in -->
-								<label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-							{% else %}
-              <!-- New Customer - create account -->
-								<label class="form-check-label" for="id-save-info">
-                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                                </label>
+                {% if user.is_authenticated %}
+                <!-- User is logged in -->
+                  <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                                  <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                {% else %}
+                <!-- New Customer - create account -->
+                  <label class="form-check-label" for="id-save-info">
+                                      <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                      <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                  </label>
 							{% endif %}
 						  </div>
             </fieldset>
+
             {% csrf_token %}
             <!--Stripe Payment -->
             <fieldset class="px-3">
@@ -88,20 +89,21 @@
 
             <!-- Submit Button -->
 						<button id="submit-button" class="btn button-main rounded-0">
-            <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-							<span class="font-weight-bold" id="button-text">Complete Payment</span>
-							<span class="icon">
-								<i class="fas fa-lock"></i>
-							</span>
-						</button>
-					</div>
+              <div class="spinner-border  spinner-border-sm text-light hidden" id="spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+                <span class="font-weight-bold" id="button-text">Complete Payment</span>
+                <span class="icon">
+                  <i class="fas fa-lock"></i>
+                </span>
+            </button>
+					  </div>
             </form>
             <!-- end of form -->
           </div>
           
         <!-- Bag Column -->
+
         <div class="col-md-4 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your Bag</span>

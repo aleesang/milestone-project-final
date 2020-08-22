@@ -15,6 +15,7 @@
         <!-- Product Categories -->
         <div class="row">
             <div class="col text-center">
+                <hr>
                 <h2 class="mt-5">Products</h2>
                 {% for c in current_categories %}
                     <a class="text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
