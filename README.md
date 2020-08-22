@@ -48,11 +48,11 @@ The target audience for this website are girls and women who love gadgets and ar
 + Storing products in the session for return users and for new users.
 + Authentication required for purchasing products from the site.
 
-#### For users who are not logged in
 ### Existing Features
+#### *For users who are not logged in*
 
 #### [Home Page](https://tech-and-co.herokuapp.com/)
-This is the landing page for the online tech accessories store, which displays the navigation menu, a free delivery banner, the hero image with an enquiry form button linked, New Products to Tech & Co, and the footer with a brief description of the company, and navigation links. 
+This is the landing page for the online tech accessories store, which displays the navigation menu, the hero image with an enquiry form button linked, New Products to Tech & Co, and the footer with a brief description of the company, and navigation links. 
 
 #### [Hero Banner: Custom Order Form Button](https://tech-and-co.herokuapp.com/customorder/customorder/)
 Order Form for new and existing users to request custom made products.
@@ -62,14 +62,14 @@ The following needs to be filled in:
 - Describe Request via Text Area
 - Send Button
 
-#### [New In Tech Products]
+#### **New In Tech Products**
 New Products to Tech & Co is featured in this section"
 - Product Image
 - Product Name
 - Price
 - Shop Now Button (links to shop)
 
-#### [Footer]
+#### **Footer**
 Lists:
 - About Tech & Co 
 - My Account
@@ -139,7 +139,7 @@ If user has forgotten password, they will need to enter valid email address and 
 #### [Change Password](https://tech-and-co.herokuapp.com/accounts/password/reset/key/q-set-password/) 
 Only will see link if received email to change password.
 
-#### [Shopping Bag]
+#### **Shopping Bag**
 This page shows you the items in your shopping bag, along with:
 - Product Info
 - Product Image
@@ -154,7 +154,7 @@ This page shows you the items in your shopping bag, along with:
 - Final Total
 - Keep shopping buttom and Secure Checkout button
 
-#### [Checkout]
+#### **Checkout**
 Displays checkout form, and shopping bag summary:
 **Checkout Form**
 - Full Name
@@ -178,11 +178,12 @@ Displays checkout form, and shopping bag summary:
 - Keep shopping buttom and Secure Checkout button
 
 
-#### For users who are logged in
-### Existing Features
+
+### **Existing Features**
+#### *For users who are logged in*
 
 #### [Home Page](https://tech-and-co.herokuapp.com/)
-This is the landing page for the online tech accessories store, which displays the navigation menu, a free delivery banner, the hero image with an enquiry form button linked, New Products to Tech & Co, and the footer with a brief description of the company, and navigation links. 
+This is the landing page for the online tech accessories store, which displays the navigation menu, the hero image with an enquiry form button linked, New Products to Tech & Co, and the footer with a brief description of the company, and navigation links. 
 
 #### [Hero Banner: Custom Order Form Button](https://tech-and-co.herokuapp.com/customorder/customorder/)
 Order Form for new and existing users to request custom made products.
@@ -192,14 +193,14 @@ The following needs to be filled in:
 - Describe Request via Text Area
 - Send Button
 
-#### [New In Tech Products]
+#### **New In Tech Products**
 New Products to Tech & Co is featured in this section"
 - Product Image
 - Product Name
 - Price
 - Shop Now Button (links to shop)
 
-#### [Footer]
+#### **Footer**
 Lists:
 - About Tech & Co 
 - My Account
@@ -254,7 +255,7 @@ Takes you bag to your profile page, displaying:
     - Time
     - Order Total
 
-#### [Shopping Bag]
+#### **Shopping Bag**
 This page shows you the items in your shopping bag, along with:
 - Product Info
 - Product Image
@@ -269,7 +270,7 @@ This page shows you the items in your shopping bag, along with:
 - Final Total
 - Keep shopping buttom and Secure Checkout button
 
-#### [Checkout]
+#### **Checkout**
 Displays checkout form, and shopping bag summary:
 **Checkout Form**
 - Full Name
@@ -292,15 +293,16 @@ Displays checkout form, and shopping bag summary:
 - Final Total
 - Keep shopping buttom and Secure Checkout button
 
-#### [Checkout Success]
+#### **Checkout Success**
 Confirmation of successful order, with order summary.
 
-### Features Left to Implement
+## Features Left to Implement
 
 Due to lack of time remaining the following features were not implemented:
 
 1) To allow users to add ratings and reviews for the products
-2) Add subscription for a tech service
+2) Add quantity and bag button on products page
+3) Add subscription for a tech service
 
 
 ## Technologies Used
@@ -316,10 +318,9 @@ The following technologies were used in the making of this project.
 - [Django 3.1](https://www.djangoproject.com/) is used as the Python web framework.
 - [Stripe](https://stripe.com/docs/payments) is used to make secured payments at the checkout.
 - [python-dotenv](https://pypi.org/project/python-dotenv/) was used to store configuration in the .env file and add them to the environment variables, separate from my code.
-- [django-crispy-forms](https://pypi.org/project/django-crispy-forms/) was used to create a more elegant looking form on the checkout page.
+- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) was used to create a more elegant looking form on the checkout page.
 - [django-bootstrap-forms](https://pypi.org/project/django-bootstrap-form/) was used to create an easy custom order form.
-- [Whitenoise](http://whitenoise.evans.io/en/stable/) is simplified static file serving for Python web apps.
-- [PostgreSQL](http://whitenoise.evans.io/en/stable/) is used as relational SQL database plugin via Heroku.
+- [PostgreSQL](https://www.postgresql.org/) is used as relational SQL database plugin via Heroku.
 - [Visual Studio Code](https://code.visualstudio.com/) was used to predominately build the code on Mac.
 - [GitHub](https://github.com/) was used for version control and repository housing.
 - [Heroku](https://heroku.com) was used for the deployment of website.
@@ -356,7 +357,7 @@ Manual testing conducted were as follows:
 ## Deployment
 ### GitHub Deployment
 
-My code was written using Visual Studio Code, which serves as the local repository that was used to deploy to GitHub. Whenever a new commit is done to the master branch, heroku will be updated accordingly. 
+Visual Studio Code was the code editor used to write and deploy the project to GitHub. Whenever a new commit is done to the master branch, heroku will be updated accordingly. 
 
 This repository can also be deployed locally by cloning the repository. This can be done by going to the main page of the repository to clone/download directly into the editor of choice by pasting git clone into terminal.
 
@@ -373,7 +374,7 @@ To deploy the page locally:
 
 ### Heroku Deployment
 
-The website has been deployed to Heroku. <br>
+The website has been deployed to [Heroku](https://tech-and-co.herokuapp.com/). <br>
 
 - The following steps are instructions for deployment to Heroku in the terminal:
 
