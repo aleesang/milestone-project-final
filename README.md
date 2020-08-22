@@ -518,7 +518,7 @@ git push heroku master
 - [USB speakers image and description](https://cottonon.com/AU/led-wireless-usb-speaker/144650-01.html?dwvar_144650-01_color=144650-01&cgid=speakers-portable-speakers&originalPid=144650-01#start=12)
 - [Wireless Buds image and description](https://www.officeworks.com.au/shop/officeworks/p/otto-true-wireless-earbuds-white-tw100-otslthw08)
 - [Over ear phones image and description](https://www.officeworks.com.au/shop/officeworks/p/otto-headphones-with-inline-mic-and-volume-control-pink-otoew034pk)
-- [Steminist T-shirt:](https://www.etsy.com/au/listing/610309404/women-scientist-t-shirt-steminist-tshirt?ref=pla_similar_listings_top_ad-6&plkey=6e4b90c47258f6d6ac0ed2559fbec555bc94671d%3A610309404)
+- [Steminist T-shirt](https://www.etsy.com/au/listing/610309404/women-scientist-t-shirt-steminist-tshirt?ref=pla_similar_listings_top_ad-6&plkey=6e4b90c47258f6d6ac0ed2559fbec555bc94671d%3A610309404)
 
 
 ## Acknowledgements
