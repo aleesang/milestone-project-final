@@ -17,8 +17,7 @@ class CheckoutForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        Add placeholders to fields
         """
         super().__init__(*args, **kwargs)
         placeholders = {

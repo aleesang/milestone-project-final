@@ -1,89 +1,89 @@
-        <!-- Footer Start-->
-        <footer id="footer">
-            <div class="footer-container">
-                <div class="container-fluid">
-                    <div class="row">
-                    <!-- Start of Footer Widget -->
-                      <!-- Column 1 -->
-                        <div class="col-lg-3 col-sm-6 offset-md-1 offset-lg-0 mb-md--45">
-                            <div class="footer-widget">
-                                <div class="textwidget">
-                                    <figure class="mb--30">
-                                        <img src="/media/TECH&COLOGO.png" height="100" alt="">
-                                    </figure>
-                                    <p>Bringing you fun, but practical tech accessories to empower you in this tech world! </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column 2 -->
-                        <div class="col-lg-2 col-md-3 col-sm-4">
-                            <div class="footer-widget">
-                                <h3 class="widget-title mb--35 mb-sm--20">Company</h3>
-                                <div class="footer-widget">
-                                    <ul class="footer-menu">
-                                        <a href="{% url 'products' %}" class="dropdown-item">Shop</a>
-                                        <a href="{% url 'customorder' %}" class="dropdown-item">Custom Order</a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column 3 -->
-                        <div class="col-lg-2 col-md-3 col-sm-4">
-                            <div class="footer-widget">
-                                <h3 class="widget-title mb--35 mb-sm--20">My Account</h3>
-                                <div class="footer-widget">
-                                    <ul class="footer-menu">
-                            {% if request.user.is_authenticated %}
-                                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                            {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column 4 -->
-                        <div class="col-lg-2 col-md-3 col-sm-4">
-                            <div class="footer-widget">
-                                <h3 class="widget-title mb--35 mb-sm--20">Social Network</h3>
-                                <div class="footer-widget">
-                                    <ul class="footer-menu">
-                                        <a href="https://facebook.com" target="_blank" class="dropdown-item">Facebook</a>
-                                        <a href="https://instagram.com" target="_blank" class="dropdown-item">Instagram</a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column 5 -->
-                        <div class="col-lg-2 col-md-3 col-sm-4">
-                            <div class="footer-widget">
-                                <h3 class="widget-title mb--35 mb-sm--20">Get the App</h3>
-                                <div class="footer-widget">
-                                    <ul class="footer-menu">
-                                        <a href="https://www.apple.com/au/ios/app-store/" target="_blank">
-                                          <img src="/media/app-store.svg" alt="">
-                                        </a>
-                                        <a href="https://play.google.com/store?" target="_blank">
-                                          <img src="/media/google-play.svg" alt="">
-                                        </a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                <!-- End of Footer Widget -->        
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <p class="copyright-text">Tech&Co &copy; 2020 all rights reserved</p>
+<!-- Footer Start-->
+<footer id="footer">
+    <div class="footer-container">
+        <div class="container-fluid">
+            <div class="row">
+            <!-- Start of Footer Widget -->
+                <!-- Column 1 -->
+                <div class="col-lg-3 col-sm-6 offset-md-1 offset-lg-0 mb-md--45">
+                    <div class="footer-widget">
+                        <div class="textwidget">
+                            <figure class="mb--30">
+                                <img src="/media/TECH&COLOGO.png" height="100" alt="">
+                            </figure>
+                            <p>Bringing you fun, but practical tech accessories to empower you in this tech world! </p>
                         </div>
                     </div>
                 </div>
+                <!-- Column 2 -->
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3 class="widget-title mb--35 mb-sm--20">Company</h3>
+                        <div class="footer-widget">
+                            <ul class="footer-menu">
+                                <a href="{% url 'products' %}" class="dropdown-item">Shop</a>
+                                <a href="{% url 'customorder' %}" class="dropdown-item">Custom Order</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 3 -->
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3 class="widget-title mb--35 mb-sm--20">My Account</h3>
+                        <div class="footer-widget">
+                            <ul class="footer-menu">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                    {% else %}
+                        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                    {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 4 -->
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3 class="widget-title mb--35 mb-sm--20">Social Network</h3>
+                        <div class="footer-widget">
+                            <ul class="footer-menu">
+                                <a href="https://facebook.com" target="_blank" class="dropdown-item">Facebook</a>
+                                <a href="https://instagram.com" target="_blank" class="dropdown-item">Instagram</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 5 -->
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3 class="widget-title mb--35 mb-sm--20">Get the App</h3>
+                        <div class="footer-widget">
+                            <ul class="footer-menu">
+                                <a href="https://www.apple.com/au/ios/app-store/" target="_blank">
+                                    <img src="/media/app-store.svg" alt="">
+                                </a>
+                                <a href="https://play.google.com/store?" target="_blank">
+                                    <img src="/media/google-play.svg" alt="">
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        <!-- End of Footer Widget -->        
             </div>
-        </footer>
-        <!-- Footer End-->
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="copyright-text">Tech&Co &copy; 2020 all rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer End-->

@@ -9,11 +9,12 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        Add placeholders to fields
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'default_full_name': 'Full Name',
+            'default_email': 'Email',
             'default_phone_number': 'Phone Number',
             'default_street_address': 'Address',
             'default_address2': 'Alternatate Address',
@@ -22,7 +23,7 @@ class ProfileForm(forms.ModelForm):
             'default_postcode': 'Postal Code',
         }
 
-        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        self.fields['default_full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if field != 'default_country':
                 if self.fields[field].required:

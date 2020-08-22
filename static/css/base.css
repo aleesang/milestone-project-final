@@ -11,10 +11,11 @@
 7. Bottom To Top Arrow On Product Page
 8. Bootstrap Toasts
 9. Allauth Form Formatting
-10. Checkout Page - Your Bag Styling
-11. Stripe
-12. Footer
-13. Media Queries
+10. Profile
+11. Checkout Page - Your Bag Styling
+12. Stripe
+13. Footer
+14. Media Queries
 
 -----------------------------/
 
@@ -61,7 +62,8 @@ body.fade-out {
     text-align: center;
     text-transform: uppercase;
     color: white;
-    background: #b12466;
+    background: #9e6e84;
+    height: 3em;
 }
 
 .hero-header {
@@ -95,15 +97,14 @@ body.fade-out {
 }
 
 .button-other {
-    background: rgb(0, 0, 0);
+    background: rgb(107, 107, 107);
     color: rgb(250, 246, 246) !important; 
-    border: 1px solid rgb(128, 91, 91);
 }
 
 .button-other:hover,
 .button-other:active,
 .button-other:focus {
-    background: rgb(59, 59, 59);
+    background: rgb(95, 93, 93);
     color: white !important;
 }
 
@@ -170,11 +171,13 @@ input[name='q']::placeholder {
 }
 
 /* Bootstrap Toasts */
-.popup-message {
+.toast.popup-message {
     position: fixed;
-    top: 92px;
+    top: 122px;
     right: 15px;
     z-index: 99999999999;
+    background-color: #000000;
+    color: #e6ebf1;
 }
 
 /* Allauth form formatting */
@@ -227,7 +230,6 @@ input[name='q']::placeholder {
 }
 
 /* Profile */
-
 .order-history {
     max-height: 416px; 
     overflow-y: auto;
@@ -238,7 +240,7 @@ input[name='q']::placeholder {
 }
 
 #profile-update-form input::placeholder {
-    color: #aab7c4;
+    color: #9ba4ad;
 }
 
 
@@ -342,7 +344,6 @@ footer {
     background-color: #ffdb1181;
     padding: 1em 1em 1em 1em;   
 }
-
 
 /* Media Queries */
 

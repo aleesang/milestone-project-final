@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django_countries.fields import CountryField
 from django.db import models
 from django.contrib.auth.models import User
@@ -9,13 +8,11 @@ from django.dispatch import receiver
 # Create your models here.
 class Profile(models.Model):
     """
-    This model will contain all of a user's profile information,
-    apart from what is required for
-    authentication (username, password and email).
-    The user does not *need* to fill in these details,
-    but they can be used to auto-populate the form found on checkout.html
+    This model will contain all of a user's profile information
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    default_full_name = models.CharField(max_length=20, null=True, blank=True, default=None)
+    default_email = models.EmailField(max_length=20, null=True, blank=True, default=None)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True, default=None)
     default_street_address = models.CharField(max_length=100, null=True, blank=True, default=None)
     default_address2 = models.CharField(max_length=80, null=True, blank=True, default=None)

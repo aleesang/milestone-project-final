@@ -10,7 +10,6 @@ from profiles.models import Profile
 
 # Create your models here.
 
-
 class Order(models.Model):
     """
     The Order model stores information about the user's name,
@@ -41,7 +40,7 @@ class Order(models.Model):
     
     def update_total(self):
         """
-        Update grand total each time a line item is added,
+        Update total each time an item is added,
         accounting for delivery costs.
         """
         self.order_total = self.order_item.aggregate(Sum('item_total'))['item_total__sum'] or 0

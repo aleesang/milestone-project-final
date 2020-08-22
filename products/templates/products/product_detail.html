@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+    <!-- image Container -->
     <div class="overlay"></div>
     <div class="container-fluid">
         <div class="row">
@@ -26,6 +27,7 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- Product Details -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="product-details-container mb-5 mt-md-5">
                     <p class="mb-0">{{ product.name }}</p>
@@ -37,6 +39,7 @@
                         </a>
                     </p>
                     {% endif %}
+                    <!-- Product Description -->
                     <p class="mt-3">{{ product.description }}</p>
                     <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                         {% csrf_token %}
@@ -58,15 +61,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- Buttons -->
                             <div class="col{% if s %}-12 mt-2{% endif %}">
                                 <a href="{% url 'products' %}" class="btn button-other rounded-0 mt-5">
                                     <span class="icon">
-                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span class="text-uppercase">Keep Shopping</span>
+                                    <span class="text-uppercase">Continue Shopping</span>
                                 </a>
-                                <input type="submit" class="btn button-main rounded-0 text-uppercase mt-5" value="Add to Bag">
+                                <input type="submit" class="btn button-main rounded-0 text-uppercase mt-5" value="Bagc It!">
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             {% endwith %}
