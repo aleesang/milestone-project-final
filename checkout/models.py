@@ -40,8 +40,7 @@ class Order(models.Model):
     
     def update_total(self):
         """
-        Update total each time an item is added,
-        accounting for delivery costs.
+        Update total each time an item is added, including delivery costs.
         """
         self.order_total = self.order_item.aggregate(Sum('item_total'))['item_total__sum'] or 0
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
@@ -53,8 +52,7 @@ class Order(models.Model):
         
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the order number
-        if it hasn't been set already.
+        Set the order number if it hasn't been set already.
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
@@ -72,8 +70,7 @@ class OrderItem(models.Model):
     
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the item total
-        and update the order total.
+        Update the order total.
         """
         self.item_total = self.product.price * self.quantity
         super().save(*args, **kwargs)

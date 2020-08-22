@@ -17,7 +17,6 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <hr>
                 <h2 class="mt-5 mb-4">Thank You</h2>
                 <hr>
                 <p>Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
@@ -158,12 +157,12 @@
                     {% endif %}
                     
                 <!-- Billing Information -->
+                
                     <div class="row mt-3">
                         <div class="col">
                             <h5 class="text-success">Billing Info:</h5>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 font-weight-bold">Order Total</p>
@@ -172,7 +171,6 @@
                             <p class="mb-0">{{ order.order_total }}</p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 font-weight-bold">Delivery</p>
@@ -190,6 +188,17 @@
                             <p class="mb-0">{{ order.final_total }}</p>
                         </div>
                     </div>
+                    <div class="row mt-5">
+			            <div class="col-12 col-lg-7 text-right">
+                        {% if from_profile %}
+                            <a href="{% url 'profile' %}" class="btn button-main rounded-0 my-2">
+                                <span class="icon mr-2">
+                                </span>
+                                <span class="text-uppercase">Back to Profile</span>
+                            </a>
+                        {% endif %}
+			            </div>
+		            </div>
                 </div>
         </div>
     </div>
