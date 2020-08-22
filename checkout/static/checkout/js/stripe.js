@@ -57,7 +57,7 @@ form.addEventListener('submit', function(ev) {
     var url = '/checkout/cache_checkout_data/';
 
   $.post(url, postData).done(function () {
-      stripe.createPaymentMethod(clientSecret, {
+      stripe.confirmCardPayment(clientSecret, {
           payment_method: {
               type: 'card',
               card: cardElement,
@@ -86,8 +86,8 @@ form.addEventListener('submit', function(ev) {
                   postcode: $.trim(form.postal_code.value),
               }
           },
-      }).then(function(result) {
-          if (result.error) {
+      }).then(function(response) {
+          if (response.error) {
               var errorDiv = document.getElementById('card-errors');
               var html = `
                   <span class="icon" role="alert">
@@ -100,7 +100,7 @@ form.addEventListener('submit', function(ev) {
               card.update({ 'disabled': false});
               $('#submit-button').attr('disabled', false);
           } else {
-              if (result.paymentIntent.status === 'succeeded') {
+              if (response.paymentIntent && response.paymentIntent.status === 'succeeded') {
                   form.submit();
               }
           }

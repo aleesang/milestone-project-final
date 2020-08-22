@@ -1,8 +1,3 @@
-import os
-import stripe
-import json
-import datetime
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -18,7 +13,9 @@ from .forms import CheckoutForm
 from .models import OrderItem, Order, Product
 from bag.calculate import inside_bag
    
-
+import stripe
+import json
+import datetime
 
 
 @require_POST
