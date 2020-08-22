@@ -333,12 +333,16 @@ Manual testing conducted were as follows:
     - Reset Password
     - Logging in
     - Checkout
+    - Sending queries through the enquiry form
+    - Incorrectly filling in fields to test validation
 - Responsiveness
     - Built mostly using mobile first approach
+    - Tested site was functional and user-friendly in mobile view
 
 #### Technologies Used For Testing
 - [HTML Validator](https://validator.w3.org/) 
 - [CSS Validator](https://jigsaw.w3.org/css-validator) 
+- 
 
 **Browsers and Devices**
 - [Google Chrome](https://www.google.com/chrome/) was used predominately for testing and for Inspecting via Development Tools
@@ -352,7 +356,7 @@ Manual testing conducted were as follows:
 ## Deployment
 ### GitHub Deployment
 
-My code was written using Visual Studio Code, which serves as the local repository that was used to deploy to GitHub. Whenever a new commit is done to the master branch, the deployed site will be updated accordingly. 
+My code was written using Visual Studio Code, which serves as the local repository that was used to deploy to GitHub. Whenever a new commit is done to the master branch, heroku will be updated accordingly. 
 
 This repository can also be deployed locally by cloning the repository. This can be done by going to the main page of the repository to clone/download directly into the editor of choice by pasting git clone into terminal.
 
@@ -378,126 +382,30 @@ The website has been deployed to Heroku. <br>
 2. Install Heroku in your system with this command (for mac users)
  `brew tap heroku/brew && brew install heroku`
 
-3. Install these using pip3:
+3. Login to Heroku from your terminal by using this command `heroku login`
+
+4. Used $ heroku git:clone -a milestone-project-final to clone repository
+
+5. Create a new app with a unique name with this command `heroku create <app_name>` replacing the <app_name> with a name of your choice
+
+6. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button and add your environment variables.
+
+7. The Procfile contains a command that Heroku will run when the app starts. In the root folder, create a file named Procfile. Open the file and put the following: web: gunicorn milestone_project_final.wsgi:application
+
+8. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https): 
 ````
-pip3 install gunicorn 
-pip3 install psycopg2
-pip3 install Pillow
-pip3 install whitenoise
-pip3 install dj_database_url
-
-** Additional Installations **
-pip3 install boto3
-pip3 install django-crispy-forms
-pip3 install django-bootstrap-form
-pip3 install python-dotenv
-pip3 install stripe
-pip3 install stripe
-
-````
-
-4. In the `settings.py` file, add Whitenoise to the middleware:
-````
-MIDDLEWARE = [ 
-..... 
-'whitenoise.middleware.WhiteNoiseMiddleware'
-]
-````
-
-5. Create a repository in Github
-
-6. Create a hidden file named `.gitignore` add the following django files to be ignored taken from [here](https://gitignore.io/api/django)
-
-7. In your terminal, type these commands to add the repository origin from Github:
-````
-git init 
-git add . 
-git commit -m "Your commit message" 
-````
-
-8. Login to Heroku from your terminal by using this command `heroku login`
-
-9. Create a new app with a unique name with this command `heroku create <app_name>` replacing the <app_name> with a name of your choice
-
-10. In your app in Heroku in the settings tab, click on the 'Reveal Config Vars' button and add your environment variables.
-
-11. The Procfile contains a command that Heroku will run when the app starts. In the root folder, create a file named Procfile. Open the file and put the following:
-
-```
-web: gunicorn milestone_project_final.wsgi:application
-
-```
-
-12. Inside the `settings.py` add the URL of the heroku app into the ALLOWED_HOST section (without the https)
-
-```
 ALLOWED_HOSTS = ["tech-and-co.herokuapp.com", '127.0.0.1', 'localhost', '*']
-```
-
-13. Use this command to create a `requirements.txt` file which lists all the required packages needed for this project:
 ````
-pip3 freeze  > requirements.txt
-````
-
-14. At the project directory level, create a `Static` folder, which should  be on the same level as the `manage.py` file. Place some files inside here like images or text files
-
-15. Add STATIC_ROOT to your settings.py file
-We need this for Whitenoise to work (so that it can serve static files properly):
-
-```
-milestone_project_final/settings.py
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-```
-
-Make sure when you use static files in your template, you make use of the {% static .... %} helper.
-
-Example
-```
-{% load static %}
-<img src="{% static "images/hi.jpg" %}" alt="Hi!" />
-```
-
-16. Commit all files to Heroku with these commands
+9. Commit all files to Heroku with these commands
 ````
 git add . 
 git commit -m "deploy to Heroku" 
 git push heroku master
 ````
+10. Make a superuser with this command
+`python3 manage.py createsuperuser`
 
-17. To use the PostgresSQL database, type this to your terminal 
-````
-heroku addons:create heroku-postgresql
-````
-
-18. To check the URL to the database created, run this command
-`heroku config` and copy this URL to be used later
-
-19. In the `settings.py` add `import dj_database_url` after all the other import statements
-
-20. In the `settings.py` file, comment out the `DATABASES` section and add the URL copied from Heroku here
-````
-DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
-````
-
-21. Save and restart the terminal
-
-22. Make migrations with this command
-````
-python3 manage.py makemigrations
-python3 manage.py migrate
-````
-
-23. Commit all files to Heroku with these commands
-````
-git add . 
-git commit -m "Updated settings.py" 
-git push heroku master
-````
-
-24. Make a superuser with this command
-`python manage.py createsuperuser`
-
-25. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
+11. At the very top right hand side of the page in Heroku, click "Open App". You will now be able to view the project in Heroku
 
 
 ## Credits
