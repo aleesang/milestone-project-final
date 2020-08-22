@@ -131,7 +131,7 @@ body.fade-out {
 }
 
 img.card-image-home {
-    float: center;
+    float: none;
     width: 300px;
     height: 300px;
     padding: 0 1em 0 0;
@@ -189,10 +189,6 @@ input[name='q']::placeholder {
 .allauth-form-inner-content input {
     border-color: rgb(143, 143, 143);
     border-radius: 0;
-}
-
-.allauth-form-inner-content label:not([for='id_remember']) {
-    display: none;
 }
 
 .allauth-form-inner-content input::placeholder {

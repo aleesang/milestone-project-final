@@ -1,5 +1,7 @@
 # Milestone Project 4 Django Project - Tech & Co
 
+![W3Ccss](http://jigsaw.w3.org/css-validator/images/vcss-blue)
+
 ![Tech & Co](media/MilestoneProjectDjangoMockup.png)
 
 ### Introduction
