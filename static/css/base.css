@@ -46,6 +46,27 @@ body.fade-out {
     color: rgb(98, 109, 109);
 }
 
+/* unvisited link */
+a:link {
+    color: rgb(94, 146, 150);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(156, 145, 145);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: rgb(190, 48, 114);
+    text-decoration: none;
+  }
+  
+  /* selected link */
+  a:active {
+    color: rgb(114, 114, 146);
+  }
+
 /* Cover Overlay */
 .overlay {
 	height: 100%;
@@ -156,6 +177,7 @@ img.card-image-home {
 .update-link,
 .remove-item {
     cursor: pointer;
+    color: palevioletred;
 }
 
 input[name='q']::placeholder {

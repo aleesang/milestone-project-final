@@ -11,20 +11,20 @@
 
 {% block content %}
 <!-- Banner Content Area -->
-    <div class="container h-100 rellax" data-rellax-speed="-4">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="hero-header">
-                    Request custom made apparel for your personal or business needs!
-                </h1>
-                <div class="my-5">
-                    <h4>
-                        <a href="{% url 'customorder' %}" class="hero-button btn rounded-0 text-uppercase py-3">Enquire Now</a>
-                    </h4>
-                </div>
+<div class="container h-100 rellax" data-rellax-speed="-4">
+    <div class="row h-100">
+        <div class="col-7 col-md-6 my-auto">
+            <h1 class="hero-header">
+                Request custom made apparel for your personal or business needs!
+            </h1>
+            <div class="my-5">
+                <h4>
+                    <a href="{% url 'customorder' %}" class="hero-button btn rounded-0 text-uppercase py-3">Enquire Now</a>
+                </h4>
             </div>
         </div>
     </div>
+</div>
 
 <!-- New Products -->
 <div class="container">
@@ -33,62 +33,69 @@
         <div class="col-12 index-products-title mb-4"><h2>New In Tech & Co</h2></div>
     </div>
     <!-- Start of Product Card Row -->
-        <div class="row">
-            <!--Card 1 -->
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card card-index h-100 border-0">
-                    <div class="card-body">
-                        <div class="row">
-                            <img class="card-image-home mb-4" src="{% static 'images/techncohoodie.png' %}" alt="tech & co bag">
-                        </div>
-                    <h5 class="card-title">Tech & Co Sienna Hoodie</h5>
-                    <p class="card-text">$45.00</p>
-                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+    <div class="row">
+        <!--Card 1 -->
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="card card-index h-100 border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <img class="card-image-home mb-4" src="{% static 'images/techncohoodie.png' %}" alt="tech & co bag">
                     </div>
+                <h5 class="card-title">Tech & Co Sienna Hoodie</h5>
+                <p class="card-text">$45.00</p>
+                <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
-            <!--Card 2 -->
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card card-index h-100 border-0">
-                    <div class="card-body">
-                        <div class="row">
-                            <img class="card-image-home mb-4" src="{% static 'images/techncolaptopcover.jpg' %}" alt="tech & co mousepad">
-                        </div>
-                    <h5 class="card-title">Avery Laptop Sleeve</h5>
-                    <p class="card-text">$25.00</p>
-                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+        </div>
+        <!--Card 2 -->
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="card card-index h-100 border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <img class="card-image-home mb-4" src="{% static 'images/techncolaptopcover.jpg' %}" alt="tech & co mousepad">
                     </div>
+                <h5 class="card-title">Avery Laptop Sleeve</h5>
+                <p class="card-text">$25.00</p>
+                <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
-            <!--Card 3 -->
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card card-index h-100 border-0">
-                    <div class="card-body">
-                        <div class="row">
-                        <img class="card-image-home mb-4" src="{% static 'images/techncooverearphones.jpeg' %}" alt="tech & co Mug">
-                        </div>
-                    <h5 class="card-title">Tech & Co Over the Moon Ear Phones</h5>
-                    <p class="card-text">$10.00</p>
-                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+        </div>
+        <!--Card 3 -->
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="card card-index h-100 border-0">
+                <div class="card-body">
+                    <div class="row">
+                    <img class="card-image-home mb-4" src="{% static 'images/techncooverearphones.jpeg' %}" alt="tech & co Mug">
                     </div>
+                <h5 class="card-title">Tech & Co Over the Moon Ear Phones</h5>
+                <p class="card-text">$10.00</p>
+                <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
-            <!--Card 4 -->
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card card-index h-100 border-0">
-                    <div class="card-body">
-                        <div class="row">
-                            <img class="card-image-home mb-4" src="{% static 'images/techncopowerbank.jpg' %}" alt="tech & co notebook">
-                        </div>
-                    <h5 class="card-title">Tech & Co Mirabella Power Bank</h5>
-                    <p class="card-text">$25.00</p>
-                    <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
+        </div>
+        <!--Card 4 -->
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <div class="card card-index h-100 border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <img class="card-image-home mb-4" src="{% static 'images/techncopowerbank.jpg' %}" alt="tech & co notebook">
                     </div>
+                <h5 class="card-title">Tech & Co Mirabella Power Bank</h5>
+                <p class="card-text">$25.00</p>
+                <a href="{% url 'products' %}" class="btn index-page-shop-btn">Shop Now</a>
                 </div>
             </div>
+        </div>
     <!-- End of Row -->  
     </div>
     <!-- End of Row -->
+
+
+
+
+
+
+
 </div>
     {% endblock %}
 
@@ -96,3 +103,6 @@
         {{ block.super }}
     {% endblock %}
     
+
+
+
