@@ -19,6 +19,9 @@ import datetime
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    View to process payment method
+    """    
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
