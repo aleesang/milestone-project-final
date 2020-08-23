@@ -6,12 +6,12 @@ from products.models import Product
 # Create your views here.
 
 def view_bag(request):
-    """ A view that renders the bag contents page """
+    """ A view that shows the contents of the bag """
 
     return render(request, 'bag/bag.html')
 
 def add_to_bag(request, item_id):
-    """ Add a quantity of the specified product to the shopping bag """
+    """ Add product including qty to bag """
 
     product = Product.objects.get(pk=item_id)
     quantity = int(request.POST.get('quantity'))
@@ -33,7 +33,7 @@ def add_to_bag(request, item_id):
     
 
 def review_bag(request, item_id):
-    """Review the quantity of the specified product to the specified amount"""
+    """Review the contents of the bag"""
 
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
@@ -64,7 +64,7 @@ def review_bag(request, item_id):
 
 
 def remove_from_bag(request, item_id):
-    """Remove the item from the shopping bag"""
+    """Remove the item from the bag"""
 
     try:
         size = None
