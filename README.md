@@ -5,6 +5,16 @@
 ### Introduction
 The project is an ecommerce site for an online store called Tech & Co. The website aims to bring you fun, but practical tech accessories to empower you in this tech world, with a range of tech accessories for the modern girl.
 
+**To navigate site as a logged in user, you may log in with the following:**
+````
+Login: testingtesting
+Password: testaccount123
+````
+
+**If you wish to register for your own account, you may use a temporary email address [here](https://temp-mail.org/en/).**
+
+*Please note: in order to checkout items and view your order history, you must have an account to proceed.*
+
 ## Table of Contents
 
 1. [**UX**](#ux)
@@ -343,11 +353,12 @@ Manual testing conducted were as follows:
 - Responsiveness
     - Built mostly using mobile first approach
     - Tested site was functional and user-friendly in mobile view
+- Stripe
+    - Tested many card numbers to check error messages, valid card numbers, and authentication. [Test cards from stripe.](https://stripe.com/docs/testing#cards-responses)
 
 #### Technologies Used For Testing
 - [HTML Validator](https://validator.w3.org/) 
 - [CSS Validator](https://jigsaw.w3.org/css-validator) 
-- 
 
 **Browsers and Devices**
 - [Google Chrome](https://www.google.com/chrome/) was used predominately for testing and for Inspecting via Development Tools
@@ -363,18 +374,19 @@ Manual testing conducted were as follows:
 
 Visual Studio Code was the code editor used to write and deploy the project to GitHub. Whenever a new commit is done to the master branch, heroku will be updated accordingly. 
 
+- Initialise the repository:
+````
+git add . 
+git commit -m "Initialise repository" 
+git push origin master
+````
+
 This repository can also be deployed locally by cloning the repository. This can be done by going to the main page of the repository to clone/download directly into the editor of choice by pasting git clone into terminal.
 
-I deployed the site to Github with the following steps:
-1. Go to this repository in Github [link](https://github.com/aleesang/milestone-project-final)
-2. Click on settings --> Github Pages
-3. Select "none" for the Source and then select "master branch"
+- Go to this repository in Github [link](https://github.com/aleesang/milestone-project-final)
 
-To deploy the page locally:
-1.	Go to the github [link](https://github.com/aleesang/milestone-project-final)
-2.	Click on the Clone/download button and copy the URL 
-3.	Set up and install your own Stripe and uploadcare accounts, and also install crispy forms
-5.	To run the application locally, type `python3 manage.py runserver 8000` in bash
+2.	To run the application locally, type `python3 manage.py runserver` in terminal.
+
 
 ### Heroku Deployment
 
@@ -420,6 +432,7 @@ git push heroku master
 - [**Font Awesome**](https://fontawesome.com/icons?d=gallery) font awesome for site icons.
 - [**Stack Overflow**](https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b) creating my Sticky footer.
 - [**Rellax.JS**](https://www.hongkiat.com/blog/rellaxjs-parallax-script/) for parallax effect on some elements on home page.
+- **Code Institute** - their stripe tutorial is what I followed to enable successful implementation of the payment method.
 
 ### Description of Products and some product image credit ###
 - [Bag](https://cottonon.com/AU/formidable-backpack/145730-09.html?dwvar_145730-09_color=145730-09&cgid=womens-bags-backpacks&originalPid=145730-09#start=1)
