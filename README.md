@@ -333,9 +333,13 @@ Manual testing conducted were as follows:
     - Verification of Email when Registering Account
     - Reset Password
     - Logging in
-    - Checkout
+    - Signing Out
+- General 
     - Sending queries through the enquiry form
     - Incorrectly filling in fields to test validation
+    - Adding items to bag
+    - Checking items out
+    - Fillig in checkout form details
 - Responsiveness
     - Built mostly using mobile first approach
     - Tested site was functional and user-friendly in mobile view

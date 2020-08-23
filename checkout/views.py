@@ -18,6 +18,7 @@ import json
 import datetime
 
 
+    
 @login_required()
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY   

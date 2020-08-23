@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Footer Start-->
 <footer">
     <div class="footer-container">
@@ -9,7 +10,7 @@
                     <div class="footer-widget">
                         <div class="textwidget">
                             <figure class="mb--30">
-                                <img src="/media/TECH&COLOGO.png" height="100" alt="">
+                                <img src="{% static 'images/TECH&COLOGO.png' %}" height="100" alt="">
                             </figure>
                             <p>Bringing you fun, but practical tech accessories to empower you in this tech world! </p>
                         </div>
@@ -63,10 +64,10 @@
                         <div class="footer-widget">
                             <ul class="footer-menu">
                                 <a href="https://www.apple.com/au/ios/app-store/" target="_blank">
-                                    <img src="/media/app-store.svg" alt="">
+                                    <img src="{% static 'images/app-store.svg' %}" alt="">
                                 </a>
                                 <a href="https://play.google.com/store?" target="_blank">
-                                    <img src="/media/google-play.svg" alt="">
+                                    <img src="{% static 'images/google-play.svg' %}" alt="">
                                 </a>
                             </ul>
                         </div>
