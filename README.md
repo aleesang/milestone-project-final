@@ -357,8 +357,8 @@ Manual testing conducted were as follows:
     - Tested many card numbers to check error messages, valid card numbers, and authentication. [Test cards from stripe.](https://stripe.com/docs/testing#cards-responses)
 
 #### Technologies Used For Testing
-- [HTML Validator](https://validator.w3.org/) 
-- [CSS Validator](https://jigsaw.w3.org/css-validator) 
+- [HTML Validator](https://validator.w3.org/) - HTML was challenging to validate as a lot of errors came from using {% %} tags on the top of the document and throughout. Due to time, I could not find how to rectify one error without another one occurong. I know this is a huge deal to ensure this is valid, but I have run out of time to validate as best as possible.
+- [CSS Validator](https://jigsaw.w3.org/css-validator) - CSS Valid
 
 **Browsers and Devices**
 - [Google Chrome](https://www.google.com/chrome/) was used predominately for testing and for Inspecting via Development Tools
