@@ -1,3 +1,5 @@
+//Please note: The code below was inspired by code institute tutprial on stripe.
+
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);

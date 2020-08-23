@@ -17,10 +17,18 @@ import stripe
 import json
 import datetime
 
+
+"""
+The code in this document was inspired by code institute tutorial on stripe, 
+which helped me get the payment method to work. It also enabled me to get the view to work
+on checkout_success.
+"""
+
+
 @require_POST
 def cache_checkout_data(request):
     """
-    View to process payment method
+    View to process payment method.
     """    
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]

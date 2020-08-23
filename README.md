@@ -450,4 +450,4 @@ git push heroku master
 ## Acknowledgements
 A big thanks to the following for their support and guidance on this project.
 - **Seun Owonikoko** - Mentor on this project who provided many helpful tips, and guidance and suggestions for consideration.
-- **Code Institute** - Django modules and mini project was a big help in shaping the functionality and logic of my project.
+- **Code Institute** - Django modules and mini project and stripe tutorial was a big help in shaping the functionality and logic of my project. 
