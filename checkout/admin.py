@@ -30,9 +30,9 @@ class OrderAdmin(admin.ModelAdmin):
             'address2',
             'country', 
             'town_or_city', 
-            'postcode', 
+            'postcode',
+            'order_total',  
             'delivery_cost',
-            'order_total', 
             'final_total',
             'original_bag',
             'stripe_pid') 
