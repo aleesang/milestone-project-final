@@ -3,19 +3,19 @@ var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 var style = {
-  base: {
-      color: '#000',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-          color: '#aab7c4'
-      }
-  },
-  invalid: {
-      color: '#dc3545',
-      iconColor: '#dc3545'
-  }
+    base: {
+        color: '#000',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+            color: '#aab7c4'
+        }
+    },
+    invalid: {
+        color: '#dc3545',
+        iconColor: '#dc3545'
+    }
 };
 var card = elements.create('card', {style: style});
 card.mount('#card-element');
@@ -54,35 +54,13 @@ form.addEventListener('submit', function(ev) {
         'client_secret': clientSecret,
         'save_info': saveInfo,
     };
+    var url = '/checkout/cache_checkout_data/';
 
-  $.post(url, postData).done(function () {
-      stripe.confirmCardPayment(clientSecret, {
-          payment_method: {
-              card: card,
-              billing_details: {
-                  name: $.trim(form.full_name.value),
-                  email: $.trim(form.email.value),
-                  phone: $.trim(form.phone_number.value),
-                  address:{
-                      line1: $.trim(form.street_address.value),
-                      line2: $.trim(form.address2.value),
-                      country: $.trim(form.country.value),
-                      city: $.trim(form.town_or_city.value),
-                  }
-              }
-          },
-          shipping: {
-              name: $.trim(form.full_name.value),
-              email: $.trim(form.email.value),
-              phone: $.trim(form.phone_number.value),
-              address:{
-                  line1: $.trim(form.street_address.value),
-                  line2: $.trim(form.address2.value),
-                  country: $.trim(form.country.value),
-                  city: $.trim(form.town_or_city.value),
-                  postcode: $.trim(form.postal_code.value),
-              }
-          },
+    $.post(url, postData).done(function () {
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+            },
         }).then(function(result) {
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');
